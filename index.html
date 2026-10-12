@@ -413,6 +413,7 @@
 
         let visitorCount = 1854;
         let cartData = [];
+        let adminClockInterval;
 
         let therapistsData = [
             { id: 1, name: "Ust. Abdullah", role: "Spesialis Ruqyah & Bekam", desc: "Berpengalaman 10 tahun dalam metode Thibbun Nabawi dan tersertifikasi ABI.", image: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=400&q=80" },
@@ -1052,10 +1053,14 @@
         }
 
         function renderStore(container) {
+            let isJumat = new Date().getDay() === 5;
+            let jumatBanner = isJumat ? `<div class="bg-gradient-to-r from-amber-400 to-orange-500 text-white px-6 py-4 rounded-2xl mb-8 font-black text-sm text-center shadow-lg animate-pulse border border-amber-300"><i class="fa-solid fa-gift mr-2 text-xl"></i> PROMO JUMAT BERKAH: Diskon Otomatis 10% untuk Semua Produk Herbal Hari Ini!</div>` : '';
+
             let html = productsData.map((p, idx) => `
                 <div class="card-3d rounded-3xl overflow-hidden flex flex-col group hover:-translate-y-2 transition-transform border border-slate-200 dark:border-slate-700 reveal-item" style="transition-delay: ${idx * 50}ms">
                     <div class="h-48 overflow-hidden relative bg-white">
                         <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        ${isJumat ? `<div class="absolute top-3 right-3 bg-red-500 text-white text-[10px] font-black px-2 py-1 rounded-lg shadow-md">-10%</div>` : ''}
                     </div>
                     <div class="p-6 flex-grow flex flex-col justify-between bg-white/90 dark:bg-slate-800/90">
                         <div>
@@ -1079,10 +1084,11 @@
 
             container.innerHTML = `
                 <div class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="text-center mb-12 reveal-item">
+                    <div class="text-center mb-8 reveal-item">
                         <h2 class="text-4xl font-playfair font-black text-slate-900 dark:text-white mb-3">Toko <span class="text-emerald-600 dark:text-emerald-400">Herbal & Suplemen</span></h2>
                         <p class="text-slate-600 text-sm">Dapatkan produk herbal sunnah berkualitas premium yang kami kurasi secara ketat untuk menunjang pengobatan Anda.</p>
                     </div>
+                    ${jumatBanner}
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                         ${html}
                     </div>
@@ -1118,6 +1124,8 @@
             }
 
             let total = 0;
+            let isJumat = new Date().getDay() === 5;
+
             container.innerHTML = cartData.map((item, index) => {
                 const subtotal = parseInt(item.price) * item.qty;
                 total += subtotal;
@@ -1138,7 +1146,20 @@
                     </div>
                 `;
             }).join('');
-            document.getElementById('cart-total-price').innerText = formatRupiah(total);
+            
+            if (isJumat) {
+                let diskon = total * 0.10;
+                let finalTotal = total - diskon;
+                document.getElementById('cart-total-price').innerHTML = `
+                    <div class="text-right">
+                        <span class="line-through text-xs text-slate-400 block">${formatRupiah(total)}</span>
+                        <span class="text-xl font-black text-emerald-600 dark:text-emerald-400">${formatRupiah(finalTotal)}</span>
+                        <div class="text-[9px] bg-amber-100 text-amber-700 px-2 py-0.5 rounded uppercase font-black tracking-widest mt-1 inline-block">Jumat Berkah -10%</div>
+                    </div>
+                `;
+            } else {
+                document.getElementById('cart-total-price').innerText = formatRupiah(total);
+            }
         }
 
         function changeCartQty(index, change) {
@@ -1163,13 +1184,24 @@
         function checkoutCart() {
             if(cartData.length === 0) { showToast("Keranjang kosong!", true); return; }
             let total = 0;
+            let isJumat = new Date().getDay() === 5;
             let msg = "*FORM PEMESANAN TOKO NabaTCM*\n\n*Daftar Pesanan:*\n";
             cartData.forEach(item => {
                 const subtotal = parseInt(item.price) * item.qty;
                 total += subtotal;
                 msg += `- ${item.name} (${item.qty}x) = ${formatRupiah(subtotal)}\n`;
             });
-            msg += `\n*TOTAL: ${formatRupiah(total)}*\n\nMohon informasi ongkos kirim dan prosedur pembayaran. Terima kasih.`;
+            
+            if (isJumat) {
+                let diskon = total * 0.10;
+                let finalTotal = total - diskon;
+                msg += `\n*Subtotal: ${formatRupiah(total)}*`;
+                msg += `\n*Diskon Jumat Berkah (10%): -${formatRupiah(diskon)}*`;
+                msg += `\n*TOTAL BAYAR: ${formatRupiah(finalTotal)}*\n\nMohon informasi ongkos kirim dan prosedur pembayaran. Terima kasih.`;
+            } else {
+                msg += `\n*TOTAL: ${formatRupiah(total)}*\n\nMohon informasi ongkos kirim dan prosedur pembayaran. Terima kasih.`;
+            }
+
             let phone = clinicSettings.phone.trim();
             if(phone.startsWith('0')) phone = '62' + phone.substring(1);
             window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
@@ -1420,6 +1452,10 @@
                                         <button onclick="showSection('home')" class="w-full text-left px-4 py-3 rounded-xl text-sm font-bold text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20"><i class="fa-solid fa-arrow-right-from-bracket w-6"></i> Keluar</button>
                                     </div>
                                 </div>
+                                <div class="mt-6 pt-5 border-t border-slate-100 dark:border-slate-800 text-center">
+                                    <p class="text-[10px] uppercase tracking-widest text-slate-400 font-bold mb-1">Waktu Server</p>
+                                    <div id="admin-clock-display" class="text-lg font-black text-emerald-600 dark:text-emerald-400 font-playfair tracking-wider">--:--:--</div>
+                                </div>
                             </div>
                         </div>
                         <div class="flex-grow bg-white dark:bg-slate-900 rounded-2xl p-6 md:p-8 shadow-sm border border-slate-200 dark:border-slate-800 min-h-[60vh]" id="admin-content-area"></div>
@@ -1427,6 +1463,18 @@
                 </div>
             `;
             switchAdminTab('queue'); 
+            startAdminClock();
+        }
+
+        function startAdminClock() {
+            if(adminClockInterval) clearInterval(adminClockInterval);
+            adminClockInterval = setInterval(() => {
+                const clockEl = document.getElementById('admin-clock-display');
+                if(clockEl) {
+                    const now = new Date();
+                    clockEl.innerText = now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit' }) + ' WIB';
+                }
+            }, 1000);
         }
 
         function switchAdminTab(tab) {
@@ -1730,7 +1778,134 @@
         }
 
         function renderAdminPartnersCareers(container) {
-            container.innerHTML = `<div class="p-6 text-center text-slate-500 font-bold">Kelola Mitra & Karir aktif.</div>`;
+            let partnersList = partnersData.map(p => `
+                <div class="flex items-center justify-between p-4 border-b border-slate-100 dark:border-slate-800">
+                    <div class="flex items-center">
+                        <img src="${p.image}" class="w-12 h-12 rounded-xl object-cover mr-4 border">
+                        <div>
+                            <h4 class="text-sm font-black text-slate-800 dark:text-white">${p.name}</h4>
+                            <p class="text-xs text-slate-500 font-bold">${p.type}</p>
+                        </div>
+                    </div>
+                    <div class="flex space-x-2">
+                        <button onclick="editPartnerForm(${p.id})" class="w-9 h-9 rounded-xl bg-blue-50 text-blue-500 flex items-center justify-center"><i class="fa-solid fa-pen text-xs"></i></button>
+                        <button onclick="confirmDelete('Mitra', ${p.id})" class="w-9 h-9 rounded-xl bg-red-50 text-red-500 flex items-center justify-center"><i class="fa-solid fa-trash text-xs"></i></button>
+                    </div>
+                </div>
+            `).join('');
+            if(partnersData.length === 0) partnersList = `<div class="p-6 text-center text-slate-400 font-bold">Belum ada data Mitra.</div>`;
+
+            let careersList = careersData.map(c => `
+                <div class="flex items-center justify-between p-4 border-b border-slate-100 dark:border-slate-800">
+                    <div>
+                        <h4 class="text-sm font-black text-slate-800 dark:text-white">${c.title}</h4>
+                        <p class="text-xs text-slate-500 font-bold">${c.type} • ${c.location} • Batas: ${c.deadline}</p>
+                    </div>
+                    <div class="flex space-x-2">
+                        <button onclick="editCareerForm(${c.id})" class="w-9 h-9 rounded-xl bg-blue-50 text-blue-500 flex items-center justify-center"><i class="fa-solid fa-pen text-xs"></i></button>
+                        <button onclick="confirmDelete('Karir', ${c.id})" class="w-9 h-9 rounded-xl bg-red-50 text-red-500 flex items-center justify-center"><i class="fa-solid fa-trash text-xs"></i></button>
+                    </div>
+                </div>
+            `).join('');
+            if(careersData.length === 0) careersList = `<div class="p-6 text-center text-slate-400 font-bold">Belum ada lowongan Karir.</div>`;
+
+            container.innerHTML = `
+                <div class="grid grid-cols-1 xl:grid-cols-2 gap-8">
+                    <!-- Bagian Mitra -->
+                    <div>
+                        <div class="flex justify-between items-center mb-4">
+                            <h2 class="text-xl font-black text-slate-800 dark:text-white">Kelola Mitra</h2>
+                            <button onclick="editPartnerForm()" class="btn-3d bg-emerald-600 text-white px-4 py-2 rounded-xl font-bold text-xs"><i class="fa-solid fa-plus"></i> Tambah</button>
+                        </div>
+                        <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden shadow-sm mb-6">${partnersList}</div>
+                    </div>
+                    
+                    <!-- Bagian Karir -->
+                    <div>
+                        <div class="flex justify-between items-center mb-4">
+                            <h2 class="text-xl font-black text-slate-800 dark:text-white">Kelola Karir</h2>
+                            <button onclick="editCareerForm()" class="btn-3d bg-amber-500 text-white px-4 py-2 rounded-xl font-bold text-xs"><i class="fa-solid fa-plus"></i> Tambah</button>
+                        </div>
+                        <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden shadow-sm">${careersList}</div>
+                    </div>
+                </div>
+                <div id="admin-form-container" class="mt-8 hidden p-8 bg-slate-50 dark:bg-slate-800/40 rounded-3xl border border-slate-200 dark:border-slate-700"></div>
+            `;
+        }
+
+        function editPartnerForm(id = null) {
+            const item = id ? partnersData.find(d => d.id === id) : { name: '', type: '', desc: '', image: '' };
+            document.getElementById('admin-form-container').innerHTML = `
+                <h3 class="text-xl font-black text-slate-800 dark:text-white mb-6">Kelola Mitra</h3>
+                <div class="space-y-5">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div><label class="block text-xs font-bold mb-1.5 dark:text-slate-300">Nama Mitra</label><input type="text" id="part-name" value="${item.name}" class="w-full px-4 py-3 rounded-xl border dark:bg-slate-900 dark:text-white"></div>
+                        <div><label class="block text-xs font-bold mb-1.5 dark:text-slate-300">Tipe / Kategori</label><input type="text" id="part-type" value="${item.type}" class="w-full px-4 py-3 rounded-xl border dark:bg-slate-900 dark:text-white" placeholder="Contoh: Mitra Strategis"></div>
+                    </div>
+                    <div><label class="block text-xs font-bold mb-1.5 dark:text-slate-300">Deskripsi</label><textarea id="part-desc" rows="3" class="w-full px-4 py-3 rounded-xl border dark:bg-slate-900 dark:text-white">${item.desc}</textarea></div>
+                    <div>
+                        <label class="block text-xs font-bold mb-1.5 dark:text-slate-300">Logo/Foto Mitra (Maks 2MB)</label>
+                        <input type="file" id="part-image" accept="image/*" class="w-full px-4 py-2.5 rounded-xl border dark:bg-slate-900 dark:text-white text-sm" onchange="updatePreviewImage('part-image', 'part-preview')">
+                        <img id="part-preview" src="${item.image}" class="mt-3 w-32 h-20 object-cover rounded-xl border border-slate-200 dark:border-slate-700 ${item.image ? '' : 'hidden'}">
+                    </div>
+                    <div class="flex space-x-3 pt-4 border-t border-slate-200 dark:border-slate-700">
+                        <button onclick="savePartner(${id})" class="btn-3d bg-emerald-600 text-white px-6 py-3 rounded-xl text-xs font-extrabold">Simpan Mitra</button>
+                        <button onclick="document.getElementById('admin-form-container').classList.add('hidden')" class="bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 px-6 py-3 rounded-xl text-xs font-bold">Batal</button>
+                    </div>
+                </div>
+            `;
+            document.getElementById('admin-form-container').classList.remove('hidden');
+            document.getElementById('admin-form-container').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        async function savePartner(id) {
+            let base64Img = await fileToBase64('part-image');
+            const data = {
+                id: id || Date.now(),
+                name: document.getElementById('part-name').value,
+                type: document.getElementById('part-type').value,
+                desc: document.getElementById('part-desc').value,
+                image: base64Img ? base64Img : (id ? partnersData.find(d => d.id === id).image : 'https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=400&q=80')
+            };
+            if(id) { const idx = partnersData.findIndex(d => d.id === id); partnersData[idx] = data; } 
+            else { partnersData.push(data); }
+            saveDataLocally(); showToast("Mitra disimpan!"); switchAdminTab('partners');
+        }
+
+        function editCareerForm(id = null) {
+            const item = id ? careersData.find(d => d.id === id) : { title: '', type: '', location: '', desc: '', deadline: '' };
+            document.getElementById('admin-form-container').innerHTML = `
+                <h3 class="text-xl font-black text-slate-800 dark:text-white mb-6">Kelola Lowongan Karir</h3>
+                <div class="space-y-5">
+                    <div><label class="block text-xs font-bold mb-1.5 dark:text-slate-300">Posisi Lowongan</label><input type="text" id="car-title" value="${item.title}" class="w-full px-4 py-3 rounded-xl border dark:bg-slate-900 dark:text-white"></div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div><label class="block text-xs font-bold mb-1.5 dark:text-slate-300">Tipe Waktu</label><input type="text" id="car-type" value="${item.type}" class="w-full px-4 py-3 rounded-xl border dark:bg-slate-900 dark:text-white" placeholder="Cth: Full-Time"></div>
+                        <div><label class="block text-xs font-bold mb-1.5 dark:text-slate-300">Lokasi</label><input type="text" id="car-loc" value="${item.location}" class="w-full px-4 py-3 rounded-xl border dark:bg-slate-900 dark:text-white"></div>
+                        <div><label class="block text-xs font-bold mb-1.5 dark:text-slate-300">Tenggat Waktu</label><input type="text" id="car-deadline" value="${item.deadline}" class="w-full px-4 py-3 rounded-xl border dark:bg-slate-900 dark:text-white" placeholder="Cth: 30 Nov 2026"></div>
+                    </div>
+                    <div><label class="block text-xs font-bold mb-1.5 dark:text-slate-300">Persyaratan / Deskripsi</label><textarea id="car-desc" rows="3" class="w-full px-4 py-3 rounded-xl border dark:bg-slate-900 dark:text-white">${item.desc}</textarea></div>
+                    <div class="flex space-x-3 pt-4 border-t border-slate-200 dark:border-slate-700">
+                        <button onclick="saveCareer(${id})" class="btn-3d bg-amber-500 text-white px-6 py-3 rounded-xl text-xs font-extrabold">Simpan Karir</button>
+                        <button onclick="document.getElementById('admin-form-container').classList.add('hidden')" class="bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 px-6 py-3 rounded-xl text-xs font-bold">Batal</button>
+                    </div>
+                </div>
+            `;
+            document.getElementById('admin-form-container').classList.remove('hidden');
+            document.getElementById('admin-form-container').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function saveCareer(id) {
+            const data = {
+                id: id || Date.now(),
+                title: document.getElementById('car-title').value,
+                type: document.getElementById('car-type').value,
+                location: document.getElementById('car-loc').value,
+                deadline: document.getElementById('car-deadline').value,
+                desc: document.getElementById('car-desc').value
+            };
+            if(id) { const idx = careersData.findIndex(d => d.id === id); careersData[idx] = data; } 
+            else { careersData.push(data); }
+            saveDataLocally(); showToast("Lowongan Karir disimpan!"); switchAdminTab('partners');
         }
 
         let pendingDelete = null;
@@ -1739,12 +1914,13 @@
             document.getElementById('confirm-modal').classList.remove('hidden');
             document.getElementById('confirm-modal').classList.add('flex');
             document.getElementById('confirm-yes-btn').onclick = function() {
-                if(pendingDelete.type === 'Layanan Utama') servicesData = servicesData.filter(d => d.id !== pendingDelete.id);
-                else if(pendingDelete.type === 'Tim Terapis') therapistsData = therapistsData.filter(d => d.id !== pendingDelete.id);
-                else if(pendingDelete.type === 'Artikel Edukasi') articlesData = articlesData.filter(d => d.id !== pendingDelete.id);
-                else if(pendingDelete.type === 'Produk Herbal') productsData = productsData.filter(d => d.id !== pendingDelete.id);
-                else if(pendingDelete.type === 'Antrean') queueData = queueData.filter(d => d.id !== pendingDelete.id);
-                saveDataLocally(); closeConfirmModal(); showToast("Data dihapus!"); switchAdminTab('queue');
+                let currentTab = 'queue';
+                if(pendingDelete.type === 'Layanan Utama') { servicesData = servicesData.filter(d => d.id !== pendingDelete.id); currentTab = 'services'; }
+                else if(pendingDelete.type === 'Tim Terapis') { therapistsData = therapistsData.filter(d => d.id !== pendingDelete.id); currentTab = 'therapists'; }
+                else if(pendingDelete.type === 'Artikel Edukasi') { articlesData = articlesData.filter(d => d.id !== pendingDelete.id); currentTab = 'articles'; }
+                else if(pendingDelete.type === 'Produk Herbal') { productsData = productsData.filter(d => d.id !== pendingDelete.id); currentTab = 'products'; }
+                else if(pendingDelete.type === 'Antrean') { queueData = queueData.filter(d => d.id !== pendingDelete.id); currentTab = 'queue'; }
+                saveDataLocally(); closeConfirmModal(); showToast("Data dihapus!"); switchAdminTab(currentTab);
             };
         }
         function closeConfirmModal() {
