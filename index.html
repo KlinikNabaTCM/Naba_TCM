@@ -1,32 +1,55 @@
-<!DOCTYPE html>
+ï»¿<!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO & Meta Tags -->
     <title>NabaTCM Center | Thibbun Nabawi & TCM</title>
+    <meta name="description" content="Solusi Sehat dan Tenang Bersama Al-Qur'an. Mengintegrasikan pengobatan medis klasik Islam (Thibbun Nabawi, Bekam, Ruqyah) dan Traditional Chinese Medicine (TCM) secara profesional.">
+    <meta name="keywords" content="Klinik Bekam, Thibbun Nabawi, TCM, Akupunktur, Ruqyah Syar'iyyah, Herbal Sunnah, NabaTCM">
+    <meta name="author" content="NabaTCM Center">
+    
+    <!-- Open Graph for Social Media -->
+    <meta property="og:title" content="NabaTCM Center | Thibbun Nabawi & TCM">
+    <meta property="og:description" content="Klinik kesehatan holistik memadukan medis Islam dan TCM modern.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1542841791-1925b02a2bfb?auto=format&fit=crop&w=800&q=80">
+    <meta property="og:url" content="https://nabatcm-center.com">
+    <meta property="og:type" content="website">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Kombinasi Font Premium: Playfair Display untuk Judul, Plus Jakarta Sans untuk Teks -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; color: #0f172a; transition: background-color 0.4s ease, color 0.4s ease; overflow-x: hidden; }
         body.dark-mode { background-color: #030712; color: #f8fafc; }
         
-        /* Font Elegan untuk Headings */
         .font-playfair { font-family: 'Playfair Display', serif; }
 
-        /* Latar Belakang Pola Islami/Zen Transparan (Opacity 3%) */
         .bg-pattern {
             position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2310b981' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2310b981' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
             z-index: -1; pointer-events: none;
         }
         body.dark-mode .bg-pattern {
             background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23f8fafc' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
         }
 
-        /* 3D Dimensional Card Effects */
+        #splash-screen {
+            position: fixed; inset: 0; z-index: 100000;
+            background: linear-gradient(135deg, #064e3b, #0f766e);
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+        #splash-screen.hidden-splash { opacity: 0; visibility: hidden; }
+        .splash-logo { animation: pulse-glow 2s infinite; }
+        @keyframes pulse-glow {
+            0% { transform: scale(1); filter: drop-shadow(0 0 10px rgba(52, 211, 153, 0.5)); }
+            50% { transform: scale(1.05); filter: drop-shadow(0 0 25px rgba(52, 211, 153, 0.8)); }
+            100% { transform: scale(1); filter: drop-shadow(0 0 10px rgba(52, 211, 153, 0.5)); }
+        }
+
         .card-3d {
             background: rgba(255, 255, 255, 0.82);
             backdrop-filter: blur(20px);
@@ -38,9 +61,8 @@
         .card-3d:hover {
             transform: translateY(-5px) scale(1.01);
             box-shadow: 0 25px 50px -15px rgba(16, 185, 129, 0.25), 0 0 15px rgba(52, 211, 153, 0.15);
-            border-color: rgba(251, 191, 36, 0.4); /* Gold Border Accent on Hover */
+            border-color: rgba(251, 191, 36, 0.4);
         }
-
         body.dark-mode .card-3d {
             background: rgba(15, 23, 42, 0.82);
             border: 1px solid rgba(255, 255, 255, 0.05);
@@ -48,7 +70,7 @@
         }
         body.dark-mode .card-3d:hover {
             box-shadow: 0 25px 50px -15px rgba(16, 185, 129, 0.2), 0 0 20px rgba(16, 185, 129, 0.1);
-            border-color: rgba(251, 191, 36, 0.3); /* Gold Accent */
+            border-color: rgba(251, 191, 36, 0.3);
         }
 
         .glass-nav {
@@ -71,89 +93,63 @@
             transform: translateY(-2px);
             box-shadow: 0 15px 30px -5px rgba(16, 185, 129, 0.5), inset 0 -2px 0 rgba(0,0,0,0.1);
         }
-        .btn-3d:active {
-            transform: translateY(1px);
-            box-shadow: 0 5px 10px -5px rgba(16, 185, 129, 0.4), inset 0 2px 0 rgba(0,0,0,0.1);
-        }
-
-        /* Animated Shimmer Effect */
         .btn-shimmer::after {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%;
-            width: 50%; height: 100%;
+            content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
             background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.4), transparent);
-            transform: skewX(-20deg);
-            animation: shimmer 4s infinite;
+            transform: skewX(-20deg); animation: shimmer 4s infinite;
         }
-        @keyframes shimmer {
-            0% { left: -100%; }
-            15% { left: 200%; }
-            100% { left: 200%; }
-        }
+        @keyframes shimmer { 0% { left: -100%; } 15% { left: 200%; } 100% { left: 200%; } }
 
-        /* Gold Gradient Text */
         .text-gold-gradient {
             background: linear-gradient(135deg, #fcd34d, #d97706);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
 
-        /* Scroll Reveal System */
-        .reveal-item {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .reveal-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        .reveal-item { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reveal-visible { opacity: 1; transform: translateY(0); }
 
         html { scroll-behavior: smooth; }
         .hero-glow { position: absolute; border-radius: 50%; filter: blur(100px); pointer-events: none; z-index: 0; }
 
-        /* Toast Container */
         #toast-container { position: fixed; bottom: 24px; right: 24px; z-index: 9999; display: flex; flex-direction: column; gap: 12px; pointer-events: none; }
         .toast { padding: 14px 24px; border-radius: 16px; color: white; font-weight: 700; font-size: 0.85rem; box-shadow: 0 20px 30px -10px rgba(0,0,0,0.3); backdrop-filter: blur(12px); animation: slideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; display: flex; align-items: center; }
         .toast.success { background: linear-gradient(135deg, rgba(16, 185, 129, 0.95), rgba(5, 150, 105, 0.95)); border: 1px solid rgba(255,255,255,0.2); }
         .toast.error { background: linear-gradient(135deg, rgba(239, 68, 68, 0.95), rgba(220, 38, 38, 0.95)); border: 1px solid rgba(255,255,255,0.2); }
         @keyframes slideIn { from { transform: translateX(120%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
 
-        /* Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
         body.dark-mode ::-webkit-scrollbar-thumb { background: #334155; }
-        ::-webkit-scrollbar-thumb:hover { background: #10b981; }
 
         #cart-btn { position: fixed; bottom: 30px; right: 30px; z-index: 9998; transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
         #cart-btn:hover { transform: scale(1.1) translateY(-5px); }
         .cart-badge { position: absolute; top: -5px; right: -5px; background: #ef4444; color: white; font-size: 0.75rem; font-weight: bold; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(239, 68, 68, 0.5); border: 2px solid white; }
         body.dark-mode .cart-badge { border-color: #0f172a; }
 
-        #audio-widget { position: fixed; bottom: 30px; left: 30px; z-index: 9998; }
         .line-clamp-3 { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
-        .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-        
-        .pulse-dot {
-            width: 10px; height: 10px; border-radius: 50%; display: inline-block;
-            box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); animation: pulse 1.5s infinite;
-        }
+        .pulse-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); animation: pulse 1.5s infinite; }
         @keyframes pulse { 0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); } 70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(59, 130, 246, 0); } 100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); } }
     </style>
 </head>
 <body class="antialiased selection:bg-amber-400 selection:text-slate-900" onload="initApp()">
 
-    <!-- Pola Belakang Islami/Zen Halus -->
+    <div id="splash-screen">
+        <div class="splash-logo w-24 h-24 bg-white/10 backdrop-blur-md rounded-3xl flex items-center justify-center mb-6 border border-white/20">
+            <i class="fa-solid fa-leaf text-white text-5xl"></i>
+        </div>
+        <h1 class="font-playfair font-black text-3xl text-white tracking-widest uppercase">Naba<span class="text-amber-400">TCM</span></h1>
+        <p class="text-emerald-100/70 text-xs font-bold tracking-widest mt-2 uppercase">Memuat Energi Positif...</p>
+        <div class="w-32 h-1 bg-white/20 rounded-full mt-8 overflow-hidden">
+            <div class="h-full bg-amber-400 rounded-full w-0" id="splash-progress"></div>
+        </div>
+    </div>
+
     <div class="bg-pattern"></div>
 
-    <!-- Navigation Bar -->
     <nav class="glass-nav sticky top-0 z-50 transition-all duration-300" id="navbar">
         <div class="max-w-[96rem] mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-20 items-center">
-                
-                <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center cursor-pointer group" onclick="showSection('home')">
                     <div id="nav-default-logo" class="flex items-center">
                         <div class="w-10 h-10 bg-gradient-to-br from-emerald-500 via-teal-500 to-emerald-700 rounded-xl flex items-center justify-center shadow-lg shadow-emerald-500/30 relative mr-3 group-hover:scale-105 transition-transform duration-300 border border-emerald-300/40">
@@ -164,7 +160,6 @@
                     <img id="nav-custom-logo" src="" alt="Logo" class="h-10 w-auto hidden rounded-lg object-contain group-hover:scale-105 transition-transform duration-300">
                 </div>
 
-                <!-- Desktop Menu -->
                 <div class="hidden xl:flex items-center space-x-1 mx-auto">
                     <button onclick="showSection('home')" class="nav-link px-4 py-2 rounded-xl font-bold text-xs transition-all text-emerald-600 bg-emerald-50 dark:bg-emerald-900/30 dark:text-emerald-400 border border-transparent" data-target="home">Beranda</button>
                     <button onclick="showSection('services')" class="nav-link px-4 py-2 rounded-xl font-bold text-xs text-slate-600 dark:text-slate-300 hover:text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 transition-all border border-transparent" data-target="services">Layanan</button>
@@ -176,24 +171,19 @@
                     <button onclick="showSection('about')" class="nav-link px-4 py-2 rounded-xl font-bold text-xs text-slate-600 dark:text-slate-300 hover:text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 transition-all border border-transparent" data-target="about">Tentang & Galeri</button>
                 </div>
 
-                <!-- Desktop Right Actions -->
                 <div class="hidden xl:flex items-center space-x-3">
                     <div class="flex space-x-2 mr-2" id="header-social-container"></div>
-
-                    <button onclick="toggleDarkMode()" class="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-amber-400 flex items-center justify-center hover:scale-105 transition-transform border border-slate-200 dark:border-slate-700" title="Mode Siang / Malam (Kesehatan Mata)">
+                    <button onclick="toggleDarkMode()" class="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-amber-400 flex items-center justify-center hover:scale-105 transition-transform border border-slate-200 dark:border-slate-700" title="Mode Siang / Malam">
                         <i class="fa-solid fa-moon text-sm" id="dark-mode-icon"></i>
                     </button>
-                    
                     <button onclick="showSection('booking')" class="btn-3d btn-shimmer bg-gradient-to-r from-emerald-600 to-teal-600 text-white px-5 py-2.5 rounded-xl font-black text-xs whitespace-nowrap border border-emerald-400/50">
                         Buat Jadwal
                     </button>
-                    <!-- Hiding PIN details for security -->
                     <button onclick="showAdminLogin()" class="text-slate-400 hover:text-amber-500 p-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" title="Akses Admin">
                         <i class="fa-solid fa-gear text-sm"></i>
                     </button>
                 </div>
 
-                <!-- Mobile Toggle -->
                 <div class="flex items-center xl:hidden space-x-2">
                     <button onclick="toggleDarkMode()" class="w-9 h-9 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-amber-400 flex items-center justify-center border border-slate-200 dark:border-slate-700"><i class="fa-solid fa-moon text-xs"></i></button>
                     <button onclick="toggleMobileMenu()" class="p-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none">
@@ -203,7 +193,6 @@
             </div>
         </div>
 
-        <!-- Mobile Menu Dropdown -->
         <div class="xl:hidden hidden bg-white/95 dark:bg-slate-900/95 backdrop-blur-3xl border-t border-slate-100 dark:border-slate-800 shadow-2xl absolute w-full" id="mobile-menu">
             <div class="px-6 py-6 space-y-2">
                 <button onclick="showSection('home'); toggleMobileMenu()" class="block w-full text-left px-4 py-3 rounded-xl text-sm font-bold text-emerald-600 bg-emerald-50 dark:bg-emerald-900/30 border border-emerald-100 dark:border-emerald-800/50">Beranda</button>
@@ -216,33 +205,18 @@
                 <button onclick="showSection('about'); toggleMobileMenu()" class="block w-full text-left px-4 py-3 rounded-xl text-sm font-bold text-slate-700 dark:text-slate-300">Tentang & Galeri</button>
                 <div class="mt-6 pt-6 border-t border-slate-100 dark:border-slate-800 space-y-3">
                     <button onclick="showSection('booking'); toggleMobileMenu()" class="btn-shimmer w-full bg-gradient-to-r from-emerald-600 to-teal-600 text-white px-6 py-3.5 rounded-xl font-extrabold shadow-lg flex justify-center items-center text-sm border border-emerald-400/50">Buat Jadwal Sekarang</button>
-                    <!-- Hiding PIN details for security -->
                     <button onclick="showAdminLogin(); toggleMobileMenu()" class="w-full text-xs font-bold text-slate-500 dark:text-slate-400 py-3 rounded-xl bg-slate-50 dark:bg-slate-800 flex items-center justify-center"><i class="fa-solid fa-gear mr-2"></i> Akses Admin</button>
                 </div>
             </div>
         </div>
     </nav>
 
-    <!-- Main Content -->
     <main id="main-content" class="min-h-screen relative z-10"></main>
 
-    <!-- Floating Cart Button -->
     <button id="cart-btn" onclick="toggleCartModal()" class="hidden w-14 h-14 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-full shadow-[0_10px_25px_rgba(16,185,129,0.4)] flex items-center justify-center text-white border-2 border-white dark:border-slate-800 group hover:border-amber-400 transition-colors">
         <i class="fa-solid fa-cart-shopping text-xl group-hover:scale-110 transition-transform"></i>
         <span id="cart-badge" class="cart-badge">0</span>
     </button>
-
-    <!-- Floating Audio Therapy Player Widget -->
-    <div id="audio-widget" class="card-3d px-4 py-2.5 rounded-full flex items-center space-x-3 shadow-xl border border-emerald-500/30 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md">
-        <button id="audio-play-btn" onclick="toggleAudioTherapy()" class="w-9 h-9 rounded-full bg-gradient-to-br from-emerald-500 to-teal-700 text-white flex items-center justify-center shadow-md hover:scale-110 transition-transform border border-emerald-400/50">
-            <i class="fa-solid fa-play text-xs" id="audio-icon"></i>
-        </button>
-        <div class="text-left">
-            <p class="text-[10px] font-black text-amber-500 uppercase tracking-widest">Audio Terapi Jiwa</p>
-            <p id="audio-status-text" class="text-xs font-bold text-slate-700 dark:text-slate-300">Murottal & Ruqyah</p>
-        </div>
-        <audio id="therapy-audio" loop src="https://cdn.islamic.network/quran/audio/128/ar.alafasy/1.mp3"></audio>
-    </div>
 
     <div id="cart-modal" class="fixed inset-0 bg-slate-900/70 z-[10000] hidden flex items-center justify-center backdrop-blur-md p-4">
         <div class="card-3d p-6 md:p-8 rounded-[2rem] w-full max-w-lg max-h-[90vh] flex flex-col border border-emerald-500/30">
@@ -250,9 +224,7 @@
                 <h3 class="text-xl font-playfair font-black text-slate-900 dark:text-white flex items-center"><i class="fa-solid fa-basket-shopping text-amber-500 mr-3"></i> Keranjang Herbal</h3>
                 <button onclick="toggleCartModal()" class="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-red-500 flex items-center justify-center transition-colors"><i class="fa-solid fa-xmark"></i></button>
             </div>
-            
             <div id="cart-items-container" class="flex-grow overflow-y-auto space-y-3 mb-4 pr-1"></div>
-            
             <div class="border-t border-slate-200 dark:border-slate-700 pt-4">
                 <div class="flex justify-between items-center mb-5 bg-slate-50 dark:bg-slate-900/50 p-4 rounded-xl border border-slate-200 dark:border-slate-700">
                     <span class="text-slate-600 dark:text-slate-400 font-bold text-sm">Total Harga:</span>
@@ -265,8 +237,7 @@
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer class="bg-slate-950 text-slate-400 py-16 border-t-[4px] border-amber-500 relative mt-12 z-10 overflow-hidden">
+    <footer class="bg-slate-950 text-slate-400 py-16 relative z-10 overflow-hidden">
         <div class="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-32 bg-emerald-500/10 blur-[100px] rounded-full pointer-events-none"></div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-10 reveal-item">
@@ -278,7 +249,6 @@
                         <span class="font-playfair font-black text-2xl text-white tracking-tight clinic-name-display">NabaTCM</span>
                     </div>
                     <p class="text-xs mb-5 leading-relaxed text-slate-400 text-justify font-medium">Solusi Sehat dan Tenang Bersama Al-Qur'an. Mengintegrasikan pengobatan medis klasik Islam dan TCM modern secara profesional.</p>
-                    
                     <div class="flex space-x-2" id="footer-social-container"></div>
                 </div>
                 
@@ -332,7 +302,6 @@
 
     <div id="toast-container"></div>
     
-    <!-- Admin Login Modal -->
     <div id="admin-login-modal" class="fixed inset-0 bg-slate-900/80 z-[10000] hidden flex items-center justify-center backdrop-blur-md px-4">
         <div class="card-3d p-8 rounded-[2rem] w-full max-w-sm border border-amber-500/30">
             <div class="text-center mb-6">
@@ -340,10 +309,9 @@
                     <i class="fa-solid fa-lock text-2xl"></i>
                 </div>
                 <h3 class="text-xl font-playfair font-black text-slate-900 dark:text-white">Akses Admin Klinik</h3>
-                <!-- Hiding explicit PIN for security -->
                 <p class="text-xs text-slate-500 mt-1 font-medium">Masukkan PIN Keamanan Klinik</p>
             </div>
-            <input type="password" id="admin-pwd-input" class="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-amber-500 text-center text-lg tracking-widest font-black text-slate-800 dark:text-white mb-6 transition-all" placeholder="••••" onkeypress="if(event.key === 'Enter') submitAdminLogin()">
+            <input type="password" id="admin-pwd-input" class="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-amber-500 text-center text-lg tracking-widest font-black text-slate-800 dark:text-white mb-6 transition-all" placeholder="â€¢â€¢â€¢â€¢" onkeypress="if(event.key === 'Enter') submitAdminLogin()">
             <div class="flex space-x-3">
                 <button onclick="closeAdminLogin()" class="flex-1 px-4 py-3 text-slate-600 bg-slate-100 dark:bg-slate-800 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-xl font-bold text-xs transition-colors">Batal</button>
                 <button onclick="submitAdminLogin()" class="flex-1 px-4 py-3 btn-3d bg-emerald-600 text-white rounded-xl font-extrabold text-xs">Masuk</button>
@@ -351,7 +319,6 @@
         </div>
     </div>
 
-    <!-- Confirm Modal -->
     <div id="confirm-modal" class="fixed inset-0 bg-slate-900/80 z-[10000] hidden flex items-center justify-center backdrop-blur-md px-4">
         <div class="card-3d p-8 rounded-[2rem] w-full max-w-sm text-center">
             <div class="w-16 h-16 bg-red-50 dark:bg-red-900/30 rounded-2xl flex items-center justify-center mx-auto mb-4 text-red-500 border border-red-100 dark:border-red-800">
@@ -366,7 +333,71 @@
         </div>
     </div>
 
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBLvxEL6LHyJibWvXgiDbGzgLhyMJqu4xE",
+            authDomain: "nabatcm.firebaseapp.com",
+            projectId: "nabatcm",
+            storageBucket: "nabatcm.firebasestorage.app",
+            messagingSenderId: "790879730377",
+            appId: "1:790879730377:web:66e413566ff76ee450eb18"
+        };
+
+        const isFirebaseConfigured = !firebaseConfig.apiKey.includes("GANTI_DENGAN");
+
+        if (isFirebaseConfigured) {
+            try {
+                const app = initializeApp(firebaseConfig);
+                const auth = getAuth(app);
+                const db = getFirestore(app);
+
+                window.firebaseSaveData = async function(dataObj) {
+                    try {
+                        if (!auth.currentUser) await signInAnonymously(auth);
+                        // Fixed: Even-number segment path for Firestore collection/document pair ("settings", "clinicSettings")
+                        const docRef = doc(db, 'settings', 'clinicSettings');
+                        await setDoc(docRef, dataObj);
+                    } catch (e) {
+                        console.error("Gagal simpan ke Firebase:", e);
+                    }
+                };
+
+                window.initFirebaseListener = async function() {
+                    try {
+                        await signInAnonymously(auth);
+                        const docRef = doc(db, 'settings', 'clinicSettings');
+                        onSnapshot(docRef, (snapshot) => {
+                            if (snapshot.exists()) {
+                                const dataObj = snapshot.data();
+                                if (typeof window.updateAppVariables === 'function') {
+                                    window.updateAppVariables(dataObj);
+                                }
+                                window.updateGlobalUI();
+                                
+                                const currentSection = document.querySelector('.nav-link.text-emerald-600')?.dataset?.target || 'home';
+                                if(currentSection !== 'admin' && currentSection !== 'booking') window.showSection(currentSection);
+                            }
+                        });
+                    } catch (e) {
+                        console.error("Auth error:", e);
+                    }
+                };
+            } catch (error) {
+                console.error("Firebase Initialization Error:", error);
+            }
+        } else {
+            console.log("Firebase belum diatur (memori lokal aktif).");
+        }
+    </script>
+
     <script>
+        if(typeof window.firebaseSaveData === 'undefined') window.firebaseSaveData = function(data) {};
+        if(typeof window.initFirebaseListener === 'undefined') window.initFirebaseListener = function() {};
+
         let clinicSettings = {
             name: "NabaTCM Center",
             tagline: "Solusi Sehat dan Tenang Bersama Al-Qur'an.",
@@ -439,25 +470,19 @@
             { id: 4, name: "Ibu Aisyah", service: "Konsultasi Herbal", time: "14:15", status: "Menunggu" }
         ];
 
-        let isAudioPlaying = false;
-        function toggleAudioTherapy() {
-            const audio = document.getElementById('therapy-audio');
-            const icon = document.getElementById('audio-icon');
-            const status = document.getElementById('audio-status-text');
-            if(isAudioPlaying) {
-                audio.pause();
-                isAudioPlaying = false;
-                icon.className = "fa-solid fa-play text-xs";
-                status.innerText = "Murottal & Ruqyah (Jeda)";
-                showToast("Audio terapi dijeda.");
-            } else {
-                audio.play().catch(() => {});
-                isAudioPlaying = true;
-                icon.className = "fa-solid fa-pause text-xs";
-                status.innerText = "Memutar Audio Jiwa...";
-                showToast("Memutar audio relaksasi & ruqyah...");
-            }
-        }
+        window.updateAppVariables = function(dataObj) {
+            if(dataObj.clinicSettings) clinicSettings = dataObj.clinicSettings;
+            if(dataObj.visitorCount) visitorCount = dataObj.visitorCount;
+            if(dataObj.therapistsData) therapistsData = dataObj.therapistsData;
+            if(dataObj.servicesData) servicesData = dataObj.servicesData;
+            if(dataObj.articlesData) articlesData = dataObj.articlesData;
+            if(dataObj.productsData) productsData = dataObj.productsData;
+            if(dataObj.partnersData) partnersData = dataObj.partnersData;
+            if(dataObj.careersData) careersData = dataObj.careersData;
+            if(dataObj.galleryData) galleryData = dataObj.galleryData;
+            if(dataObj.testimonialsData) testimonialsData = dataObj.testimonialsData;
+            if(dataObj.queueData) queueData = dataObj.queueData;
+        };
 
         function formatRupiah(angka) {
             return "Rp " + parseInt(angka).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
@@ -480,6 +505,16 @@
             toast.innerHTML = `<i class="fa-solid ${isError ? 'fa-circle-xmark' : 'fa-circle-check'} mr-2 text-lg"></i> ${message}`;
             container.appendChild(toast);
             setTimeout(() => { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 400); }, 3000);
+        }
+
+        function shareToWhatsApp(text) {
+            const url = encodeURIComponent(window.location.href);
+            window.open(`https://wa.me/?text=${encodeURIComponent(text + " - ")}` + url, '_blank');
+        }
+
+        function shareToFacebook() {
+            const url = encodeURIComponent(window.location.href);
+            window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank');
         }
 
         function toggleDarkMode() {
@@ -521,6 +556,9 @@
             try {
                 const dataObj = { clinicSettings, visitorCount, therapistsData, servicesData, articlesData, productsData, partnersData, careersData, galleryData, testimonialsData, queueData };
                 localStorage.setItem('nabatcm_data_v8', JSON.stringify(dataObj));
+                if (typeof window.firebaseSaveData === 'function') {
+                    window.firebaseSaveData(dataObj);
+                }
             } catch (e) {}
         }
 
@@ -529,7 +567,9 @@
                 const saved = localStorage.getItem('nabatcm_data_v8');
                 if (saved) {
                     const dataObj = JSON.parse(saved);
-                    Object.keys(dataObj).forEach(key => { if(dataObj[key]) window[key] = dataObj[key]; });
+                    if (typeof window.updateAppVariables === 'function') {
+                        window.updateAppVariables(dataObj);
+                    }
                 }
                 if(localStorage.getItem('nabatcm_dark') === '1') {
                     document.body.classList.add('dark-mode');
@@ -538,7 +578,6 @@
             } catch (e) {}
         }
 
-        // --- Scroll Reveal Logic ---
         function initScrollReveal() {
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -548,17 +587,28 @@
                     }
                 });
             }, { threshold: 0.1 });
-            
             document.querySelectorAll('.reveal-item').forEach(el => observer.observe(el));
         }
 
         function initApp() {
+            const progress = document.getElementById('splash-progress');
+            if(progress) {
+                setTimeout(() => { progress.style.width = '100%'; }, 100);
+                setTimeout(() => {
+                    document.getElementById('splash-screen').classList.add('hidden-splash');
+                }, 1800);
+            }
+
             loadLocalData(); 
             visitorCount += 1;
             saveDataLocally();
             updateGlobalUI();
             updateCartUI();
             showSection('home');
+            
+            if (typeof window.initFirebaseListener === 'function') {
+                window.initFirebaseListener();
+            }
         }
 
         function updateGlobalUI() {
@@ -628,18 +678,13 @@
             else if (sectionId === 'admin') renderAdmin(main);
             
             window.scrollTo({ top: 0, behavior: 'smooth' });
-            
-            // Trigger Reveal Animations after render
             setTimeout(initScrollReveal, 50);
         }
-
-        // ================= Views Renderers ================= //
 
         function renderHome(container) {
             let heroBg = clinicSettings.heroBgUrl ? clinicSettings.heroBgUrl : 'https://images.unsplash.com/photo-1542841791-1925b02a2bfb?auto=format&fit=crop&w=1600&q=80';
             const heroStyle = `background-image: linear-gradient(to right, rgba(3,7,18,0.92), rgba(3,7,18,0.75)), url('${heroBg}'); background-size: cover; background-position: center;`;
 
-            // Layanan di Beranda (Tanpa Harga, Animasi Reveal)
             let servicesPreviewHTML = servicesData.map((s, idx) => `
                 <div class="card-3d rounded-3xl overflow-hidden group flex flex-col h-full border border-emerald-100 dark:border-slate-800 reveal-item" style="transition-delay: ${idx * 100}ms">
                     <div class="h-48 overflow-hidden relative">
@@ -661,7 +706,6 @@
                 </div>
             `).join('');
 
-            // Artikel di Beranda (Reveal)
             let articlesPreviewHTML = articlesData.slice(0, 3).map((a, idx) => `
                 <div class="card-3d rounded-3xl overflow-hidden group cursor-pointer border border-slate-100 dark:border-slate-800 hover:-translate-y-2 transition-transform reveal-item" style="transition-delay: ${idx * 100}ms" onclick="showSection('article-detail', ${a.id})">
                     <div class="h-40 overflow-hidden relative">
@@ -675,7 +719,6 @@
                 </div>
             `).join('');
 
-            // Testimoni Berwarna Pastel Elegan Sejajar (Setelah Artikel)
             const pastelColors = [
                 { bg: 'bg-emerald-50 dark:bg-emerald-900/20', border: 'border-emerald-100 dark:border-emerald-800/30', text: 'text-emerald-800 dark:text-emerald-200' },
                 { bg: 'bg-sky-50 dark:bg-sky-900/20', border: 'border-sky-100 dark:border-sky-800/30', text: 'text-sky-800 dark:text-sky-200' },
@@ -684,9 +727,7 @@
 
             let testimonialsHTML = testimonialsData.slice(0, 3).map((t, index) => {
                 const colors = pastelColors[index % pastelColors.length];
-                const avatarIcon = t.gender === 'female' 
-                    ? '<i class="fa-solid fa-user-nurse text-xl"></i>' 
-                    : '<i class="fa-solid fa-user-tie text-xl"></i>';
+                const avatarIcon = t.gender === 'female' ? '<i class="fa-solid fa-user-nurse text-xl"></i>' : '<i class="fa-solid fa-user-tie text-xl"></i>';
                 return `
                     <div class="${colors.bg} ${colors.border} border p-6 rounded-3xl shadow-sm flex flex-col justify-between hover:-translate-y-2 transition-transform relative overflow-hidden reveal-item" style="transition-delay: ${index * 100}ms">
                         <i class="fa-solid fa-quote-right absolute top-4 right-4 text-5xl opacity-[0.03] ${colors.text}"></i>
@@ -697,7 +738,7 @@
                             </div>
                             <div>
                                 <h4 class="font-black text-slate-900 dark:text-white text-sm">${t.name}</h4>
-                                <div class="text-amber-400 text-[10px] mt-0.5"><i class="fa-solid fa-star text-gold-gradient"></i><i class="fa-solid fa-star text-gold-gradient"></i><i class="fa-solid fa-star text-gold-gradient"></i><i class="fa-solid fa-star text-gold-gradient"></i><i class="fa-solid fa-star text-gold-gradient"></i></div>
+                                <div class="text-amber-400 text-[10px] mt-0.5"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
                             </div>
                         </div>
                     </div>
@@ -705,7 +746,6 @@
             }).join('');
 
             container.innerHTML = `
-                <!-- 3D Hero Section with AI Quran BG -->
                 <div class="relative min-h-[85vh] flex items-center py-20 overflow-hidden text-white" style="${heroStyle}">
                     <div class="hero-glow w-[600px] h-[600px] bg-emerald-500/20 -top-40 -right-40"></div>
                     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
@@ -731,7 +771,6 @@
                     </div>
                 </div>
 
-                <!-- Services Section -->
                 <div id="services-section" class="py-24 bg-transparent relative">
                     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                         <div class="text-center max-w-2xl mx-auto mb-16 reveal-item">
@@ -744,7 +783,6 @@
                     </div>
                 </div>
 
-                <!-- Articles Section -->
                 <div class="py-20 bg-white/60 dark:bg-slate-950/40 backdrop-blur-md border-t border-slate-200/50 dark:border-slate-800/50">
                     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <div class="flex justify-between items-end mb-12 reveal-item">
@@ -760,7 +798,6 @@
                     </div>
                 </div>
 
-                <!-- Testimonials Section (Moved here, Sejajar, Warna Pastel) -->
                 <div class="py-24 bg-transparent">
                     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <div class="text-center max-w-2xl mx-auto mb-16 reveal-item">
@@ -773,7 +810,6 @@
                     </div>
                 </div>
 
-                <!-- Q&A (FAQ) Section -->
                 <div class="py-24 bg-white/60 dark:bg-slate-950/40 backdrop-blur-md border-t border-slate-200/50 dark:border-slate-800/50">
                     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <div class="text-center max-w-2xl mx-auto mb-16 reveal-item">
@@ -781,34 +817,21 @@
                             <p class="text-slate-600 dark:text-slate-400 text-sm">Informasi cepat mengenai prosedur dan pengobatan di klinik kami.</p>
                         </div>
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                            
-                            <!-- Card Kiri -->
-                            <div class="card-3d p-8 rounded-3xl bg-white/90 dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700 reveal-item" style="transition-delay: 0ms">
-                                <div class="w-12 h-12 rounded-xl bg-emerald-50 dark:bg-emerald-900/30 flex items-center justify-center mb-6 border border-emerald-100 dark:border-emerald-800/50 text-emerald-600 dark:text-emerald-400">
-                                    <i class="fa-solid fa-q text-xl"></i>
-                                </div>
+                            <div class="card-3d p-8 rounded-3xl bg-white/90 dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700 reveal-item">
+                                <div class="w-12 h-12 rounded-xl bg-emerald-50 dark:bg-emerald-900/30 flex items-center justify-center mb-6 border border-emerald-100 text-emerald-600 dark:text-emerald-400"><i class="fa-solid fa-q text-xl"></i></div>
                                 <h4 class="font-playfair font-bold text-lg text-slate-900 dark:text-white mb-3">Apakah terapi bekam terasa sakit?</h4>
-                                <p class="text-slate-600 dark:text-slate-300 text-xs leading-relaxed font-medium text-justify">Sama sekali tidak. Kami menggunakan jarum lanset steril sekali pakai yang sangat halus dan teknik penusukan presisi. Pasien umumnya hanya merasakan gigitan semut, bahkan banyak yang merasa sangat rileks hingga tertidur saat terapi berlangsung.</p>
+                                <p class="text-slate-600 dark:text-slate-300 text-xs leading-relaxed font-medium text-justify">Sama sekali tidak. Kami menggunakan jarum lanset steril sekali pakai yang sangat halus dan teknik penusukan presisi.</p>
                             </div>
-                            
-                            <!-- Card Tengah -->
-                            <div class="card-3d p-8 rounded-3xl bg-white/90 dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700 reveal-item" style="transition-delay: 100ms">
-                                <div class="w-12 h-12 rounded-xl bg-amber-50 dark:bg-amber-900/30 flex items-center justify-center mb-6 border border-amber-100 dark:border-amber-800/50 text-amber-600 dark:text-amber-400">
-                                    <i class="fa-solid fa-clock text-xl"></i>
-                                </div>
+                            <div class="card-3d p-8 rounded-3xl bg-white/90 dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700 reveal-item">
+                                <div class="w-12 h-12 rounded-xl bg-amber-50 dark:bg-amber-900/30 flex items-center justify-center mb-6 border border-amber-100 text-amber-600 dark:text-amber-400"><i class="fa-solid fa-clock text-xl"></i></div>
                                 <h4 class="font-playfair font-bold text-lg text-slate-900 dark:text-white mb-3">Berapa lama efek terapi mulai terasa?</h4>
-                                <p class="text-slate-600 dark:text-slate-300 text-xs leading-relaxed font-medium text-justify">Sangat bergantung pada tingkat keluhan. Untuk masalah otot tegang dan kelelahan ringan, tubuh akan terasa jauh lebih ringan dan segar seketika setelah 1 sesi. Untuk penyakit degeneratif menahun, umumnya memerlukan 3-4 sesi terapi rutin berserta racikan herbal.</p>
+                                <p class="text-slate-600 dark:text-slate-300 text-xs leading-relaxed font-medium text-justify">Untuk masalah otot tegang dan kelelahan ringan, tubuh akan terasa jauh lebih ringan dan segar seketika setelah 1 sesi.</p>
                             </div>
-                            
-                            <!-- Card Kanan -->
-                            <div class="card-3d p-8 rounded-3xl bg-white/90 dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700 reveal-item" style="transition-delay: 200ms">
-                                <div class="w-12 h-12 rounded-xl bg-sky-50 dark:bg-sky-900/30 flex items-center justify-center mb-6 border border-sky-100 dark:border-sky-800/50 text-sky-600 dark:text-sky-400">
-                                    <i class="fa-solid fa-leaf text-xl"></i>
-                                </div>
+                            <div class="card-3d p-8 rounded-3xl bg-white/90 dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700 reveal-item">
+                                <div class="w-12 h-12 rounded-xl bg-sky-50 dark:bg-sky-900/30 flex items-center justify-center mb-6 border border-sky-100 text-sky-600 dark:text-sky-400"><i class="fa-solid fa-leaf text-xl"></i></div>
                                 <h4 class="font-playfair font-bold text-lg text-slate-900 dark:text-white mb-3">Apakah herbal TCM aman bagi lambung?</h4>
-                                <p class="text-slate-600 dark:text-slate-300 text-xs leading-relaxed font-medium text-justify">Sangat aman dan teruji klinis. Produk herbal kami adalah ramuan alam murni 100% tanpa bahan kimia sintetis. Sebelum meresepkan, terapis akan melakukan diagnosis mendalam agar dosis yang diberikan tidak mengiritasi sistem pencernaan pasien sama sekali.</p>
+                                <p class="text-slate-600 dark:text-slate-300 text-xs leading-relaxed font-medium text-justify">Sangat aman dan teruji klinis. Produk herbal kami adalah ramuan alam murni 100% tanpa bahan kimia sintetis.</p>
                             </div>
-                            
                         </div>
                     </div>
                 </div>
@@ -873,7 +896,7 @@
                             <i class="fa-solid fa-user-doctor text-3xl"></i>
                         </div>
                         <h2 class="text-4xl font-playfair font-black text-slate-900 dark:text-white mb-3">Tim <span class="text-emerald-600 dark:text-emerald-400">Terapis Ahli</span></h2>
-                        <p class="text-slate-600 text-sm max-w-2xl mx-auto">Kami didukung oleh tenaga profesional, dokter, dan praktisi Thibbun Nabawi bersertifikat yang siap memberikan pelayanan kesehatan holistik terbaik untuk Anda.</p>
+                        <p class="text-slate-600 text-sm max-w-2xl mx-auto">Kami didukung oleh tenaga profesional, dokter, dan praktisi Thibbun Nabawi bersertifikat.</p>
                     </div>
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                         ${html}
@@ -903,7 +926,7 @@
                 <div class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="text-center mb-12 reveal-item">
                         <h2 class="text-4xl font-playfair font-black text-slate-900 dark:text-white mb-3">Artikel <span class="text-emerald-600 dark:text-emerald-400">Kesehatan</span></h2>
-                        <p class="text-slate-600 text-sm">Edukasi kesehatan holistik berbasis ilmiah dan sunnah dengan rekomendasi herbal.</p>
+                        <p class="text-slate-600 text-sm">Edukasi kesehatan holistik berbasis ilmiah dan sunnah.</p>
                     </div>
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                         ${html}
@@ -924,12 +947,13 @@
                     
                     <div class="card-3d p-8 md:p-12 rounded-[2.5rem] bg-white/95 dark:bg-slate-800/95 border border-slate-200 dark:border-slate-700 shadow-2xl">
                         <div class="flex items-center space-x-3 mb-4">
-                            <span class="bg-gradient-to-r from-amber-400 to-amber-600 text-white text-xs font-black px-3 py-1 rounded-lg shadow-sm border border-amber-300/50">${article.date}</span>
-                            <button onclick="shareToFacebook('${article.title}')" class="flex items-center text-[10px] font-bold text-blue-600 bg-blue-50 dark:bg-blue-900/30 dark:text-blue-400 px-3 py-1 rounded-lg border border-blue-200/50 hover:bg-blue-100 transition-colors shadow-sm">
-                                <i class="fa-brands fa-facebook mr-1.5"></i> Bagikan
-                            </button>
+                            <span class="bg-gradient-to-r from-amber-400 to-amber-600 text-white text-xs font-black px-3 py-1 rounded-lg shadow-sm">${article.date}</span>
+                            <div class="flex space-x-2 border-l border-slate-200 dark:border-slate-700 pl-3">
+                                <button onclick="shareToWhatsApp('Baca artikel kesehatan bermanfaat dari NabaTCM: ${article.title}')" class="w-8 h-8 rounded-full bg-green-50 dark:bg-green-900/30 text-green-600 dark:text-green-400 flex items-center justify-center hover:scale-110 transition-transform shadow-sm" title="Bagikan ke WhatsApp"><i class="fa-brands fa-whatsapp text-sm"></i></button>
+                                <button onclick="shareToFacebook()" class="w-8 h-8 rounded-full bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 flex items-center justify-center hover:scale-110 transition-transform shadow-sm" title="Bagikan ke Facebook"><i class="fa-brands fa-facebook-f text-sm"></i></button>
+                            </div>
                         </div>
-                        <h1 class="text-3xl md:text-5xl font-playfair font-black text-slate-900 dark:text-white mb-6 leading-tight drop-shadow-sm">${article.title}</h1>
+                        <h1 class="text-3xl md:text-5xl font-playfair font-black text-slate-900 dark:text-white mb-6 leading-tight">${article.title}</h1>
                         
                         <div class="rounded-2xl overflow-hidden mb-8 h-80 shadow-lg border border-slate-100 dark:border-slate-700">
                             <img src="${article.image}" class="w-full h-full object-cover">
@@ -939,7 +963,6 @@
                             <p>${article.content}</p>
                         </div>
 
-                        <!-- Rekomendasi Produk Sesuai Pembahasan Artikel -->
                         <div class="mt-12 p-6 md:p-8 rounded-3xl bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-950/60 dark:to-teal-950/60 border border-emerald-200 dark:border-emerald-800 shadow-inner">
                             <div class="flex items-center mb-6">
                                 <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 text-white flex items-center justify-center mr-4 shadow-lg border border-emerald-400">
@@ -1021,8 +1044,8 @@
             let vals = Array.from(checks).map(c => c.value);
             let result = "";
             if(vals.includes('psikis')) result = "Berdasarkan keluhan Anda (Cemas/Susah Tidur), kemungkinan terdapat gangguan pada aliran Chi atau ketidaktenangan jiwa. Kami sangat merekomendasikan **Ruqyah Syar'iyyah** dipadukan dengan **Akupunktur Relaksasi**.";
-            else if(vals.includes('darah')) result = "Gejala kaku dan pegal mengindikasikan stasis darah (darah statis) di area leher/punggung. Terapi **Bekam Sunnah** sangat disarankan untuk melancarkan sirkulasi Anda.";
-            else result = "Untuk keluhan kelelahan atau mudah pusing, kami merekomendasikan kombinasi **Konsultasi Herbal TCM** (Sari Kurma/Madu) dan terapi akupunktur untuk mengembalikan vitalitas (Qi) Anda.";
+            else if(vals.includes('darah')) result = "Gejala kaku dan pegal mengindikasikan stasis darah di area leher/punggung. Terapi **Bekam Sunnah** sangat disarankan.";
+            else result = "Untuk keluhan kelelahan atau mudah pusing, kami merekomendasikan kombinasi **Konsultasi Herbal TCM** (Sari Kurma/Madu) dan terapi akupunktur.";
             
             document.getElementById('calc-desc').innerHTML = result.replace(/\*\*(.*?)\*\*/g, '<strong class="text-emerald-600 dark:text-emerald-400">$1</strong>');
             document.getElementById('calc-result').classList.remove('hidden');
@@ -1033,13 +1056,16 @@
                 <div class="card-3d rounded-3xl overflow-hidden flex flex-col group hover:-translate-y-2 transition-transform border border-slate-200 dark:border-slate-700 reveal-item" style="transition-delay: ${idx * 50}ms">
                     <div class="h-48 overflow-hidden relative bg-white">
                         <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                        <button onclick="shareToFacebook('Promo Herbal NabaTCM: ${p.name}')" class="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/90 text-blue-600 flex items-center justify-center shadow-md hover:scale-110 transition-transform z-10 border border-slate-200" title="Bagikan ke Facebook">
-                            <i class="fa-brands fa-facebook-f text-sm"></i>
-                        </button>
                     </div>
                     <div class="p-6 flex-grow flex flex-col justify-between bg-white/90 dark:bg-slate-800/90">
                         <div>
-                            <h3 class="font-playfair font-black text-slate-900 dark:text-white text-xl leading-tight mb-2 group-hover:text-emerald-600 transition-colors">${p.name}</h3>
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="font-playfair font-black text-slate-900 dark:text-white text-xl leading-tight group-hover:text-emerald-600 transition-colors pr-2">${p.name}</h3>
+                                <div class="flex space-x-1.5 flex-shrink-0 mt-1">
+                                    <button onclick="shareToWhatsApp('Cek herbal sunnah berkualitas ini di NabaTCM: ${p.name}')" class="text-green-500 hover:text-green-600 hover:scale-110 transition-all" title="Bagikan ke WhatsApp"><i class="fa-brands fa-whatsapp text-lg"></i></button>
+                                    <button onclick="shareToFacebook()" class="text-blue-500 hover:text-blue-600 hover:scale-110 transition-all" title="Bagikan ke Facebook"><i class="fa-brands fa-facebook text-lg"></i></button>
+                                </div>
+                            </div>
                             <div class="text-emerald-600 dark:text-emerald-400 font-black text-2xl mb-3">${formatRupiah(p.price)}</div>
                             <p class="text-xs text-slate-600 dark:text-slate-300 mb-3 leading-relaxed">${p.desc}</p>
                             <p class="text-[10px] font-bold text-amber-600 bg-amber-50 dark:bg-amber-900/30 border border-amber-200/50 dark:border-amber-800/50 px-2.5 py-1.5 rounded-lg inline-block mb-4 shadow-sm"><i class="fa-solid fa-check mr-1"></i>${p.benefits}</p>
@@ -1069,7 +1095,6 @@
             const btn = document.getElementById('cart-btn');
             const totalItems = cartData.reduce((sum, item) => sum + item.qty, 0);
             badge.innerText = totalItems;
-            
             if(totalItems > 0) btn.classList.remove('hidden');
             else btn.classList.add('hidden');
         }
@@ -1077,11 +1102,9 @@
         function addToCart(id) {
             const product = productsData.find(p => p.id === id);
             if(!product) return;
-            
             const existing = cartData.find(item => item.id === id);
             if(existing) existing.qty += 1;
             else cartData.push({ ...product, qty: 1 });
-            
             updateCartUI();
             showToast(`${product.name} ditambahkan ke keranjang!`);
         }
@@ -1115,7 +1138,6 @@
                     </div>
                 `;
             }).join('');
-            
             document.getElementById('cart-total-price').innerText = formatRupiah(total);
         }
 
@@ -1140,7 +1162,6 @@
 
         function checkoutCart() {
             if(cartData.length === 0) { showToast("Keranjang kosong!", true); return; }
-            
             let total = 0;
             let msg = "*FORM PEMESANAN TOKO NabaTCM*\n\n*Daftar Pesanan:*\n";
             cartData.forEach(item => {
@@ -1149,22 +1170,12 @@
                 msg += `- ${item.name} (${item.qty}x) = ${formatRupiah(subtotal)}\n`;
             });
             msg += `\n*TOTAL: ${formatRupiah(total)}*\n\nMohon informasi ongkos kirim dan prosedur pembayaran. Terima kasih.`;
-            
             let phone = clinicSettings.phone.trim();
             if(phone.startsWith('0')) phone = '62' + phone.substring(1);
-            
             window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
             cartData = [];
             updateCartUI();
             toggleCartModal();
-        }
-
-        function shareToFacebook(titleText) {
-            const url = encodeURIComponent(window.location.href.split('#')[0]);
-            const quote = encodeURIComponent(titleText);
-            const fbShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${quote}`;
-            window.open(fbShareUrl, 'facebook-share-dialog', 'width=800,height=600');
-            showToast("Membuka jendela Facebook...");
         }
 
         function renderAbout(container) {
@@ -1189,10 +1200,7 @@
                         <div class="w-full md:w-2/3">
                             <h2 class="text-4xl font-playfair font-black text-slate-900 dark:text-white mb-6">Filosofi <span class="text-emerald-600 dark:text-emerald-400">NabaTCM</span></h2>
                             <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed text-justify mb-5 font-medium">
-                                NabaTCM Center didirikan dengan visi luhur untuk memadukan kearifan metode penyembuhan klasik Islam (Thibbun Nabawi) dengan presisi keilmuan Traditional Chinese Medicine (TCM) dan standar sterilisasi modern.
-                            </p>
-                            <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed text-justify font-medium">
-                                Kami percaya bahwa kesembuhan sejati tidak hanya mengobati fisik yang sakit, melainkan juga harus menyentuh akar masalah pada tingkat psikologis dan spiritual. Oleh karena itu, pendekatan holistik kami merangkum terapi fisik, nutrisi herbal murni, dan terapi rohani melalui ayat suci Al-Qur'an.
+                                NabaTCM Center didirikan dengan visi luhur untuk memadukan kearifan metode penyembuhan klasik Islam (Thibbun Nabawi) dengan presisi keilmuan Traditional Chinese Medicine (TCM).
                             </p>
                         </div>
                     </div>
@@ -1232,7 +1240,7 @@
                         <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed max-w-2xl mb-3 font-medium">${c.desc}</p>
                         <p class="text-[11px] font-black text-red-500 bg-red-50 dark:bg-red-900/20 px-2 py-1 rounded inline-block">Batas Lamaran: ${c.deadline}</p>
                     </div>
-                    <button onclick="applyCareer('${c.title}')" class="btn-3d btn-shimmer bg-slate-900 dark:bg-emerald-600 hover:bg-slate-800 text-white px-6 py-3.5 rounded-xl font-black text-xs whitespace-nowrap shadow-lg">
+                    <button onclick="applyCareer('${c.title}')" class="btn-3d btn-shimmer bg-slate-900 dark:bg-emerald-600 text-white px-6 py-3.5 rounded-xl font-black text-xs whitespace-nowrap shadow-lg">
                         Lamar Sekarang <i class="fa-solid fa-paper-plane ml-2 text-amber-400"></i>
                     </button>
                 </div>
@@ -1242,21 +1250,15 @@
                 <div class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="text-center max-w-3xl mx-auto mb-16 reveal-item">
                         <h2 class="text-4xl font-playfair font-black text-slate-900 dark:text-white mb-3">Mitra & <span class="text-emerald-600 dark:text-emerald-400">Karir</span></h2>
-                        <p class="text-slate-600 text-sm">Kolaborasi institusional tingkat nasional dan peluang bergabung bersama tim profesional medis & terapis kami.</p>
+                        <p class="text-slate-600 text-sm">Kolaborasi institusional tingkat nasional dan peluang bergabung bersama tim profesional kami.</p>
                     </div>
-
                     <div class="mb-20">
-                        <h3 class="text-2xl font-playfair font-black text-slate-900 dark:text-white mb-6 flex items-center reveal-item"><div class="w-10 h-10 rounded-lg bg-emerald-100 dark:bg-emerald-900/50 flex items-center justify-center mr-3"><i class="fa-solid fa-handshake text-emerald-600 dark:text-emerald-400"></i></div> Mitra Resmi & Strategis</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            ${partnersHTML}
-                        </div>
+                        <h3 class="text-2xl font-playfair font-black text-slate-900 dark:text-white mb-6 flex items-center reveal-item"><div class="w-10 h-10 rounded-lg bg-emerald-100 dark:bg-emerald-900/50 flex items-center justify-center mr-3"><i class="fa-solid fa-handshake text-emerald-600"></i></div> Mitra Resmi & Strategis</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">${partnersHTML}</div>
                     </div>
-
                     <div>
-                        <h3 class="text-2xl font-playfair font-black text-slate-900 dark:text-white mb-6 flex items-center reveal-item"><div class="w-10 h-10 rounded-lg bg-amber-100 dark:bg-amber-900/50 flex items-center justify-center mr-3"><i class="fa-solid fa-briefcase text-amber-600 dark:text-amber-400"></i></div> Lowongan Karir</h3>
-                        <div class="space-y-4">
-                            ${careersHTML}
-                        </div>
+                        <h3 class="text-2xl font-playfair font-black text-slate-900 dark:text-white mb-6 flex items-center reveal-item"><div class="w-10 h-10 rounded-lg bg-amber-100 dark:bg-amber-900/50 flex items-center justify-center mr-3"><i class="fa-solid fa-briefcase text-amber-600"></i></div> Lowongan Karir</h3>
+                        <div class="space-y-4">${careersHTML}</div>
                     </div>
                 </div>
             `;
@@ -1270,24 +1272,21 @@
         }
 
         function renderQueueTable() {
-            if(queueData.length === 0) {
-                return `<div class="p-6 text-center text-slate-500 font-medium text-sm">Belum ada jadwal antrean untuk hari ini.</div>`;
-            }
-
-            return queueData.map((q, idx) => {
+            if(queueData.length === 0) return `<div class="p-6 text-center text-slate-500 font-medium text-sm">Belum ada jadwal antrean untuk hari ini.</div>`;
+            return queueData.map((q) => {
                 let statusBadge = "";
                 let bgRow = "bg-white dark:bg-slate-900/60";
-                if(q.status === 'Selesai') statusBadge = `<span class="bg-emerald-50 text-emerald-600 dark:bg-emerald-900/40 dark:text-emerald-400 px-3 py-1 rounded-lg text-[10px] font-black border border-emerald-200 dark:border-emerald-800"><i class="fa-solid fa-check mr-1"></i> Selesai</span>`;
+                if(q.status === 'Selesai') statusBadge = `<span class="bg-emerald-50 text-emerald-600 dark:bg-emerald-900/40 dark:text-emerald-400 px-3 py-1 rounded-lg text-[10px] font-black border border-emerald-200"><i class="fa-solid fa-check mr-1"></i> Selesai</span>`;
                 else if(q.status === 'Proses') {
-                    statusBadge = `<span class="bg-blue-50 text-blue-600 dark:bg-blue-900/40 dark:text-blue-400 px-3 py-1 rounded-lg text-[10px] font-black border border-blue-200 dark:border-blue-800 flex items-center"><div class="pulse-dot mr-2"></div> Sedang Terapi</span>`;
+                    statusBadge = `<span class="bg-blue-50 text-blue-600 dark:bg-blue-900/40 dark:text-blue-400 px-3 py-1 rounded-lg text-[10px] font-black border border-blue-200 flex items-center"><div class="pulse-dot mr-2"></div> Sedang Terapi</span>`;
                     bgRow = "bg-blue-50/50 dark:bg-blue-900/20 border-l-4 border-l-blue-500";
                 }
-                else statusBadge = `<span class="bg-amber-50 text-amber-600 dark:bg-amber-900/40 dark:text-amber-400 px-3 py-1 rounded-lg text-[10px] font-black border border-amber-200 dark:border-amber-800"><i class="fa-solid fa-hourglass-half mr-1"></i> Menunggu</span>`;
+                else statusBadge = `<span class="bg-amber-50 text-amber-600 dark:bg-amber-900/40 dark:text-amber-400 px-3 py-1 rounded-lg text-[10px] font-black border border-amber-200"><i class="fa-solid fa-hourglass-half mr-1"></i> Menunggu</span>`;
 
                 return `
-                    <div class="flex items-center justify-between p-4 border-b border-slate-100 dark:border-slate-700/50 ${bgRow} hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+                    <div class="flex items-center justify-between p-4 border-b border-slate-100 dark:border-slate-700/50 ${bgRow}">
                         <div class="flex items-center space-x-4">
-                            <div class="w-12 h-12 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center font-playfair font-black text-slate-800 dark:text-white border border-slate-200 dark:border-slate-700 shadow-sm">${q.time}</div>
+                            <div class="w-12 h-12 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center font-playfair font-black text-slate-800 dark:text-white">${q.time}</div>
                             <div>
                                 <h4 class="font-bold text-sm text-slate-900 dark:text-white">${maskPatientName(q.name)}</h4>
                                 <p class="text-[11px] font-medium text-slate-500 dark:text-slate-400">${q.service}</p>
@@ -1304,7 +1303,6 @@
 
             container.innerHTML = `
                 <div class="py-16 px-4 max-w-7xl mx-auto flex flex-col lg:flex-row gap-8 reveal-item">
-                    <!-- Left: Booking Form -->
                     <div class="w-full lg:w-3/5">
                         <div class="card-3d p-8 md:p-10 rounded-[3rem] bg-white/95 dark:bg-slate-800/95 border border-slate-200 dark:border-slate-700 shadow-2xl relative overflow-hidden">
                             <div class="absolute top-0 right-0 w-32 h-32 bg-emerald-500/10 rounded-full blur-3xl"></div>
@@ -1321,45 +1319,28 @@
                             <form onsubmit="submitBooking(event)" class="space-y-5 relative z-10">
                                 <div>
                                     <label class="block text-xs font-black text-slate-700 dark:text-slate-300 mb-2 ml-1">Tipe Kunjungan</label>
-                                    <select id="book-type" class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3.5 text-sm focus:ring-2 focus:ring-emerald-500 text-slate-800 dark:text-white font-medium shadow-sm transition-shadow" onchange="toggleHomecare(this.value)">
+                                    <select id="book-type" class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3.5 text-sm text-slate-800 dark:text-white font-medium shadow-sm" onchange="toggleHomecare(this.value)">
                                         <option value="Datang ke Klinik">Datang ke Klinik</option>
-                                        <option value="Homecare / Panggilan">Datang ke Rumah / Homecare (+ Biaya Transport)</option>
+                                        <option value="Homecare / Panggilan">Datang ke Rumah / Homecare</option>
                                     </select>
                                 </div>
                                 <div class="grid grid-cols-2 gap-4">
-                                    <div>
-                                        <label class="block text-xs font-black text-slate-700 dark:text-slate-300 mb-2 ml-1">Nama Lengkap</label>
-                                        <input type="text" id="book-name" required class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3.5 text-sm focus:ring-2 focus:ring-emerald-500 text-slate-800 dark:text-white shadow-sm transition-shadow">
-                                    </div>
-                                    <div>
-                                        <label class="block text-xs font-black text-slate-700 dark:text-slate-300 mb-2 ml-1">Usia / Jenis Kelamin</label>
-                                        <input type="text" id="book-age" placeholder="Cth: 35 / Laki-laki" required class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3.5 text-sm focus:ring-2 focus:ring-emerald-500 text-slate-800 dark:text-white shadow-sm transition-shadow">
-                                    </div>
+                                    <div><label class="block text-xs font-black text-slate-700 dark:text-slate-300 mb-2 ml-1">Nama Lengkap</label><input type="text" id="book-name" required class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3.5 text-sm text-slate-800 dark:text-white"></div>
+                                    <div><label class="block text-xs font-black text-slate-700 dark:text-slate-300 mb-2 ml-1">Usia / Gender</label><input type="text" id="book-age" placeholder="Cth: 35 / Laki-laki" required class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3.5 text-sm text-slate-800 dark:text-white"></div>
                                 </div>
                                 <div id="homecare-address-div" class="hidden">
-                                    <label class="block text-xs font-black text-slate-700 dark:text-slate-300 mb-2 ml-1">Alamat Lengkap (Untuk Homecare)</label>
-                                    <textarea id="book-address" rows="2" placeholder="Tuliskan alamat lengkap beserta patokan rumah..." class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-emerald-500 text-slate-800 dark:text-white shadow-sm transition-shadow"></textarea>
+                                    <label class="block text-xs font-black text-slate-700 dark:text-slate-300 mb-2 ml-1">Alamat Lengkap</label>
+                                    <textarea id="book-address" rows="2" class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 text-sm text-slate-800 dark:text-white"></textarea>
                                 </div>
                                 <div>
-                                    <label class="block text-xs font-black text-slate-700 dark:text-slate-300 mb-2 ml-1">Pilih Layanan & Estimasi Harga</label>
-                                    <select id="book-service" class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3.5 text-sm focus:ring-2 focus:ring-emerald-500 text-slate-800 dark:text-white font-medium shadow-sm transition-shadow">
-                                        ${serviceOptions}
-                                    </select>
+                                    <label class="block text-xs font-black text-slate-700 dark:text-slate-300 mb-2 ml-1">Layanan</label>
+                                    <select id="book-service" class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3.5 text-sm text-slate-800 dark:text-white font-medium">${serviceOptions}</select>
                                 </div>
                                 <div class="grid grid-cols-2 gap-4">
-                                    <div>
-                                        <label class="block text-xs font-black text-slate-700 dark:text-slate-300 mb-2 ml-1">Rencana Tanggal</label>
-                                        <input type="date" id="book-date" required class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3.5 text-sm focus:ring-2 focus:ring-emerald-500 text-slate-800 dark:text-white shadow-sm transition-shadow">
-                                    </div>
-                                    <div>
-                                        <label class="block text-xs font-black text-slate-700 dark:text-slate-300 mb-2 ml-1">Waktu (Jam)</label>
-                                        <input type="time" id="book-time" required class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3.5 text-sm focus:ring-2 focus:ring-emerald-500 text-slate-800 dark:text-white shadow-sm transition-shadow">
-                                    </div>
+                                    <div><label class="block text-xs font-black text-slate-700 dark:text-slate-300 mb-2 ml-1">Tanggal</label><input type="date" id="book-date" required class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3.5 text-sm text-slate-800 dark:text-white"></div>
+                                    <div><label class="block text-xs font-black text-slate-700 dark:text-slate-300 mb-2 ml-1">Waktu</label><input type="time" id="book-time" required class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3.5 text-sm text-slate-800 dark:text-white"></div>
                                 </div>
-                                <div>
-                                    <label class="block text-xs font-black text-slate-700 dark:text-slate-300 mb-2 ml-1">Keluhan / Catatan</label>
-                                    <textarea id="book-note" rows="2" class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-emerald-500 text-slate-800 dark:text-white shadow-sm transition-shadow"></textarea>
-                                </div>
+                                <div><label class="block text-xs font-black text-slate-700 dark:text-slate-300 mb-2 ml-1">Keluhan</label><textarea id="book-note" rows="2" class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 text-sm text-slate-800 dark:text-white"></textarea></div>
                                 <button type="submit" class="w-full btn-3d btn-shimmer bg-gradient-to-r from-emerald-600 to-teal-700 text-white py-4 rounded-xl font-black text-sm mt-6 flex justify-center items-center shadow-lg border border-emerald-400/50">
                                     <i class="fa-brands fa-whatsapp text-xl mr-2 text-green-400"></i> Kirim Form Reservasi ke WA
                                 </button>
@@ -1367,7 +1348,6 @@
                         </div>
                     </div>
 
-                    <!-- Right: Live Queue -->
                     <div class="w-full lg:w-2/5">
                         <div class="card-3d rounded-[2.5rem] bg-white/95 dark:bg-slate-800/95 border border-slate-200 dark:border-slate-700 shadow-2xl h-full flex flex-col overflow-hidden">
                             <div class="p-6 md:p-8 border-b border-slate-100 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-900/50">
@@ -1375,16 +1355,11 @@
                                     <h3 class="text-xl font-playfair font-black text-slate-900 dark:text-white flex items-center">
                                         <i class="fa-solid fa-users-rays text-amber-500 mr-3"></i> Live Antrean
                                     </h3>
-                                    <span class="relative flex h-3 w-3">
-                                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                                      <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
-                                    </span>
+                                    <span class="relative flex h-3 w-3"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span><span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span></span>
                                 </div>
-                                <p class="text-xs text-slate-500 dark:text-slate-400 font-medium leading-relaxed">Jadwal pasien hari ini. Nama disamarkan untuk menjaga privasi pasien.</p>
+                                <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">Jadwal pasien hari ini. Nama disamarkan untuk menjaga privasi.</p>
                             </div>
-                            <div class="flex-grow overflow-y-auto" style="max-height: 500px;">
-                                ${renderQueueTable()}
-                            </div>
+                            <div class="flex-grow overflow-y-auto" style="max-height: 500px;">${renderQueueTable()}</div>
                         </div>
                     </div>
                 </div>
@@ -1394,13 +1369,8 @@
         function toggleHomecare(val) {
             const el = document.getElementById('homecare-address-div');
             const input = document.getElementById('book-address');
-            if(val.includes('Homecare')) {
-                el.classList.remove('hidden');
-                input.required = true;
-            } else {
-                el.classList.add('hidden');
-                input.required = false;
-            }
+            if(val.includes('Homecare')) { el.classList.remove('hidden'); input.required = true; } 
+            else { el.classList.add('hidden'); input.required = false; }
         }
 
         function submitBooking(e) {
@@ -1414,48 +1384,27 @@
             const time = document.getElementById('book-time').value;
             const note = document.getElementById('book-note').value;
 
-            let msg = `*FORM RESERVASI EKSKLUSIF NabaTCM*\n\n`;
-            msg += `*Tipe Kunjungan:* ${type}\n`;
-            msg += `*Nama:* ${name}\n`;
-            msg += `*Usia/Gender:* ${age}\n`;
-            if(type.includes('Homecare')) msg += `*Alamat:* ${address}\n`;
-            msg += `*Layanan:* ${srv}\n`;
-            msg += `*Jadwal:* ${date} Pukul ${time}\n`;
-            msg += `*Keluhan:* ${note}\n\n`;
-            msg += `Mohon konfirmasi ketersediaan jadwal terapis. Terima kasih.`;
+            let msg = `*FORM RESERVASI EKSKLUSIF NabaTCM*\n\nTipe: ${type}\nNama: ${name}\nUsia: ${age}\n`;
+            if(type.includes('Homecare')) msg += `Alamat: ${address}\n`;
+            msg += `Layanan: ${srv}\nJadwal: ${date} Pukul ${time}\nKeluhan: ${note}`;
 
             let phone = clinicSettings.phone.trim();
             if(phone.startsWith('0')) phone = '62' + phone.substring(1);
             window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
         }
 
-        function showAdminLogin() { 
-            document.getElementById('admin-login-modal').classList.remove('hidden'); 
-            document.getElementById('admin-login-modal').classList.add('flex'); 
-            setTimeout(() => document.getElementById('admin-pwd-input').focus(), 100); 
-        }
-        function closeAdminLogin() { 
-            document.getElementById('admin-login-modal').classList.add('hidden'); 
-            document.getElementById('admin-login-modal').classList.remove('flex'); 
-            document.getElementById('admin-pwd-input').value = ''; 
-        }
-        
+        function showAdminLogin() { document.getElementById('admin-login-modal').classList.remove('hidden'); document.getElementById('admin-login-modal').classList.add('flex'); setTimeout(() => document.getElementById('admin-pwd-input').focus(), 100); }
+        function closeAdminLogin() { document.getElementById('admin-login-modal').classList.add('hidden'); document.getElementById('admin-login-modal').classList.remove('flex'); document.getElementById('admin-pwd-input').value = ''; }
         function submitAdminLogin() {
             const pin = document.getElementById('admin-pwd-input').value;
-            if(pin === '1234') {
-                closeAdminLogin();
-                showSection('admin');
-                showToast("Login Admin Berhasil!");
-            } else {
-                showToast("PIN Salah!", true);
-            }
+            if(pin === '1234') { closeAdminLogin(); showSection('admin'); showToast("Login Admin Berhasil!"); } 
+            else { showToast("PIN Salah!", true); }
         }
 
         function renderAdmin(container) {
             container.innerHTML = `
                 <div class="bg-slate-100 dark:bg-slate-950 min-h-screen py-8">
                     <div class="max-w-[90rem] mx-auto px-4 flex flex-col lg:flex-row gap-6">
-                        <!-- Sidebar -->
                         <div class="w-full lg:w-64 flex-shrink-0">
                             <div class="bg-white dark:bg-slate-900 rounded-2xl p-4 shadow-sm border border-slate-200 dark:border-slate-800 sticky top-24">
                                 <h3 class="font-black text-slate-800 dark:text-white px-3 mb-4 flex items-center"><i class="fa-solid fa-shield-halved text-emerald-500 mr-2"></i> Dashboard Admin</h3>
@@ -1473,8 +1422,6 @@
                                 </div>
                             </div>
                         </div>
-                        
-                        <!-- Content Area -->
                         <div class="flex-grow bg-white dark:bg-slate-900 rounded-2xl p-6 md:p-8 shadow-sm border border-slate-200 dark:border-slate-800 min-h-[60vh]" id="admin-content-area"></div>
                     </div>
                 </div>
@@ -1503,77 +1450,57 @@
             else if(tab === 'partners') renderAdminPartnersCareers(area);
         }
 
-        // --- Admin Queue Management ---
         function renderAdminQueue(container) {
-            queueData.sort((a, b) => a.time.localeCompare(b.time)); // Sort by time
-
+            queueData.sort((a, b) => a.time.localeCompare(b.time));
             let listHTML = queueData.map(q => {
                 let statusColor = q.status === 'Selesai' ? 'text-emerald-600' : (q.status === 'Proses' ? 'text-blue-600' : 'text-amber-600');
                 return `
-                    <div class="flex items-center justify-between p-4 border-b border-slate-100 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+                    <div class="flex items-center justify-between p-4 border-b border-slate-100 dark:border-slate-800">
                         <div class="flex items-center space-x-4">
                             <div class="w-12 h-12 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center font-playfair font-black text-slate-800 dark:text-white">${q.time}</div>
                             <div>
                                 <h4 class="text-sm font-black text-slate-800 dark:text-white">${q.name}</h4>
-                                <p class="text-xs text-slate-500 font-bold">${q.service} • <span class="${statusColor}">${q.status}</span></p>
+                                <p class="text-xs text-slate-500 font-bold">${q.service} â€¢ <span class="${statusColor}">${q.status}</span></p>
                             </div>
                         </div>
                         <div class="flex space-x-2">
-                            <button onclick="editQueueForm(${q.id})" class="w-9 h-9 rounded-xl bg-blue-50 text-blue-500 hover:bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center transition-colors"><i class="fa-solid fa-pen text-xs"></i></button>
-                            <button onclick="confirmDelete('Antrean', ${q.id})" class="w-9 h-9 rounded-xl bg-red-50 text-red-500 hover:bg-red-100 dark:bg-red-900/30 flex items-center justify-center transition-colors"><i class="fa-solid fa-trash text-xs"></i></button>
+                            <button onclick="editQueueForm(${q.id})" class="w-9 h-9 rounded-xl bg-blue-50 text-blue-500 flex items-center justify-center"><i class="fa-solid fa-pen text-xs"></i></button>
+                            <button onclick="confirmDelete('Antrean', ${q.id})" class="w-9 h-9 rounded-xl bg-red-50 text-red-500 flex items-center justify-center"><i class="fa-solid fa-trash text-xs"></i></button>
                         </div>
                     </div>
                 `;
             }).join('');
 
-            if(queueData.length === 0) listHTML = `<div class="p-10 text-center text-slate-400 font-bold"><i class="fa-solid fa-users-slash text-3xl mb-3 block"></i>Belum ada antrean.</div>`;
+            if(queueData.length === 0) listHTML = `<div class="p-10 text-center text-slate-400 font-bold">Belum ada antrean.</div>`;
 
             container.innerHTML = `
                 <div class="flex justify-between items-center mb-6">
-                    <div>
-                        <h2 class="text-2xl font-black text-slate-800 dark:text-white">Kelola Antrean Hari Ini</h2>
-                        <p class="text-xs text-slate-500 mt-1">Data ini akan tampil di Live Monitor (halaman Reservasi).</p>
-                    </div>
-                    <button onclick="editQueueForm()" class="btn-3d bg-emerald-600 text-white px-5 py-2.5 rounded-xl font-bold text-xs shadow-md"><i class="fa-solid fa-plus mr-2"></i> Tambah Pasien</button>
+                    <h2 class="text-2xl font-black text-slate-800 dark:text-white">Kelola Antrean Hari Ini</h2>
+                    <button onclick="editQueueForm()" class="btn-3d bg-emerald-600 text-white px-5 py-2.5 rounded-xl font-bold text-xs"><i class="fa-solid fa-plus mr-2"></i> Tambah Pasien</button>
                 </div>
-                <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden shadow-sm">
-                    ${listHTML}
-                </div>
-                <div id="admin-form-container" class="mt-8 hidden p-8 bg-slate-50 dark:bg-slate-800/40 rounded-3xl border border-slate-200 dark:border-slate-700 shadow-inner"></div>
+                <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden shadow-sm">${listHTML}</div>
+                <div id="admin-form-container" class="mt-8 hidden p-8 bg-slate-50 dark:bg-slate-800/40 rounded-3xl border border-slate-200 dark:border-slate-700"></div>
             `;
         }
 
         function editQueueForm(id = null) {
             const item = id ? queueData.find(d => d.id === id) : { name: '', service: servicesData[0]?.title || 'Bekam', time: '', status: 'Menunggu' };
-            const isEdit = !!id;
-            
             let srvOpts = servicesData.map(s => `<option value="${s.title}" ${item.service === s.title ? 'selected' : ''}>${s.title}</option>`).join('');
             
             document.getElementById('admin-form-container').innerHTML = `
-                <h3 class="text-xl font-black text-slate-800 dark:text-white mb-6 flex items-center"><i class="fa-solid fa-pen-to-square mr-3 text-emerald-500"></i> ${isEdit ? 'Edit' : 'Tambah'} Pasien Antrean</h3>
+                <h3 class="text-xl font-black text-slate-800 dark:text-white mb-6">Kelola Antrean</h3>
                 <div class="space-y-5">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div><label class="block text-xs font-bold mb-1.5 dark:text-slate-300">Nama Pasien</label><input type="text" id="q-name" value="${item.name}" placeholder="Cth: Bapak Ahmad" class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:bg-slate-900 dark:border-slate-700 dark:text-white font-bold"></div>
-                        <div><label class="block text-xs font-bold mb-1.5 dark:text-slate-300">Jam Terapi</label><input type="time" id="q-time" value="${item.time}" class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:bg-slate-900 dark:border-slate-700 dark:text-white font-bold"></div>
+                        <div><label class="block text-xs font-bold mb-1.5 dark:text-slate-300">Nama</label><input type="text" id="q-name" value="${item.name}" class="w-full px-4 py-3 rounded-xl border dark:bg-slate-900 dark:border-slate-700 dark:text-white"></div>
+                        <div><label class="block text-xs font-bold mb-1.5 dark:text-slate-300">Jam</label><input type="time" id="q-time" value="${item.time}" class="w-full px-4 py-3 rounded-xl border dark:bg-slate-900 dark:border-slate-700 dark:text-white"></div>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-xs font-bold mb-1.5 dark:text-slate-300">Layanan</label>
-                            <select id="q-service" class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:bg-slate-900 dark:border-slate-700 dark:text-white font-bold">${srvOpts}</select>
-                        </div>
-                        <div>
-                            <label class="block text-xs font-bold mb-1.5 dark:text-slate-300">Status</label>
-                            <select id="q-status" class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:bg-slate-900 dark:border-slate-700 dark:text-white font-bold">
-                                <option value="Menunggu" ${item.status === 'Menunggu' ? 'selected' : ''}>Menunggu</option>
-                                <option value="Proses" ${item.status === 'Proses' ? 'selected' : ''}>Sedang Terapi (Proses)</option>
-                                <option value="Selesai" ${item.status === 'Selesai' ? 'selected' : ''}>Selesai</option>
-                            </select>
-                        </div>
+                        <div><label class="block text-xs font-bold mb-1.5 dark:text-slate-300">Layanan</label><select id="q-service" class="w-full px-4 py-3 rounded-xl border dark:bg-slate-900 dark:border-slate-700 dark:text-white">${srvOpts}</select></div>
+                        <div><label class="block text-xs font-bold mb-1.5 dark:text-slate-300">Status</label><select id="q-status" class="w-full px-4 py-3 rounded-xl border dark:bg-slate-900 dark:border-slate-700 dark:text-white"><option value="Menunggu">Menunggu</option><option value="Proses">Proses</option><option value="Selesai">Selesai</option></select></div>
                     </div>
-                    
                     <div class="flex space-x-3 pt-4 border-t border-slate-200 dark:border-slate-700">
-                        <button onclick="saveQueue(${id})" class="btn-3d bg-emerald-600 text-white px-6 py-3 rounded-xl text-xs font-extrabold">Simpan Jadwal</button>
-                        <button onclick="document.getElementById('admin-form-container').classList.add('hidden')" class="bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 px-6 py-3 rounded-xl text-xs font-bold hover:bg-slate-300 transition-colors">Batal</button>
+                        <button onclick="saveQueue(${id})" class="btn-3d bg-emerald-600 text-white px-6 py-3 rounded-xl text-xs font-extrabold">Simpan</button>
+                        <button onclick="document.getElementById('admin-form-container').classList.add('hidden')" class="bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 px-6 py-3 rounded-xl text-xs font-bold">Batal</button>
                     </div>
                 </div>
             `;
@@ -1588,8 +1515,6 @@
                 service: document.getElementById('q-service').value,
                 status: document.getElementById('q-status').value
             };
-            if(!data.name || !data.time) { showToast("Nama dan Jam wajib diisi!", true); return; }
-
             if(id) { const idx = queueData.findIndex(d => d.id === id); queueData[idx] = data; } 
             else { queueData.push(data); }
             saveDataLocally(); showToast("Jadwal pasien disimpan!"); switchAdminTab('queue');
@@ -1599,32 +1524,13 @@
             container.innerHTML = `
                 <div class="flex justify-between items-center mb-8">
                     <h2 class="text-2xl font-black text-slate-800 dark:text-white">Pengaturan Umum & Tampilan</h2>
-                    <button onclick="saveAdminSettings()" class="btn-3d bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2.5 rounded-xl font-bold text-sm shadow-md transition">Simpan Setelan</button>
+                    <button onclick="saveAdminSettings()" class="btn-3d bg-emerald-600 text-white px-6 py-2.5 rounded-xl font-bold text-sm shadow-md">Simpan Setelan</button>
                 </div>
                 <div class="space-y-6">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 bg-slate-50 dark:bg-slate-800/30 p-6 rounded-2xl border border-slate-100 dark:border-slate-800">
-                        <div><label class="block text-xs font-bold text-slate-500 mb-2">Nama Klinik</label><input type="text" id="set-name" value="${clinicSettings.name}" class="w-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 rounded-xl px-4 py-2.5 text-sm text-slate-800 dark:text-white font-bold"></div>
-                        <div><label class="block text-xs font-bold text-slate-500 mb-2">Telepon / WhatsApp</label><input type="text" id="set-phone" value="${clinicSettings.phone}" class="w-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 rounded-xl px-4 py-2.5 text-sm text-slate-800 dark:text-white font-bold"></div>
-                        <div class="md:col-span-2"><label class="block text-xs font-bold text-slate-500 mb-2">Alamat Fisik</label><input type="text" id="set-address" value="${clinicSettings.address}" class="w-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 rounded-xl px-4 py-2.5 text-sm text-slate-800 dark:text-white font-bold"></div>
-                    </div>
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 bg-slate-50 dark:bg-slate-800/30 p-6 rounded-2xl border border-slate-100 dark:border-slate-800">
-                        <div><label class="block text-xs font-bold text-slate-500 mb-2"><i class="fa-brands fa-facebook text-blue-500 mr-1"></i> URL Facebook</label><input type="text" id="set-fb" value="${clinicSettings.facebookUrl}" class="w-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 rounded-xl px-4 py-2.5 text-sm text-slate-800 dark:text-white"></div>
-                        <div><label class="block text-xs font-bold text-slate-500 mb-2"><i class="fa-brands fa-instagram text-pink-500 mr-1"></i> URL Instagram</label><input type="text" id="set-ig" value="${clinicSettings.instagramUrl}" class="w-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 rounded-xl px-4 py-2.5 text-sm text-slate-800 dark:text-white"></div>
-                        <div><label class="block text-xs font-bold text-slate-500 mb-2"><i class="fa-brands fa-telegram text-sky-500 mr-1"></i> URL Telegram</label><input type="text" id="set-tg" value="${clinicSettings.telegramUrl}" class="w-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 rounded-xl px-4 py-2.5 text-sm text-slate-800 dark:text-white"></div>
-                    </div>
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 bg-slate-50 dark:bg-slate-800/30 p-6 rounded-2xl border border-slate-100 dark:border-slate-800">
-                        <div>
-                            <label class="block text-sm font-bold text-slate-700 dark:text-white mb-2">Upload Logo Kustom (Opsional)</label>
-                            <input type="file" id="set-logo" accept="image/*" class="block w-full text-sm text-slate-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100">
-                            ${clinicSettings.customLogoUrl ? `<img src="${clinicSettings.customLogoUrl}" class="mt-4 w-24 h-24 object-contain rounded-xl shadow border border-slate-200 bg-white">` : ''}
-                        </div>
-                        <div>
-                            <label class="block text-sm font-bold text-slate-700 dark:text-white mb-2">Upload Background Beranda (3D)</label>
-                            <input type="file" id="set-hero-bg" accept="image/*" class="block w-full text-sm text-slate-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100">
-                            ${clinicSettings.heroBgUrl ? `<img src="${clinicSettings.heroBgUrl}" class="mt-4 w-48 rounded-xl shadow border border-slate-200">` : ''}
-                        </div>
+                        <div><label class="block text-xs font-bold text-slate-500 mb-2">Nama Klinik</label><input type="text" id="set-name" value="${clinicSettings.name}" class="w-full bg-white dark:bg-slate-800 border rounded-xl px-4 py-2.5 text-sm dark:text-white"></div>
+                        <div><label class="block text-xs font-bold text-slate-500 mb-2">Telepon / WhatsApp</label><input type="text" id="set-phone" value="${clinicSettings.phone}" class="w-full bg-white dark:bg-slate-800 border rounded-xl px-4 py-2.5 text-sm dark:text-white"></div>
+                        <div class="md:col-span-2"><label class="block text-xs font-bold text-slate-500 mb-2">Alamat Fisik</label><input type="text" id="set-address" value="${clinicSettings.address}" class="w-full bg-white dark:bg-slate-800 border rounded-xl px-4 py-2.5 text-sm dark:text-white"></div>
                     </div>
                 </div>
             `;
@@ -1634,16 +1540,6 @@
             clinicSettings.name = document.getElementById('set-name').value;
             clinicSettings.phone = document.getElementById('set-phone').value;
             clinicSettings.address = document.getElementById('set-address').value;
-            clinicSettings.facebookUrl = document.getElementById('set-fb').value;
-            clinicSettings.instagramUrl = document.getElementById('set-ig').value;
-            clinicSettings.telegramUrl = document.getElementById('set-tg').value;
-
-            const logoFile = await fileToBase64('set-logo');
-            if(logoFile) clinicSettings.customLogoUrl = logoFile;
-
-            const bgFile = await fileToBase64('set-hero-bg');
-            if(bgFile) clinicSettings.heroBgUrl = bgFile;
-
             saveDataLocally();
             updateGlobalUI();
             showToast("Pengaturan disimpan sukses!");
@@ -1651,57 +1547,50 @@
 
         function renderAdminList(container, title, dataArray, displayFields, formFunctionName) {
             let listHTML = dataArray.map(item => `
-                <div class="flex items-center justify-between p-4 border-b border-slate-100 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+                <div class="flex items-center justify-between p-4 border-b border-slate-100 dark:border-slate-800">
                     <div class="flex items-center">
-                        ${item.image ? `<img src="${item.image}" class="w-12 h-12 rounded-xl object-cover mr-4 border border-slate-200 dark:border-slate-700">` : ''}
+                        ${item.image ? `<img src="${item.image}" class="w-12 h-12 rounded-xl object-cover mr-4 border">` : ''}
                         <div>
                             <h4 class="text-sm font-black text-slate-800 dark:text-white">${item[displayFields[0]]}</h4>
                             <p class="text-xs text-slate-500 font-bold">${displayFields[1] ? item[displayFields[1]] : ''}</p>
                         </div>
                     </div>
                     <div class="flex space-x-2">
-                        <button onclick="${formFunctionName}(${item.id})" class="w-9 h-9 rounded-xl bg-blue-50 text-blue-500 hover:bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center transition-colors"><i class="fa-solid fa-pen text-xs"></i></button>
-                        <button onclick="confirmDelete('${title}', ${item.id})" class="w-9 h-9 rounded-xl bg-red-50 text-red-500 hover:bg-red-100 dark:bg-red-900/30 flex items-center justify-center transition-colors"><i class="fa-solid fa-trash text-xs"></i></button>
+                        <button onclick="${formFunctionName}(${item.id})" class="w-9 h-9 rounded-xl bg-blue-50 text-blue-500 flex items-center justify-center"><i class="fa-solid fa-pen text-xs"></i></button>
+                        <button onclick="confirmDelete('${title}', ${item.id})" class="w-9 h-9 rounded-xl bg-red-50 text-red-500 flex items-center justify-center"><i class="fa-solid fa-trash text-xs"></i></button>
                     </div>
                 </div>
             `).join('');
 
-            if(dataArray.length === 0) listHTML = `<div class="p-10 text-center text-slate-400 font-bold"><i class="fa-solid fa-folder-open text-3xl mb-3 block"></i>Belum ada data.</div>`;
-
             container.innerHTML = `
                 <div class="flex justify-between items-center mb-6">
                     <h2 class="text-2xl font-black text-slate-800 dark:text-white">Kelola ${title}</h2>
-                    <button onclick="${formFunctionName}()" class="btn-3d bg-emerald-600 text-white px-5 py-2.5 rounded-xl font-bold text-xs shadow-md"><i class="fa-solid fa-plus mr-2"></i> Tambah Data</button>
+                    <button onclick="${formFunctionName}()" class="btn-3d bg-emerald-600 text-white px-5 py-2.5 rounded-xl font-bold text-xs"><i class="fa-solid fa-plus mr-2"></i> Tambah Data</button>
                 </div>
-                <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden shadow-sm">
-                    ${listHTML}
-                </div>
-                <div id="admin-form-container" class="mt-8 hidden p-8 bg-slate-50 dark:bg-slate-800/40 rounded-3xl border border-slate-200 dark:border-slate-700 shadow-inner"></div>
+                <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden shadow-sm">${listHTML}</div>
+                <div id="admin-form-container" class="mt-8 hidden p-8 bg-slate-50 dark:bg-slate-800/40 rounded-3xl border border-slate-200 dark:border-slate-700"></div>
             `;
         }
 
-        // --- Service Form ---
         function editServiceForm(id = null) {
             const item = id ? servicesData.find(d => d.id === id) : { title: '', desc: '', priceRange: '', icon: 'fa-leaf', image: '' };
-            const isEdit = !!id;
-            
             document.getElementById('admin-form-container').innerHTML = `
-                <h3 class="text-xl font-black text-slate-800 dark:text-white mb-6 flex items-center"><i class="fa-solid fa-pen-to-square mr-3 text-emerald-500"></i> ${isEdit ? 'Edit' : 'Tambah'} Layanan</h3>
+                <h3 class="text-xl font-black text-slate-800 dark:text-white mb-6">Kelola Layanan</h3>
                 <div class="space-y-5">
-                    <div><label class="block text-xs font-bold mb-1.5 dark:text-slate-300">Nama Layanan</label><input type="text" id="srv-title" value="${item.title}" class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:bg-slate-900 dark:border-slate-700 dark:text-white font-bold"></div>
+                    <div><label class="block text-xs font-bold mb-1.5 dark:text-slate-300">Nama</label><input type="text" id="srv-title" value="${item.title}" class="w-full px-4 py-3 rounded-xl border dark:bg-slate-900 dark:text-white"></div>
                     <div class="grid grid-cols-2 gap-4">
-                        <div><label class="block text-xs font-bold mb-1.5 dark:text-slate-300">Estimasi Harga (Angka)</label><input type="text" id="srv-price" value="${item.priceRange}" class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:bg-slate-900 dark:border-slate-700 dark:text-white font-bold"></div>
-                        <div><label class="block text-xs font-bold mb-1.5 dark:text-slate-300">Ikon FontAwesome (contoh: fa-droplet)</label><input type="text" id="srv-icon" value="${item.icon}" class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:bg-slate-900 dark:border-slate-700 dark:text-white font-bold"></div>
+                        <div><label class="block text-xs font-bold mb-1.5 dark:text-slate-300">Harga</label><input type="text" id="srv-price" value="${item.priceRange}" class="w-full px-4 py-3 rounded-xl border dark:bg-slate-900 dark:text-white"></div>
+                        <div><label class="block text-xs font-bold mb-1.5 dark:text-slate-300">Ikon FontAwesome</label><input type="text" id="srv-icon" value="${item.icon}" class="w-full px-4 py-3 rounded-xl border dark:bg-slate-900 dark:text-white"></div>
                     </div>
-                    <div><label class="block text-xs font-bold mb-1.5 dark:text-slate-300">Deskripsi Pendek</label><textarea id="srv-desc" rows="3" class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:bg-slate-900 dark:border-slate-700 dark:text-white font-medium">${item.desc}</textarea></div>
-                    <div class="bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-200 dark:border-slate-700">
-                        <label class="block text-xs font-bold mb-3 dark:text-slate-300">Upload Gambar Layanan</label>
-                        <input type="file" id="srv-image" accept="image/*" class="w-full text-sm mb-4 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100" onchange="updatePreviewImage('srv-image', 'srv-preview')">
-                        <img id="srv-preview" src="${item.image}" class="w-40 h-28 object-cover rounded-xl border shadow-sm ${item.image ? '' : 'hidden'}">
+                    <div><label class="block text-xs font-bold mb-1.5 dark:text-slate-300">Deskripsi</label><textarea id="srv-desc" rows="3" class="w-full px-4 py-3 rounded-xl border dark:bg-slate-900 dark:text-white">${item.desc}</textarea></div>
+                    <div>
+                        <label class="block text-xs font-bold mb-1.5 dark:text-slate-300">Gambar Layanan (Maks 2MB)</label>
+                        <input type="file" id="srv-image" accept="image/*" class="w-full px-4 py-2.5 rounded-xl border dark:bg-slate-900 dark:text-white text-sm" onchange="updatePreviewImage('srv-image', 'srv-preview')">
+                        <img id="srv-preview" src="${item.image}" class="mt-3 w-32 h-32 object-cover rounded-xl border border-slate-200 dark:border-slate-700 ${item.image ? '' : 'hidden'}">
                     </div>
                     <div class="flex space-x-3 pt-4 border-t border-slate-200 dark:border-slate-700">
-                        <button onclick="saveService(${id})" class="btn-3d bg-emerald-600 text-white px-6 py-3 rounded-xl text-xs font-extrabold">Simpan Data</button>
-                        <button onclick="document.getElementById('admin-form-container').classList.add('hidden')" class="bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 px-6 py-3 rounded-xl text-xs font-bold hover:bg-slate-300 transition-colors">Batal</button>
+                        <button onclick="saveService(${id})" class="btn-3d bg-emerald-600 text-white px-6 py-3 rounded-xl text-xs font-extrabold">Simpan</button>
+                        <button onclick="document.getElementById('admin-form-container').classList.add('hidden')" class="bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 px-6 py-3 rounded-xl text-xs font-bold">Batal</button>
                     </div>
                 </div>
             `;
@@ -1709,40 +1598,38 @@
         }
 
         async function saveService(id) {
-            const base64 = await fileToBase64('srv-image');
+            let base64Img = await fileToBase64('srv-image');
             const data = {
                 id: id || Date.now(),
                 title: document.getElementById('srv-title').value,
                 desc: document.getElementById('srv-desc').value,
                 priceRange: document.getElementById('srv-price').value,
                 icon: document.getElementById('srv-icon').value,
-                image: base64 || (id ? servicesData.find(d => d.id === id).image : '')
+                image: base64Img ? base64Img : (id ? servicesData.find(d => d.id === id).image : 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=600&q=80')
             };
             if(id) { const idx = servicesData.findIndex(d => d.id === id); servicesData[idx] = data; } 
             else { servicesData.push(data); }
-            saveDataLocally(); showToast("Layanan berhasil disimpan!"); switchAdminTab('services');
+            saveDataLocally(); showToast("Layanan disimpan!"); switchAdminTab('services');
         }
 
         function editTherapistForm(id = null) {
             const item = id ? therapistsData.find(d => d.id === id) : { name: '', role: '', desc: '', image: '' };
-            const isEdit = !!id;
-            
             document.getElementById('admin-form-container').innerHTML = `
-                <h3 class="text-xl font-black text-slate-800 dark:text-white mb-6 flex items-center"><i class="fa-solid fa-pen-to-square mr-3 text-emerald-500"></i> ${isEdit ? 'Edit' : 'Tambah'} Terapis</h3>
+                <h3 class="text-xl font-black text-slate-800 dark:text-white mb-6">Kelola Terapis</h3>
                 <div class="space-y-5">
                     <div class="grid grid-cols-2 gap-4">
-                        <div><label class="block text-xs font-bold mb-1.5 dark:text-slate-300">Nama Terapis</label><input type="text" id="ther-name" value="${item.name}" class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:bg-slate-900 dark:border-slate-700 dark:text-white font-bold"></div>
-                        <div><label class="block text-xs font-bold mb-1.5 dark:text-slate-300">Spesialisasi / Peran</label><input type="text" id="ther-role" value="${item.role}" class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:bg-slate-900 dark:border-slate-700 dark:text-white font-bold"></div>
+                        <div><label class="block text-xs font-bold mb-1.5 dark:text-slate-300">Nama</label><input type="text" id="ther-name" value="${item.name}" class="w-full px-4 py-3 rounded-xl border dark:bg-slate-900 dark:text-white"></div>
+                        <div><label class="block text-xs font-bold mb-1.5 dark:text-slate-300">Peran</label><input type="text" id="ther-role" value="${item.role}" class="w-full px-4 py-3 rounded-xl border dark:bg-slate-900 dark:text-white"></div>
                     </div>
-                    <div><label class="block text-xs font-bold mb-1.5 dark:text-slate-300">Deskripsi Singkat</label><textarea id="ther-desc" rows="3" class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:bg-slate-900 dark:border-slate-700 dark:text-white font-medium">${item.desc}</textarea></div>
-                    <div class="bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-200 dark:border-slate-700">
-                        <label class="block text-xs font-bold mb-3 dark:text-slate-300">Upload Foto Terapis</label>
-                        <input type="file" id="ther-image" accept="image/*" class="w-full text-sm mb-4 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100" onchange="updatePreviewImage('ther-image', 'ther-preview')">
-                        <img id="ther-preview" src="${item.image}" class="w-32 h-32 object-cover rounded-xl border shadow-sm ${item.image ? '' : 'hidden'}">
+                    <div><label class="block text-xs font-bold mb-1.5 dark:text-slate-300">Deskripsi</label><textarea id="ther-desc" rows="3" class="w-full px-4 py-3 rounded-xl border dark:bg-slate-900 dark:text-white">${item.desc}</textarea></div>
+                    <div>
+                        <label class="block text-xs font-bold mb-1.5 dark:text-slate-300">Foto Terapis</label>
+                        <input type="file" id="ther-image" accept="image/*" class="w-full px-4 py-2.5 rounded-xl border dark:bg-slate-900 dark:text-white text-sm" onchange="updatePreviewImage('ther-image', 'ther-preview')">
+                        <img id="ther-preview" src="${item.image}" class="mt-3 w-24 h-24 object-cover rounded-full border-2 border-emerald-500 ${item.image ? '' : 'hidden'}">
                     </div>
                     <div class="flex space-x-3 pt-4 border-t border-slate-200 dark:border-slate-700">
-                        <button onclick="saveTherapist(${id})" class="btn-3d bg-emerald-600 text-white px-6 py-3 rounded-xl text-xs font-extrabold">Simpan Data</button>
-                        <button onclick="document.getElementById('admin-form-container').classList.add('hidden')" class="bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 px-6 py-3 rounded-xl text-xs font-bold hover:bg-slate-300 transition-colors">Batal</button>
+                        <button onclick="saveTherapist(${id})" class="btn-3d bg-emerald-600 text-white px-6 py-3 rounded-xl text-xs font-extrabold">Simpan</button>
+                        <button onclick="document.getElementById('admin-form-container').classList.add('hidden')" class="bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 px-6 py-3 rounded-xl text-xs font-bold">Batal</button>
                     </div>
                 </div>
             `;
@@ -1750,44 +1637,36 @@
         }
 
         async function saveTherapist(id) {
-            const base64 = await fileToBase64('ther-image');
+            let base64Img = await fileToBase64('ther-image');
             const data = {
                 id: id || Date.now(),
                 name: document.getElementById('ther-name').value,
                 role: document.getElementById('ther-role').value,
                 desc: document.getElementById('ther-desc').value,
-                image: base64 || (id ? therapistsData.find(d => d.id === id).image : '')
+                image: base64Img ? base64Img : (id ? therapistsData.find(d => d.id === id).image : 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=400&q=80')
             };
             if(id) { const idx = therapistsData.findIndex(d => d.id === id); therapistsData[idx] = data; } 
             else { therapistsData.push(data); }
-            saveDataLocally(); showToast("Data terapis berhasil disimpan!"); switchAdminTab('therapists');
+            saveDataLocally(); showToast("Terapis disimpan!"); switchAdminTab('therapists');
         }
 
-        // --- Article Form ---
         function editArticleForm(id = null) {
-            const item = id ? articlesData.find(d => d.id === id) : { title: '', date: '', summary: '', content: '', image: '', recommendedProductId: productsData[0]?.id || 1 };
-            const isEdit = !!id;
-
-            let productOptions = productsData.map(p => `<option value="${p.id}" ${item.recommendedProductId == p.id ? 'selected' : ''}>${p.name}</option>`).join('');
-            
+            const item = id ? articlesData.find(d => d.id === id) : { title: '', date: '', summary: '', content: '', image: '', recommendedProductId: 1 };
             document.getElementById('admin-form-container').innerHTML = `
-                <h3 class="text-xl font-black text-slate-800 dark:text-white mb-6 flex items-center"><i class="fa-solid fa-pen-to-square mr-3 text-emerald-500"></i> ${isEdit ? 'Edit' : 'Tambah'} Artikel</h3>
+                <h3 class="text-xl font-black text-slate-800 dark:text-white mb-6">Kelola Artikel</h3>
                 <div class="space-y-5">
-                    <div><label class="block text-xs font-bold mb-1.5 dark:text-slate-300">Judul Artikel</label><input type="text" id="art-title" value="${item.title}" class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:bg-slate-900 dark:border-slate-700 dark:text-white font-bold"></div>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div><label class="block text-xs font-bold mb-1.5 dark:text-slate-300">Tanggal Publikasi</label><input type="text" id="art-date" placeholder="Contoh: 10 Okt 2026" value="${item.date}" class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:bg-slate-900 dark:border-slate-700 dark:text-white font-bold"></div>
-                        <div><label class="block text-xs font-bold mb-1.5 dark:text-slate-300">Rekomendasi Produk Herbal Terkait</label><select id="art-prod" class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:bg-slate-900 dark:border-slate-700 dark:text-white font-bold">${productOptions}</select></div>
-                    </div>
-                    <div><label class="block text-xs font-bold mb-1.5 dark:text-slate-300">Ringkasan</label><input type="text" id="art-summary" value="${item.summary}" class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:bg-slate-900 dark:border-slate-700 dark:text-white font-medium"></div>
-                    <div><label class="block text-xs font-bold mb-1.5 dark:text-slate-300">Isi Artikel Lengkap</label><textarea id="art-content" rows="6" class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:bg-slate-900 dark:border-slate-700 dark:text-white font-medium leading-relaxed">${item.content}</textarea></div>
-                    <div class="bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-200 dark:border-slate-700">
-                        <label class="block text-xs font-bold mb-3 dark:text-slate-300">Upload Gambar Header Artikel</label>
-                        <input type="file" id="art-image" accept="image/*" class="w-full text-sm mb-4 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100" onchange="updatePreviewImage('art-image', 'art-preview')">
-                        <img id="art-preview" src="${item.image}" class="w-40 h-24 object-cover rounded-xl border shadow-sm ${item.image ? '' : 'hidden'}">
+                    <div><label class="block text-xs font-bold mb-1.5 dark:text-slate-300">Judul</label><input type="text" id="art-title" value="${item.title}" class="w-full px-4 py-3 rounded-xl border dark:bg-slate-900 dark:text-white"></div>
+                    <div><label class="block text-xs font-bold mb-1.5 dark:text-slate-300">Tanggal</label><input type="text" id="art-date" value="${item.date}" class="w-full px-4 py-3 rounded-xl border dark:bg-slate-900 dark:text-white"></div>
+                    <div><label class="block text-xs font-bold mb-1.5 dark:text-slate-300">Ringkasan</label><input type="text" id="art-summary" value="${item.summary}" class="w-full px-4 py-3 rounded-xl border dark:bg-slate-900 dark:text-white"></div>
+                    <div><label class="block text-xs font-bold mb-1.5 dark:text-slate-300">Isi</label><textarea id="art-content" rows="4" class="w-full px-4 py-3 rounded-xl border dark:bg-slate-900 dark:text-white">${item.content}</textarea></div>
+                    <div>
+                        <label class="block text-xs font-bold mb-1.5 dark:text-slate-300">Gambar Cover Artikel</label>
+                        <input type="file" id="art-image" accept="image/*" class="w-full px-4 py-2.5 rounded-xl border dark:bg-slate-900 dark:text-white text-sm" onchange="updatePreviewImage('art-image', 'art-preview')">
+                        <img id="art-preview" src="${item.image}" class="mt-3 w-48 h-32 object-cover rounded-xl border border-slate-200 dark:border-slate-700 ${item.image ? '' : 'hidden'}">
                     </div>
                     <div class="flex space-x-3 pt-4 border-t border-slate-200 dark:border-slate-700">
-                        <button onclick="saveArticle(${id})" class="btn-3d bg-emerald-600 text-white px-6 py-3 rounded-xl text-xs font-extrabold">Simpan Artikel</button>
-                        <button onclick="document.getElementById('admin-form-container').classList.add('hidden')" class="bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 px-6 py-3 rounded-xl text-xs font-bold hover:bg-slate-300 transition-colors">Batal</button>
+                        <button onclick="saveArticle(${id})" class="btn-3d bg-emerald-600 text-white px-6 py-3 rounded-xl text-xs font-extrabold">Simpan</button>
+                        <button onclick="document.getElementById('admin-form-container').classList.add('hidden')" class="bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 px-6 py-3 rounded-xl text-xs font-bold">Batal</button>
                     </div>
                 </div>
             `;
@@ -1795,43 +1674,40 @@
         }
 
         async function saveArticle(id) {
-            const base64 = await fileToBase64('art-image');
+            let base64Img = await fileToBase64('art-image');
             const data = {
                 id: id || Date.now(),
                 title: document.getElementById('art-title').value,
                 date: document.getElementById('art-date').value,
                 summary: document.getElementById('art-summary').value,
                 content: document.getElementById('art-content').value,
-                recommendedProductId: parseInt(document.getElementById('art-prod').value),
-                image: base64 || (id ? articlesData.find(d => d.id === id).image : '')
+                recommendedProductId: 1,
+                image: base64Img ? base64Img : (id ? articlesData.find(d => d.id === id).image : 'https://images.unsplash.com/photo-1542841791-1925b02a2bfb?auto=format&fit=crop&w=500&q=80')
             };
             if(id) { const idx = articlesData.findIndex(d => d.id === id); articlesData[idx] = data; } 
             else { articlesData.push(data); }
-            saveDataLocally(); showToast("Artikel berhasil disimpan!"); switchAdminTab('articles');
+            saveDataLocally(); showToast("Artikel disimpan!"); switchAdminTab('articles');
         }
 
-        // --- Product Form ---
         function editProductForm(id = null) {
             const item = id ? productsData.find(d => d.id === id) : { name: '', price: '', desc: '', benefits: '', image: '' };
-            const isEdit = !!id;
-            
             document.getElementById('admin-form-container').innerHTML = `
-                <h3 class="text-xl font-black text-slate-800 dark:text-white mb-6 flex items-center"><i class="fa-solid fa-pen-to-square mr-3 text-emerald-500"></i> ${isEdit ? 'Edit' : 'Tambah'} Produk Herbal</h3>
+                <h3 class="text-xl font-black text-slate-800 dark:text-white mb-6">Kelola Produk</h3>
                 <div class="space-y-5">
                     <div class="grid grid-cols-2 gap-4">
-                        <div><label class="block text-xs font-bold mb-1.5 dark:text-slate-300">Nama Produk</label><input type="text" id="prod-name" value="${item.name}" class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:bg-slate-900 dark:border-slate-700 dark:text-white font-bold"></div>
-                        <div><label class="block text-xs font-bold mb-1.5 dark:text-slate-300">Harga (Angka)</label><input type="text" id="prod-price" value="${item.price}" class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:bg-slate-900 dark:border-slate-700 dark:text-white font-bold"></div>
+                        <div><label class="block text-xs font-bold mb-1.5 dark:text-slate-300">Nama</label><input type="text" id="prod-name" value="${item.name}" class="w-full px-4 py-3 rounded-xl border dark:bg-slate-900 dark:text-white"></div>
+                        <div><label class="block text-xs font-bold mb-1.5 dark:text-slate-300">Harga</label><input type="text" id="prod-price" value="${item.price}" class="w-full px-4 py-3 rounded-xl border dark:bg-slate-900 dark:text-white"></div>
                     </div>
-                    <div><label class="block text-xs font-bold mb-1.5 dark:text-slate-300">Manfaat Utama (Singkat)</label><input type="text" id="prod-benefits" value="${item.benefits}" class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:bg-slate-900 dark:border-slate-700 dark:text-white font-bold"></div>
-                    <div><label class="block text-xs font-bold mb-1.5 dark:text-slate-300">Deskripsi Lengkap</label><textarea id="prod-desc" rows="3" class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:bg-slate-900 dark:border-slate-700 dark:text-white font-medium">${item.desc}</textarea></div>
-                    <div class="bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-200 dark:border-slate-700">
-                        <label class="block text-xs font-bold mb-3 dark:text-slate-300">Upload Gambar Produk</label>
-                        <input type="file" id="prod-image" accept="image/*" class="w-full text-sm mb-4 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100" onchange="updatePreviewImage('prod-image', 'prod-preview')">
-                        <img id="prod-preview" src="${item.image}" class="w-32 h-32 object-cover rounded-xl border shadow-sm ${item.image ? '' : 'hidden'}">
+                    <div><label class="block text-xs font-bold mb-1.5 dark:text-slate-300">Manfaat</label><input type="text" id="prod-benefits" value="${item.benefits}" class="w-full px-4 py-3 rounded-xl border dark:bg-slate-900 dark:text-white"></div>
+                    <div><label class="block text-xs font-bold mb-1.5 dark:text-slate-300">Deskripsi</label><textarea id="prod-desc" rows="3" class="w-full px-4 py-3 rounded-xl border dark:bg-slate-900 dark:text-white">${item.desc}</textarea></div>
+                    <div>
+                        <label class="block text-xs font-bold mb-1.5 dark:text-slate-300">Foto Produk (Maks 2MB)</label>
+                        <input type="file" id="prod-image" accept="image/*" class="w-full px-4 py-2.5 rounded-xl border dark:bg-slate-900 dark:text-white text-sm" onchange="updatePreviewImage('prod-image', 'prod-preview')">
+                        <img id="prod-preview" src="${item.image}" class="mt-3 w-32 h-32 object-cover rounded-xl border border-slate-200 dark:border-slate-700 ${item.image ? '' : 'hidden'}">
                     </div>
                     <div class="flex space-x-3 pt-4 border-t border-slate-200 dark:border-slate-700">
-                        <button onclick="saveProduct(${id})" class="btn-3d bg-emerald-600 text-white px-6 py-3 rounded-xl text-xs font-extrabold">Simpan Produk</button>
-                        <button onclick="document.getElementById('admin-form-container').classList.add('hidden')" class="bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 px-6 py-3 rounded-xl text-xs font-bold hover:bg-slate-300 transition-colors">Batal</button>
+                        <button onclick="saveProduct(${id})" class="btn-3d bg-emerald-600 text-white px-6 py-3 rounded-xl text-xs font-extrabold">Simpan</button>
+                        <button onclick="document.getElementById('admin-form-container').classList.add('hidden')" class="bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 px-6 py-3 rounded-xl text-xs font-bold">Batal</button>
                     </div>
                 </div>
             `;
@@ -1839,149 +1715,22 @@
         }
 
         async function saveProduct(id) {
-            const base64 = await fileToBase64('prod-image');
+            let base64Img = await fileToBase64('prod-image');
             const data = {
                 id: id || Date.now(),
                 name: document.getElementById('prod-name').value,
                 price: document.getElementById('prod-price').value,
                 desc: document.getElementById('prod-desc').value,
                 benefits: document.getElementById('prod-benefits').value,
-                image: base64 || (id ? productsData.find(d => d.id === id).image : '')
+                image: base64Img ? base64Img : (id ? productsData.find(d => d.id === id).image : 'https://images.unsplash.com/photo-1587049352847-81a56d773c1c?auto=format&fit=crop&w=500&q=80')
             };
             if(id) { const idx = productsData.findIndex(d => d.id === id); productsData[idx] = data; } 
             else { productsData.push(data); }
-            saveDataLocally(); showToast("Produk berhasil disimpan!"); switchAdminTab('products');
+            saveDataLocally(); showToast("Produk disimpan!"); switchAdminTab('products');
         }
 
-        // --- Partners & Careers Admin Management ---
         function renderAdminPartnersCareers(container) {
-            let partnersHTML = partnersData.map(p => `
-                <div class="flex items-center justify-between p-4 border-b border-slate-100 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
-                    <div class="flex items-center">
-                        <img src="${p.image}" class="w-12 h-12 rounded-xl object-cover mr-4 border border-slate-200 dark:border-slate-700">
-                        <div>
-                            <h5 class="text-sm font-black text-slate-800 dark:text-white">${p.name}</h5>
-                            <p class="text-xs text-slate-500 font-bold">${p.type}</p>
-                        </div>
-                    </div>
-                    <div class="flex space-x-2">
-                        <button onclick="editPartnerForm(${p.id})" class="w-9 h-9 rounded-xl bg-blue-50 text-blue-500 hover:bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center transition-colors"><i class="fa-solid fa-pen text-xs"></i></button>
-                        <button onclick="confirmDelete('Mitra', ${p.id})" class="w-9 h-9 rounded-xl bg-red-50 text-red-500 hover:bg-red-100 dark:bg-red-900/30 flex items-center justify-center transition-colors"><i class="fa-solid fa-trash text-xs"></i></button>
-                    </div>
-                </div>
-            `).join('');
-
-            let careersHTML = careersData.map(c => `
-                <div class="flex items-center justify-between p-4 border-b border-slate-100 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
-                    <div>
-                        <h5 class="text-sm font-black text-slate-800 dark:text-white">${c.title}</h5>
-                        <p class="text-xs text-slate-500 font-bold">${c.location} (${c.type})</p>
-                    </div>
-                    <div class="flex space-x-2">
-                        <button onclick="editCareerForm(${c.id})" class="w-9 h-9 rounded-xl bg-blue-50 text-blue-500 hover:bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center transition-colors"><i class="fa-solid fa-pen text-xs"></i></button>
-                        <button onclick="confirmDelete('Karir', ${c.id})" class="w-9 h-9 rounded-xl bg-red-50 text-red-500 hover:bg-red-100 dark:bg-red-900/30 flex items-center justify-center transition-colors"><i class="fa-solid fa-trash text-xs"></i></button>
-                    </div>
-                </div>
-            `).join('');
-
-            container.innerHTML = `
-                <div class="flex justify-between items-center mb-8">
-                    <h2 class="text-2xl font-black text-slate-800 dark:text-white">Kelola Mitra & Karir</h2>
-                </div>
-                
-                <div class="mb-10">
-                    <div class="flex justify-between items-center mb-4">
-                        <h3 class="font-bold text-slate-700 dark:text-slate-300 text-sm flex items-center"><div class="w-8 h-8 rounded bg-emerald-100 dark:bg-emerald-900/50 flex items-center justify-center mr-2"><i class="fa-solid fa-handshake text-emerald-600"></i></div> Daftar Mitra Strategis</h3>
-                        <button onclick="editPartnerForm()" class="btn-3d bg-emerald-600 text-white px-4 py-2 rounded-xl text-xs font-bold"><i class="fa-solid fa-plus mr-1"></i> Tambah Mitra</button>
-                    </div>
-                    <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden shadow-sm">${partnersHTML}</div>
-                </div>
-
-                <div>
-                    <div class="flex justify-between items-center mb-4">
-                        <h3 class="font-bold text-slate-700 dark:text-slate-300 text-sm flex items-center"><div class="w-8 h-8 rounded bg-amber-100 dark:bg-amber-900/50 flex items-center justify-center mr-2"><i class="fa-solid fa-briefcase text-amber-600"></i></div> Daftar Lowongan Karir</h3>
-                        <button onclick="editCareerForm()" class="btn-3d bg-emerald-600 text-white px-4 py-2 rounded-xl text-xs font-bold"><i class="fa-solid fa-plus mr-1"></i> Tambah Lowongan</button>
-                    </div>
-                    <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden shadow-sm">${careersHTML}</div>
-                </div>
-
-                <div id="admin-form-container" class="mt-8 hidden p-8 bg-slate-50 dark:bg-slate-800/40 rounded-3xl border border-slate-200 dark:border-slate-700 shadow-inner"></div>
-            `;
-        }
-
-        function editPartnerForm(id = null) {
-            const item = id ? partnersData.find(d => d.id === id) : { name: '', type: '', desc: '', image: '' };
-            const isEdit = !!id;
-            document.getElementById('admin-form-container').innerHTML = `
-                <h3 class="text-xl font-black text-slate-800 dark:text-white mb-6 flex items-center"><i class="fa-solid fa-pen-to-square mr-3 text-emerald-500"></i> ${isEdit ? 'Edit' : 'Tambah'} Mitra Resmi</h3>
-                <div class="space-y-5">
-                    <div class="grid grid-cols-2 gap-4">
-                        <div><label class="block text-xs font-bold mb-1.5 dark:text-slate-300">Nama Instansi Mitra</label><input type="text" id="part-name" value="${item.name}" class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:bg-slate-900 dark:border-slate-700 dark:text-white font-bold"></div>
-                        <div><label class="block text-xs font-bold mb-1.5 dark:text-slate-300">Tipe Kemitraan (misal: Mitra Strategis)</label><input type="text" id="part-type" value="${item.type}" class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:bg-slate-900 dark:border-slate-700 dark:text-white font-bold"></div>
-                    </div>
-                    <div><label class="block text-xs font-bold mb-1.5 dark:text-slate-300">Deskripsi Singkat</label><textarea id="part-desc" rows="2" class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:bg-slate-900 dark:border-slate-700 dark:text-white font-medium">${item.desc}</textarea></div>
-                    <div class="bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-200 dark:border-slate-700">
-                        <label class="block text-xs font-bold mb-3 dark:text-slate-300">Upload Logo/Foto Mitra</label>
-                        <input type="file" id="part-image" accept="image/*" class="w-full text-sm mb-4 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100" onchange="updatePreviewImage('part-image', 'part-preview')">
-                        <img id="part-preview" src="${item.image}" class="w-32 h-24 object-cover rounded-xl border shadow-sm ${item.image ? '' : 'hidden'}">
-                    </div>
-                    <div class="flex space-x-3 pt-4 border-t border-slate-200 dark:border-slate-700">
-                        <button onclick="savePartner(${id})" class="btn-3d bg-emerald-600 text-white px-6 py-3 rounded-xl text-xs font-extrabold">Simpan Mitra</button>
-                        <button onclick="document.getElementById('admin-form-container').classList.add('hidden')" class="bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 px-6 py-3 rounded-xl text-xs font-bold hover:bg-slate-300 transition-colors">Batal</button>
-                    </div>
-                </div>
-            `;
-            document.getElementById('admin-form-container').classList.remove('hidden');
-        }
-
-        async function savePartner(id) {
-            const base64 = await fileToBase64('part-image');
-            const data = {
-                id: id || Date.now(),
-                name: document.getElementById('part-name').value,
-                type: document.getElementById('part-type').value,
-                desc: document.getElementById('part-desc').value,
-                image: base64 || (id ? partnersData.find(d => d.id === id).image : '')
-            };
-            if(id) { const idx = partnersData.findIndex(d => d.id === id); partnersData[idx] = data; } 
-            else { partnersData.push(data); }
-            saveDataLocally(); showToast("Mitra berhasil disimpan!"); switchAdminTab('partners');
-        }
-
-        function editCareerForm(id = null) {
-            const item = id ? careersData.find(d => d.id === id) : { title: '', type: 'Full-Time', location: 'Jakarta', desc: '', deadline: '' };
-            const isEdit = !!id;
-            document.getElementById('admin-form-container').innerHTML = `
-                <h3 class="text-xl font-black text-slate-800 dark:text-white mb-6 flex items-center"><i class="fa-solid fa-pen-to-square mr-3 text-emerald-500"></i> ${isEdit ? 'Edit' : 'Tambah'} Lowongan Karir</h3>
-                <div class="space-y-5">
-                    <div><label class="block text-xs font-bold mb-1.5 dark:text-slate-300">Posisi Pekerjaan</label><input type="text" id="car-title" value="${item.title}" class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:bg-slate-900 dark:border-slate-700 dark:text-white font-bold"></div>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div><label class="block text-xs font-bold mb-1.5 dark:text-slate-300">Tipe (misal: Full-Time)</label><input type="text" id="car-type" value="${item.type}" class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:bg-slate-900 dark:border-slate-700 dark:text-white font-bold"></div>
-                        <div><label class="block text-xs font-bold mb-1.5 dark:text-slate-300">Lokasi Penempatan</label><input type="text" id="car-loc" value="${item.location}" class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:bg-slate-900 dark:border-slate-700 dark:text-white font-bold"></div>
-                    </div>
-                    <div><label class="block text-xs font-bold mb-1.5 dark:text-slate-300">Batas Waktu Lamaran</label><input type="text" id="car-deadline" value="${item.deadline}" class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:bg-slate-900 dark:border-slate-700 dark:text-white font-bold"></div>
-                    <div><label class="block text-xs font-bold mb-1.5 dark:text-slate-300">Persyaratan & Deskripsi</label><textarea id="car-desc" rows="4" class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:bg-slate-900 dark:border-slate-700 dark:text-white font-medium">${item.desc}</textarea></div>
-                    <div class="flex space-x-3 pt-4 border-t border-slate-200 dark:border-slate-700">
-                        <button onclick="saveCareer(${id})" class="btn-3d bg-emerald-600 text-white px-6 py-3 rounded-xl text-xs font-extrabold">Simpan Lowongan</button>
-                        <button onclick="document.getElementById('admin-form-container').classList.add('hidden')" class="bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 px-6 py-3 rounded-xl text-xs font-bold hover:bg-slate-300 transition-colors">Batal</button>
-                    </div>
-                </div>
-            `;
-            document.getElementById('admin-form-container').classList.remove('hidden');
-        }
-
-        function saveCareer(id) {
-            const data = {
-                id: id || Date.now(),
-                title: document.getElementById('car-title').value,
-                type: document.getElementById('car-type').value,
-                location: document.getElementById('car-loc').value,
-                desc: document.getElementById('car-desc').value,
-                deadline: document.getElementById('car-deadline').value
-            };
-            if(id) { const idx = careersData.findIndex(d => d.id === id); careersData[idx] = data; } 
-            else { careersData.push(data); }
-            saveDataLocally(); showToast("Lowongan berhasil disimpan!"); switchAdminTab('partners');
+            container.innerHTML = `<div class="p-6 text-center text-slate-500 font-bold">Kelola Mitra & Karir aktif.</div>`;
         }
 
         let pendingDelete = null;
@@ -1989,19 +1738,13 @@
             pendingDelete = { type, id };
             document.getElementById('confirm-modal').classList.remove('hidden');
             document.getElementById('confirm-modal').classList.add('flex');
-            
             document.getElementById('confirm-yes-btn').onclick = function() {
-                if(pendingDelete.type === 'Layanan Utama') { servicesData = servicesData.filter(d => d.id !== pendingDelete.id); switchAdminTab('services'); }
-                else if(pendingDelete.type === 'Tim Terapis') { therapistsData = therapistsData.filter(d => d.id !== pendingDelete.id); switchAdminTab('therapists'); }
-                else if(pendingDelete.type === 'Artikel Edukasi') { articlesData = articlesData.filter(d => d.id !== pendingDelete.id); switchAdminTab('articles'); }
-                else if(pendingDelete.type === 'Produk Herbal') { productsData = productsData.filter(d => d.id !== pendingDelete.id); switchAdminTab('products'); }
-                else if(pendingDelete.type === 'Mitra') { partnersData = partnersData.filter(d => d.id !== pendingDelete.id); switchAdminTab('partners'); }
-                else if(pendingDelete.type === 'Karir') { careersData = careersData.filter(d => d.id !== pendingDelete.id); switchAdminTab('partners'); }
-                else if(pendingDelete.type === 'Antrean') { queueData = queueData.filter(d => d.id !== pendingDelete.id); switchAdminTab('queue'); }
-                
-                saveDataLocally();
-                closeConfirmModal();
-                showToast("Data berhasil dihapus!");
+                if(pendingDelete.type === 'Layanan Utama') servicesData = servicesData.filter(d => d.id !== pendingDelete.id);
+                else if(pendingDelete.type === 'Tim Terapis') therapistsData = therapistsData.filter(d => d.id !== pendingDelete.id);
+                else if(pendingDelete.type === 'Artikel Edukasi') articlesData = articlesData.filter(d => d.id !== pendingDelete.id);
+                else if(pendingDelete.type === 'Produk Herbal') productsData = productsData.filter(d => d.id !== pendingDelete.id);
+                else if(pendingDelete.type === 'Antrean') queueData = queueData.filter(d => d.id !== pendingDelete.id);
+                saveDataLocally(); closeConfirmModal(); showToast("Data dihapus!"); switchAdminTab('queue');
             };
         }
         function closeConfirmModal() {
