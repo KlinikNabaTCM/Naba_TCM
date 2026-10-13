@@ -35,7 +35,7 @@
         
         .card-2d {
             background: #ffffff; border: 1px solid #e2e8f0; border-radius: 1rem;
-            transition: border-color 0.2s ease;
+            transition: border-color 0.2s ease, transform 0.2s ease;
         }
         .card-2d:hover { border-color: #38bdf8; }
         body.dark-mode .card-2d { background: #0f172a; border: 1px solid #1e293b; }
@@ -50,7 +50,7 @@
         html { scroll-behavior: smooth; }
 
         #toast-container { position: fixed; bottom: 24px; right: 24px; z-index: 9999; display: flex; flex-direction: column; gap: 12px; pointer-events: none; }
-        .toast { padding: 14px 24px; border-radius: 12px; color: white; font-weight: 700; font-size: 0.85rem; background-color: #0284c7; animation: slideIn 0.3s ease forwards; display: flex; align-items: center; }
+        .toast { padding: 14px 24px; border-radius: 12px; color: white; font-weight: 700; font-size: 0.85rem; background-color: #0284c7; animation: slideIn 0.3s ease forwards; display: flex; align-items: center; shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); }
         .toast.error { background-color: #ef4444; }
         @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
 
@@ -69,13 +69,32 @@
         #naba-ai-btn { position: fixed; bottom: 30px; right: 24px; z-index: 9998; }
         #naba-ai-window { position: fixed; bottom: 100px; right: 24px; z-index: 9999; width: 360px; max-height: 500px; display: none; flex-direction: column; }
 
+        .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
         .line-clamp-3 { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
         .pulse-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; background-color: #3b82f6; animation: pulse 1.5s infinite; }
         @keyframes pulse { 0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); } 70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(59, 130, 246, 0); } 100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); } }
     </style>
 
-    <script>
-        // Global State & Definitions to ensure window.initApp is always defined immediately
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc, getDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Hardcoded User Specific Firebase Config
+        const firebaseConfig = {
+            apiKey: "AIzaSyBLvxEL6LHyJibWvXgiDbGzgLhyMJqu4xE",
+            authDomain: "nabatcm.firebaseapp.com",
+            projectId: "nabatcm",
+            storageBucket: "nabatcm.firebasestorage.app",
+            messagingSenderId: "790879730377",
+            appId: "1:790879730377:web:66e413566ff76ee450eb18"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'nabatcm-main';
+
         window.clinicSettings = {
             name: "NabaTCM Center",
             tagline: "Solusi Sehat dan Tenang Bersama Al-Qur'an.",
@@ -88,7 +107,7 @@
             instagramUrl: "https://instagram.com",
             telegramUrl: "https://t.me/nabatcm",
             promoActive: true,
-            promoText: "🌟 Promo Jumat Berkah: Diskon Khusus Hari Ini! Silakan ke menu Layanan.",
+            promoText: "🌟 Promo Jumat Berkah: Diskon Khusus Hari Ini di Menu Layanan & Toko!",
             adminPin: "1234"
         };
 
@@ -104,6 +123,7 @@
         window.cartData = [];
         window.adminClockInterval = null;
         window.currentAdminTab = 'queue';
+        window.currentSection = 'home';
 
         window.therapistsData = [
             { id: 1, name: "Ust. Abdullah", role: "Spesialis Ruqyah & Bekam", desc: "Berpengalaman 10 tahun dalam metode Thibbun Nabawi dan tersertifikasi ABI.", image: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=400&q=80" },
@@ -117,7 +137,7 @@
             { id: 3, title: "Akupunktur TCM", desc: "Penusukan jarum halus pada meridian tubuh untuk menyeimbangkan energi (Qi), efektif untuk nyeri sendi, stroke ringan.", priceRange: "175000", icon: "fa-bezier-curve", image: "https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&w=600&q=80" },
             { id: 4, title: "Konsultasi Herbal", desc: "Analisis lidah dan nadi ala TCM dipadu resep ramuan herbal alami pilihan untuk mengembalikan keseimbangan organ tubuh.", priceRange: "100000", icon: "fa-seedling", image: "https://images.unsplash.com/photo-1471864190281-a93a3070b6de?auto=format&fit=crop&w=600&q=80" },
             { id: 5, title: "Fisioterapi Saraf & Tulang", desc: "Manipulasi otot dan koreksi postur tubuh untuk mengatasi saraf kejepit (HNP), nyeri pinggang, dan cedera sendi.", priceRange: "225000", icon: "fa-bone", image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600&q=80" },
-            { id: 6, title: "Konseling & Terapi Jiwa", desc: "Pendampingan psikologis Islami untuk mengatasi stres, kecemasan berlebihan, trauma, dan gangguan psikomatis.", priceRange: "175000", icon: "fa-hand-holding-heart", image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=600&q=80" }
+            { id: 6, title: "Konseling & Terapi Jiwa", desc: "Pendampingan psikologis Islami untuk mengatasi stres, kecemasan berlebihan, trauma, dan gangguan psikosomatis.", priceRange: "175000", icon: "fa-hand-holding-heart", image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=600&q=80" }
         ];
 
         window.articlesData = [
@@ -131,8 +151,8 @@
         ];
 
         window.branchesData = [
-            { id: 1, name: "Klinik NabaTCM Pusat (Jakarta)", address: "Jl. Laut Biru No. 99, Kebayoran Baru, Jakarta Selatan", phone: "081234567890", image: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=600&q=80", mapUrl: "https://www.google.com/maps/embed" },
-            { id: 2, name: "NabaTCM Cabang Bekasi", address: "Ruko Galaxy Indah Blok A No. 12, Bekasi Barat", phone: "081987654321", image: "https://images.unsplash.com/photo-1581594693702-fbdc51b2763b?auto=format&fit=crop&w=600&q=80", mapUrl: "https://www.google.com/maps/embed" }
+            { id: 1, name: "Klinik NabaTCM Pusat (Jakarta)", address: "Jl. Laut Biru No. 99, Kebayoran Baru, Jakarta Selatan", phone: "081234567890", image: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=600&q=80", mapUrl: "https://maps.google.com" },
+            { id: 2, name: "NabaTCM Cabang Bekasi", address: "Ruko Galaxy Indah Blok A No. 12, Bekasi Barat", phone: "081987654321", image: "https://images.unsplash.com/photo-1581594693702-fbdc51b2763b?auto=format&fit=crop&w=600&q=80", mapUrl: "https://maps.google.com" }
         ];
 
         window.partnersData = [];
@@ -153,7 +173,53 @@
             { id: 2, name: "Ibu Siti", service: "Ruqyah Syar'iyyah", time: "10:30", status: "Proses" }
         ];
 
+        async function initFirebaseSync() {
+            try {
+                await signInAnonymously(auth);
+                const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'clinic_state');
+                onSnapshot(docRef, (docSnap) => {
+                    if (docSnap.exists()) {
+                        const cloudData = docSnap.data();
+                        if (cloudData.clinicSettings) window.clinicSettings = cloudData.clinicSettings;
+                        if (cloudData.servicesData) window.servicesData = cloudData.servicesData;
+                        if (cloudData.therapistsData) window.therapistsData = cloudData.therapistsData;
+                        if (cloudData.articlesData) window.articlesData = cloudData.articlesData;
+                        if (cloudData.productsData) window.productsData = cloudData.productsData;
+                        if (cloudData.branchesData) window.branchesData = cloudData.branchesData;
+                        if (cloudData.partnersData) window.partnersData = cloudData.partnersData;
+                        if (cloudData.careersData) window.careersData = cloudData.careersData;
+                        if (cloudData.queueData) window.queueData = cloudData.queueData;
+                        
+                        window.updateGlobalUI();
+                        if(window.currentSection) {
+                            window.showSection(window.currentSection, null, true);
+                        }
+                    }
+                }, (error) => { console.debug("Cloud sync active in background"); });
+            } catch(e) { console.debug("Using local storage fallback"); }
+        }
+
+        window.saveDataToCloud = async function() {
+            try {
+                if (!auth.currentUser) await signInAnonymously(auth);
+                const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'clinic_state');
+                await setDoc(docRef, {
+                    clinicSettings: window.clinicSettings,
+                    servicesData: window.servicesData,
+                    therapistsData: window.therapistsData,
+                    articlesData: window.articlesData,
+                    productsData: window.productsData,
+                    branchesData: window.branchesData,
+                    partnersData: window.partnersData,
+                    careersData: window.careersData,
+                    queueData: window.queueData,
+                    updatedAt: new Date().toISOString()
+                }, { merge: true });
+            } catch(e) { console.error("Cloud save failed", e); }
+        }
+
         window.initApp = function() {
+            initFirebaseSync();
             const progress = document.getElementById('splash-progress');
             if(progress) {
                 setTimeout(() => { progress.style.width = '100%'; }, 100);
@@ -161,7 +227,7 @@
                     const splash = document.getElementById('splash-screen');
                     if(splash) splash.classList.add('hidden-splash');
                     window.showDailyTip();
-                }, 1200);
+                }, 1000);
             }
 
             window.loadLocalData(); 
@@ -175,7 +241,7 @@
             if(vEl) vEl.innerText = window.visitorCount;
         };
 
-        window.formatRupiah = function(angka) { return "Rp " + parseInt(angka).toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."); }
+        window.formatRupiah = function(angka) { return "Rp " + parseInt(angka || 0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."); }
         window.maskPatientName = function(name) {
             if(!name || name.length <= 4) return name || "Pasien";
             let parts = name.split(" ");
@@ -219,7 +285,7 @@
             const fileInput = document.getElementById(inputId);
             if (!fileInput || !fileInput.files || fileInput.files.length === 0) return null;
             const file = fileInput.files[0];
-            if(file.size > 2 * 1024 * 1024) { window.showToast("File max 2MB", true); return null; }
+            if(file.size > 2 * 1024 * 1024) { window.showToast("File maksimal 2MB", true); return null; }
             return new Promise((resolve, reject) => {
                 const reader = new FileReader();
                 reader.readAsDataURL(file);
@@ -259,13 +325,14 @@
                     testimonialsData: window.testimonialsData, 
                     queueData: window.queueData 
                 };
-                localStorage.setItem('nabatcm_data_v10', JSON.stringify(dataObj));
+                localStorage.setItem('nabatcm_data_v11', JSON.stringify(dataObj));
+                window.saveDataToCloud();
             } catch (e) {}
         }
 
         window.loadLocalData = function() {
             try {
-                const saved = localStorage.getItem('nabatcm_data_v10');
+                const saved = localStorage.getItem('nabatcm_data_v11');
                 if (saved) {
                     const dataObj = JSON.parse(saved);
                     if (dataObj.clinicSettings) window.clinicSettings = dataObj.clinicSettings;
@@ -313,14 +380,14 @@
             });
 
             let particles = [];
-            for(let i=0; i<40; i++) {
+            for(let i=0; i<35; i++) {
                 particles.push({
                     x: Math.random() * width,
                     y: Math.random() * height,
                     radius: Math.random() * 2 + 1,
-                    color: Math.random() > 0.5 ? 'rgba(56, 189, 248, 0.4)' : 'rgba(251, 191, 36, 0.4)',
-                    vx: (Math.random() - 0.5) * 0.5,
-                    vy: (Math.random() - 0.5) * 0.5
+                    color: Math.random() > 0.5 ? 'rgba(56, 189, 248, 0.35)' : 'rgba(251, 191, 36, 0.35)',
+                    vx: (Math.random() - 0.5) * 0.4,
+                    vy: (Math.random() - 0.5) * 0.4
                 });
             }
 
@@ -345,29 +412,29 @@
         }
 
         window.showDailyTip = function() {
-            const today = new Date().toDateString();
-            let lastTip = null;
-            try { lastTip = localStorage.getItem('nabatcm_last_tip'); } catch (e) { console.warn("LocalStorage access denied."); }
-            
-            if (lastTip !== today) {
-                setTimeout(() => {
-                    const modal = document.getElementById('daily-tip-modal');
-                    const card = document.getElementById('daily-tip-card');
-                    if(!modal || !card) return;
-                    const tipText = window.dailyTipsData[Math.floor(Math.random() * window.dailyTipsData.length)];
-                    const tipContent = document.getElementById('daily-tip-content');
-                    if(tipContent) tipContent.innerText = `"${tipText}"`;
-                    
-                    modal.classList.remove('hidden');
-                    modal.classList.add('flex');
+            try {
+                const today = new Date().toDateString();
+                let lastTip = null;
+                try { lastTip = localStorage.getItem('nabatcm_last_tip'); } catch(e){}
+                if (lastTip !== today) {
                     setTimeout(() => {
-                        modal.classList.remove('opacity-0');
-                        card.classList.remove('scale-95');
-                    }, 50);
-                    
-                    try { localStorage.setItem('nabatcm_last_tip', today); } catch (e) {}
-                }, 1000); 
-            }
+                        const modal = document.getElementById('daily-tip-modal');
+                        const card = document.getElementById('daily-tip-card');
+                        if(!modal || !card) return;
+                        const tipText = window.dailyTipsData[Math.floor(Math.random() * window.dailyTipsData.length)];
+                        const tipContent = document.getElementById('daily-tip-content');
+                        if(tipContent) tipContent.innerText = `"${tipText}"`;
+                        
+                        modal.classList.remove('hidden');
+                        modal.classList.add('flex');
+                        setTimeout(() => {
+                            modal.classList.remove('opacity-0');
+                            card.classList.remove('scale-95');
+                        }, 50);
+                        try { localStorage.setItem('nabatcm_last_tip', today); } catch(e){}
+                    }, 1000); 
+                }
+            } catch (e) {}
         }
 
         window.closeDailyTip = function() {
@@ -486,6 +553,7 @@
         }
 
         window.showSection = function(sectionId, paramId = null, silent = false) {
+            window.currentSection = sectionId;
             document.querySelectorAll('.nav-link').forEach(el => {
                 if(el.dataset.target === sectionId) {
                     el.classList.add('text-sky-600', 'bg-sky-50', 'dark:bg-sky-900/30', 'dark:text-sky-400', 'border-sky-200', 'dark:border-sky-800');
@@ -521,6 +589,7 @@
             let heroBg = window.clinicSettings.heroBgUrl ? window.clinicSettings.heroBgUrl : 'https://images.unsplash.com/photo-1542841791-1925b02a2bfb?auto=format&fit=crop&w=1600&q=80';
             let heroTagline = window.clinicSettings.tagline || "Solusi Sehat dan Tenang Bersama Al-Qur'an.";
             
+            // 2-column layout for mobile grid
             let servicesPreviewHTML = window.servicesData.map((s, idx) => `
                 <div class="card-2d rounded-2xl overflow-hidden group flex flex-col h-full reveal-item" style="transition-delay: ${idx * 50}ms">
                     <div class="h-28 sm:h-40 overflow-hidden relative border-b border-slate-100 dark:border-slate-800">
@@ -629,6 +698,7 @@
                     </div>
                 </div>
 
+                <!-- 1 Column stack for Q&A on Mobile, 3 Columns on Desktop -->
                 <div class="py-24 bg-slate-50 dark:bg-slate-900/40 border-b border-slate-200/50 dark:border-slate-800/50">
                     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <div class="text-center mb-16 reveal-item">
