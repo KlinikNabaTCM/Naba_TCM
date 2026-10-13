@@ -84,6 +84,25 @@
         .line-clamp-3 { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
         .pulse-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; background-color: #3b82f6; animation: pulse 1.5s infinite; }
         @keyframes pulse { 0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); } 70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(59, 130, 246, 0); } 100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); } }
+
+        /* Mobile Slider Styling for Services & Articles */
+        @media (max-width: 768px) {
+            .mobile-slider {
+                display: flex;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                gap: 1rem;
+                padding-bottom: 1rem;
+                -webkit-overflow-scrolling: touch;
+            }
+            .mobile-slider::-webkit-scrollbar {
+                display: none;
+            }
+            .mobile-slide-item {
+                flex: 0 0 75%;
+                scroll-snap-align: start;
+            }
+        }
     </style>
 </head>
 <body class="antialiased selection:bg-sky-400 selection:text-slate-900" onload="initApp()">
@@ -440,7 +459,7 @@
             { id: 2, title: "Ruqyah Syar'iyyah", desc: "Penyembuhan penyakit fisik dan psikis melalui lantunan ayat suci Al-Quran dan doa-doa ma'tsur untuk ketenangan jiwa.", priceRange: "200000", icon: "fa-book-quran", image: "https://images.unsplash.com/photo-1609599006353-e629aaabfeae?auto=format&fit=crop&w=600&q=80" },
             { id: 3, title: "Akupunktur TCM", desc: "Penusukan jarum halus pada meridian tubuh untuk menyeimbangkan energi (Qi), efektif untuk nyeri sendi, stroke ringan.", priceRange: "175000", icon: "fa-bezier-curve", image: "https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&w=600&q=80" },
             { id: 4, title: "Konsultasi Herbal", desc: "Analisis lidah dan nadi ala TCM dipadu resep ramuan herbal alami pilihan untuk mengembalikan keseimbangan organ tubuh.", priceRange: "100000", icon: "fa-seedling", image: "https://images.unsplash.com/photo-1471864190281-a93a3070b6de?auto=format&fit=crop&w=600&q=80" },
-            { id: 5, title: "Fisioterapi & Tulang Belakang", desc: "Manipulasi otot dan koreksi postur tubuh untuk mengatasi saraf kejepit (HNP), nyeri pinggang, dan cedera sendi.", priceRange: "225000", icon: "fa-bone", image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600&q=80" },
+            { id: 5, title: "Fisioterapi Saraf & Tulang", desc: "Manipulasi otot dan koreksi postur tubuh untuk mengatasi saraf kejepit (HNP), nyeri pinggang, dan cedera sendi.", priceRange: "225000", icon: "fa-bone", image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600&q=80" },
             { id: 6, title: "Konseling & Terapi Jiwa", desc: "Pendampingan psikologis Islami untuk mengatasi stres, kecemasan berlebihan, trauma, dan gangguan psikomatis.", priceRange: "175000", icon: "fa-hand-holding-heart", image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=600&q=80" }
         ];
 
@@ -592,7 +611,6 @@
             document.querySelectorAll('.reveal-item').forEach(el => observer.observe(el));
         }
 
-        // Fitur 4: Qi Energy & Healing Particles (WebGL / Canvas)
         function initQiParticles() {
             const canvas = document.getElementById('qi-canvas');
             if(!canvas) return;
@@ -637,7 +655,6 @@
             animateQi();
         }
 
-        // Fitur 3: Naba AI Assistant Logic
         window.toggleNabaAI = function() {
             const win = document.getElementById('naba-ai-window');
             if(win.style.display === 'flex') {
@@ -777,7 +794,7 @@
             const heroStyle = `background-image: linear-gradient(to right, rgba(8,47,73,0.95) 0%, rgba(8,47,73,0.7) 60%, rgba(8,47,73,0.3) 100%), url('${heroBg}'); background-size: cover; background-position: center;`;
 
             let servicesPreviewHTML = servicesData.map((s, idx) => `
-                <div class="card-2d rounded-2xl overflow-hidden group flex flex-col h-full reveal-item" style="transition-delay: ${idx * 100}ms">
+                <div class="card-2d rounded-2xl overflow-hidden group flex flex-col h-full reveal-item mobile-slide-item" style="transition-delay: ${idx * 100}ms">
                     <div class="h-48 overflow-hidden relative">
                         <img src="${s.image}" alt="${s.title}" class="w-full h-full object-cover">
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 to-transparent"></div>
@@ -798,7 +815,7 @@
             `).join('');
 
             let articlesPreviewHTML = articlesData.slice(0, 3).map((a, idx) => `
-                <div class="card-2d rounded-2xl overflow-hidden group cursor-pointer reveal-item" style="transition-delay: ${idx * 100}ms" onclick="showSection('article-detail', ${a.id})">
+                <div class="card-2d rounded-2xl overflow-hidden group cursor-pointer reveal-item mobile-slide-item" style="transition-delay: ${idx * 100}ms" onclick="showSection('article-detail', ${a.id})">
                     <div class="h-40 overflow-hidden relative">
                         <img src="${a.image}" class="w-full h-full object-cover">
                         <div class="absolute top-3 left-3 bg-sky-600 text-white text-[10px] font-black px-2 py-1 rounded shadow">${a.date}</div>
@@ -867,7 +884,7 @@
                             <h2 class="text-3xl md:text-4xl font-playfair font-black text-slate-900 dark:text-white tracking-tight mb-4">Layanan Terapi <span class="text-sky-600">Utama</span></h2>
                             <p class="text-slate-600 dark:text-slate-400 text-sm">Pilih layanan kesehatan holistik yang tepat untuk memulihkan energi dan vitalitas Anda.</p>
                         </div>
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mobile-slider">
                             ${servicesPreviewHTML}
                         </div>
                     </div>
@@ -882,7 +899,7 @@
                             </div>
                             <button onclick="showSection('articles')" class="text-sky-600 dark:text-sky-400 font-bold text-sm hover:underline px-4 py-2 rounded-lg bg-sky-50 dark:bg-sky-900/30">Lihat Semua <i class="fa-solid fa-arrow-right text-xs"></i></button>
                         </div>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mobile-slider">
                             ${articlesPreviewHTML}
                         </div>
                     </div>
@@ -937,7 +954,7 @@
 
         function renderServices(container) {
             let html = servicesData.map((s, idx) => `
-                <div class="card-2d rounded-2xl overflow-hidden flex flex-col group reveal-item" style="transition-delay: ${idx * 50}ms">
+                <div class="card-2d rounded-2xl overflow-hidden flex flex-col group reveal-item mobile-slide-item" style="transition-delay: ${idx * 50}ms">
                     <div class="p-8 flex-grow flex flex-col justify-between bg-white dark:bg-slate-800">
                         <div>
                             <div class="w-12 h-12 bg-sky-50 dark:bg-sky-900/30 rounded-xl flex items-center justify-center mb-6 border border-sky-100 dark:border-sky-700 text-sky-600 dark:text-sky-400">
@@ -962,7 +979,7 @@
                         <h2 class="text-3xl md:text-4xl font-playfair font-black text-slate-900 dark:text-white mb-3">Layanan <span class="text-sky-600 dark:text-sky-400">Klinik</span></h2>
                         <p class="text-slate-600 text-sm max-w-2xl mx-auto">Kami menyediakan berbagai terapi kesehatan yang memadukan nilai-nilai Islami dan keilmuan medis tradisional.</p>
                     </div>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mobile-slider">
                         ${html}
                     </div>
                 </div>
@@ -1002,7 +1019,6 @@
             `;
         }
 
-        // Fitur 2: Interactive Anatomy Mapper (Peta Titik Tubuh & Meridian)
         function renderCalculator(container) {
             container.innerHTML = `
                 <div class="py-16 max-w-4xl mx-auto px-4 reveal-item">
@@ -1120,7 +1136,7 @@
             if(filtered.length === 0) { grid.innerHTML = '<div class="col-span-full text-center text-slate-500 py-10 font-bold">Artikel tidak ditemukan.</div>'; return; }
             
             grid.innerHTML = filtered.map((a, idx) => `
-                <div class="card-2d rounded-2xl overflow-hidden group flex flex-col h-full cursor-pointer" onclick="showSection('article-detail', ${a.id})">
+                <div class="card-2d rounded-2xl overflow-hidden group flex flex-col h-full cursor-pointer mobile-slide-item" onclick="showSection('article-detail', ${a.id})">
                     <div class="h-48 overflow-hidden relative">
                         <img src="${a.image}" alt="${a.title}" class="w-full h-full object-cover">
                         <div class="absolute top-4 left-4 bg-amber-500 text-white text-[10px] font-black px-3 py-1.5 rounded-lg shadow border border-amber-400">${a.date}</div>
@@ -1151,7 +1167,7 @@
                         </div>
                     </div>
 
-                    <div id="articles-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 reveal-item"></div>
+                    <div id="articles-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 reveal-item mobile-slider"></div>
                 </div>
             `;
             filterArticles(''); 
@@ -1861,7 +1877,9 @@
             };
             if(id) { const idx = queueData.findIndex(d => d.id === id); queueData[idx] = data; } 
             else { queueData.push(data); }
-            saveDataLocally(); showToast("Jadwal pasien disimpan!"); switchAdminTab('queue');
+            saveDataLocally(); showToast("Jadwal pasien disimpan!"); 
+            document.getElementById('admin-form-container').classList.add('hidden');
+            switchAdminTab('queue');
         }
 
         function renderAdminSettings(container) {
@@ -1963,7 +1981,9 @@
                 image: base64Img ? base64Img : (id ? servicesData.find(d => d.id === id).image : 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=600&q=80')
             };
             if(id) { const idx = servicesData.findIndex(d => d.id === id); servicesData[idx] = data; } else { servicesData.push(data); }
-            saveDataLocally(); showToast("Layanan disimpan!"); switchAdminTab('services');
+            saveDataLocally(); showToast("Layanan disimpan!"); 
+            document.getElementById('admin-form-container').classList.add('hidden');
+            switchAdminTab('services');
         }
 
         window.editBranchForm = function(id = null) {
@@ -2002,7 +2022,9 @@
                 image: base64Img ? base64Img : (id ? branchesData.find(d => d.id === id).image : 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=600&q=80')
             };
             if(id) { const idx = branchesData.findIndex(d => d.id === id); branchesData[idx] = data; } else { branchesData.push(data); }
-            saveDataLocally(); showToast("Cabang disimpan!"); switchAdminTab('branches');
+            saveDataLocally(); showToast("Cabang disimpan!"); 
+            document.getElementById('admin-form-container').classList.add('hidden');
+            switchAdminTab('branches');
         }
 
         window.editTherapistForm = function(id = null) {
@@ -2039,7 +2061,9 @@
                 image: base64Img ? base64Img : (id ? therapistsData.find(d => d.id === id).image : 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=400&q=80')
             };
             if(id) { const idx = therapistsData.findIndex(d => d.id === id); therapistsData[idx] = data; } else { therapistsData.push(data); }
-            saveDataLocally(); showToast("Terapis disimpan!"); switchAdminTab('therapists');
+            saveDataLocally(); showToast("Terapis disimpan!"); 
+            document.getElementById('admin-form-container').classList.add('hidden');
+            switchAdminTab('therapists');
         }
 
         window.editArticleForm = function(id = null) {
@@ -2077,7 +2101,9 @@
                 image: base64Img ? base64Img : (id ? articlesData.find(d => d.id === id).image : 'https://images.unsplash.com/photo-1542841791-1925b02a2bfb?auto=format&fit=crop&w=500&q=80')
             };
             if(id) { const idx = articlesData.findIndex(d => d.id === id); articlesData[idx] = data; } else { articlesData.push(data); }
-            saveDataLocally(); showToast("Artikel disimpan!"); switchAdminTab('articles');
+            saveDataLocally(); showToast("Artikel disimpan!"); 
+            document.getElementById('admin-form-container').classList.add('hidden');
+            switchAdminTab('articles');
         }
 
         window.editProductForm = function(id = null) {
@@ -2116,7 +2142,9 @@
                 image: base64Img ? base64Img : (id ? productsData.find(d => d.id === id).image : 'https://images.unsplash.com/photo-1587049352847-81a56d773c1c?auto=format&fit=crop&w=500&q=80')
             };
             if(id) { const idx = productsData.findIndex(d => d.id === id); productsData[idx] = data; } else { productsData.push(data); }
-            saveDataLocally(); showToast("Produk disimpan!"); switchAdminTab('products');
+            saveDataLocally(); showToast("Produk disimpan!"); 
+            document.getElementById('admin-form-container').classList.add('hidden');
+            switchAdminTab('products');
         }
 
         function renderAdminPartnersCareers(container) {
@@ -2207,7 +2235,9 @@
                 image: base64Img ? base64Img : (id ? partnersData.find(d => d.id === id).image : 'https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=400&q=80')
             };
             if(id) { const idx = partnersData.findIndex(d => d.id === id); partnersData[idx] = data; } else { partnersData.push(data); }
-            saveDataLocally(); showToast("Mitra disimpan!"); switchAdminTab('partners');
+            saveDataLocally(); showToast("Mitra disimpan!"); 
+            document.getElementById('admin-form-container').classList.add('hidden');
+            switchAdminTab('partners');
         }
 
         window.editCareerForm = function(id = null) {
@@ -2242,7 +2272,9 @@
                 desc: document.getElementById('car-desc').value
             };
             if(id) { const idx = careersData.findIndex(d => d.id === id); careersData[idx] = data; } else { careersData.push(data); }
-            saveDataLocally(); showToast("Lowongan disimpan!"); switchAdminTab('partners');
+            saveDataLocally(); showToast("Lowongan disimpan!"); 
+            document.getElementById('admin-form-container').classList.add('hidden');
+            switchAdminTab('partners');
         }
 
         let pendingDelete = null;
