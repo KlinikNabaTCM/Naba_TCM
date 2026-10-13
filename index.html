@@ -88,7 +88,8 @@
             instagramUrl: "https://instagram.com",
             telegramUrl: "https://t.me/nabatcm",
             promoActive: true,
-            promoText: "🌟 Promo Jumat Berkah: Diskon Khusus Hari Ini! Silakan ke menu Layanan."
+            promoText: "🌟 Promo Jumat Berkah: Diskon Khusus Hari Ini! Silakan ke menu Layanan.",
+            adminPin: "1234"
         };
 
         window.dailyTipsData = [
@@ -521,35 +522,37 @@
             let heroTagline = window.clinicSettings.tagline || "Solusi Sehat dan Tenang Bersama Al-Qur'an.";
             
             let servicesPreviewHTML = window.servicesData.map((s, idx) => `
-                <div class="card-2d rounded-2xl overflow-hidden group flex flex-col h-full reveal-item flex-none w-[75%] sm:w-[45%] md:w-[45%] lg:w-auto snap-center" style="transition-delay: ${idx * 100}ms">
-                    <div class="h-40 overflow-hidden relative border-b border-slate-100 dark:border-slate-800">
+                <div class="card-2d rounded-2xl overflow-hidden group flex flex-col h-full reveal-item" style="transition-delay: ${idx * 50}ms">
+                    <div class="h-28 sm:h-40 overflow-hidden relative border-b border-slate-100 dark:border-slate-800">
                         <img src="${s.image}" alt="${s.title}" class="w-full h-full object-cover">
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 to-transparent"></div>
-                        <div class="absolute bottom-3 left-3 flex items-center">
-                            <div class="w-8 h-8 bg-sky-500 rounded-xl flex items-center justify-center text-white mr-2">
-                                <i class="fa-solid ${s.icon || 'fa-leaf'} text-sm"></i>
+                        <div class="absolute bottom-2 left-2 sm:bottom-3 sm:left-3 flex items-center">
+                            <div class="w-6 h-6 sm:w-8 sm:h-8 bg-sky-500 rounded-lg sm:rounded-xl flex items-center justify-center text-white mr-1.5 sm:mr-2">
+                                <i class="fa-solid ${s.icon || 'fa-leaf'} text-[10px] sm:text-sm"></i>
                             </div>
-                            <h4 class="text-white font-playfair font-black text-base tracking-wide">${s.title}</h4>
+                            <h4 class="text-white font-playfair font-black text-[11px] sm:text-base tracking-wide">${s.title}</h4>
                         </div>
                     </div>
-                    <div class="p-4 flex-grow flex flex-col justify-between">
-                        <p class="text-slate-600 dark:text-slate-300 text-xs leading-relaxed mb-4 line-clamp-3">${s.desc}</p>
-                        <button onclick="window.showSection('booking')" class="w-full text-center py-2 rounded-xl text-sky-700 bg-sky-50 hover:bg-sky-100 dark:bg-sky-900/40 dark:text-sky-400 font-bold text-xs border border-sky-200 dark:border-sky-700">
+                    <div class="p-3 sm:p-4 flex-grow flex flex-col justify-between">
+                        <p class="text-slate-600 dark:text-slate-300 text-[9px] sm:text-xs leading-relaxed mb-3 sm:mb-4 line-clamp-2 sm:line-clamp-3">${s.desc}</p>
+                        <button onclick="window.showSection('booking')" class="w-full text-center py-1.5 sm:py-2 rounded-lg sm:rounded-xl text-sky-700 bg-sky-50 hover:bg-sky-100 dark:bg-sky-900/40 dark:text-sky-400 font-bold text-[10px] sm:text-xs border border-sky-200 dark:border-sky-700">
                             Reservasi
                         </button>
                     </div>
                 </div>
             `).join('');
 
-            let articlesPreviewHTML = window.articlesData.slice(0, 3).map((a, idx) => `
-                <div class="card-2d rounded-2xl overflow-hidden group cursor-pointer reveal-item flex-none w-[75%] sm:w-[45%] md:w-[45%] lg:w-auto snap-center" style="transition-delay: ${idx * 100}ms" onclick="window.showSection('article-detail', ${a.id})">
-                    <div class="h-36 overflow-hidden relative border-b border-slate-100 dark:border-slate-800">
+            let articlesPreviewHTML = window.articlesData.slice(0, 4).map((a, idx) => `
+                <div class="card-2d rounded-2xl overflow-hidden group cursor-pointer reveal-item" style="transition-delay: ${idx * 50}ms" onclick="window.showSection('article-detail', ${a.id})">
+                    <div class="h-24 sm:h-36 overflow-hidden relative border-b border-slate-100 dark:border-slate-800">
                         <img src="${a.image}" class="w-full h-full object-cover">
-                        <div class="absolute top-2 left-2 bg-sky-500 text-white text-[9px] font-black px-2 py-0.5 rounded shadow">${a.date}</div>
+                        <div class="absolute top-2 left-2 bg-sky-500 text-white text-[8px] sm:text-[9px] font-black px-1.5 py-0.5 rounded shadow">${a.date}</div>
                     </div>
-                    <div class="p-4 bg-white dark:bg-slate-800">
-                        <h4 class="font-playfair font-bold text-sm text-slate-800 dark:text-white mb-2 line-clamp-2 group-hover:text-sky-600">${a.title}</h4>
-                        <p class="text-[11px] text-slate-500 line-clamp-2">${a.summary}</p>
+                    <div class="p-3 sm:p-4 bg-white dark:bg-slate-800 flex-grow flex flex-col justify-between">
+                        <div>
+                            <h4 class="font-playfair font-bold text-xs sm:text-sm text-slate-800 dark:text-white mb-1.5 sm:mb-2 line-clamp-2 group-hover:text-sky-600">${a.title}</h4>
+                            <p class="text-[9px] sm:text-[11px] text-slate-500 line-clamp-2 hidden sm:block">${a.summary}</p>
+                        </div>
                     </div>
                 </div>
             `).join('');
@@ -610,18 +613,19 @@
                     </div>
                 </div>
 
-                <div id="services-section" class="py-24 bg-transparent relative border-b border-slate-200/50 dark:border-slate-800/50">
+                <div id="services-section" class="py-16 md:py-24 bg-transparent relative border-b border-slate-200/50 dark:border-slate-800/50">
                     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                        <div class="flex justify-between items-end mb-12">
+                        <div class="flex justify-between items-end mb-8 md:mb-12">
                             <div>
                                 <h2 class="text-3xl md:text-4xl font-playfair font-black text-slate-900 dark:text-white tracking-tight mb-2">Layanan Terapi <span class="text-sky-600">Utama</span></h2>
                                 <p class="text-slate-600 dark:text-slate-400 text-sm">Pilih layanan kesehatan holistik yang tepat untuk memulihkan energi Anda.</p>
                             </div>
                             <button onclick="window.showSection('services')" class="hidden md:block text-sky-600 dark:text-sky-400 font-bold text-xs hover:underline">Lihat Semua <i class="fa-solid fa-arrow-right ml-1"></i></button>
                         </div>
-                        <div class="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar gap-4 pb-6 lg:grid lg:grid-cols-3">
+                        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 pb-6">
                             ${servicesPreviewHTML}
                         </div>
+                        <button onclick="window.showSection('services')" class="md:hidden mt-4 w-full text-sky-600 bg-sky-50 dark:bg-sky-900/30 dark:text-sky-400 py-3 rounded-xl font-bold text-xs border border-sky-100 dark:border-sky-800">Lihat Semua Layanan <i class="fa-solid fa-arrow-right ml-1"></i></button>
                     </div>
                 </div>
 
@@ -632,22 +636,22 @@
                             <p class="text-slate-600 dark:text-slate-400 text-sm">Pertanyaan yang sering diajukan seputar terapi di klinik kami.</p>
                         </div>
                         
-                        <div class="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar gap-6 pb-6 lg:grid lg:grid-cols-3 reveal-item">
-                            <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 md:p-8 border border-slate-200 dark:border-slate-700 flex flex-col justify-start flex-none w-[85%] sm:w-[45%] md:w-[45%] lg:w-auto snap-center">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 reveal-item">
+                            <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 md:p-8 border border-slate-200 dark:border-slate-700 flex flex-col justify-start">
                                 <div class="w-12 h-12 bg-sky-50 dark:bg-sky-900/30 rounded-xl flex items-center justify-center text-sky-600 dark:text-sky-400 mb-5 border border-sky-100 dark:border-sky-800/50">
                                     <i class="fa-solid fa-shield-virus text-xl"></i>
                                 </div>
                                 <h3 class="font-playfair font-black text-slate-800 dark:text-white mb-3 text-lg">Apakah alat steril & aman?</h3>
                                 <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-medium">Sangat aman. Kami menggunakan jarum sekali pakai (disposable) dan alat sterilisator medis berstandar rumah sakit setelah setiap penggunaan.</p>
                             </div>
-                            <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 md:p-8 border border-slate-200 dark:border-slate-700 flex flex-col justify-start flex-none w-[85%] sm:w-[45%] md:w-[45%] lg:w-auto snap-center">
+                            <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 md:p-8 border border-slate-200 dark:border-slate-700 flex flex-col justify-start">
                                 <div class="w-12 h-12 bg-sky-50 dark:bg-sky-900/30 rounded-xl flex items-center justify-center text-sky-600 dark:text-sky-400 mb-5 border border-sky-100 dark:border-sky-800/50">
                                     <i class="fa-solid fa-face-smile text-xl"></i>
                                 </div>
                                 <h3 class="font-playfair font-black text-slate-800 dark:text-white mb-3 text-lg">Apakah akupunktur sakit?</h3>
                                 <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-medium">Tidak. Jarum yang digunakan setipis rambut manusia. Anda umumnya hanya akan merasakan sensasi hangat atau ngilu ringan yang nyaman.</p>
                             </div>
-                            <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 md:p-8 border border-slate-200 dark:border-slate-700 flex flex-col justify-start flex-none w-[85%] sm:w-[45%] md:w-[45%] lg:w-auto snap-center">
+                            <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 md:p-8 border border-slate-200 dark:border-slate-700 flex flex-col justify-start">
                                 <div class="w-12 h-12 bg-sky-50 dark:bg-sky-900/30 rounded-xl flex items-center justify-center text-sky-600 dark:text-sky-400 mb-5 border border-sky-100 dark:border-sky-800/50">
                                     <i class="fa-solid fa-house-medical text-xl"></i>
                                 </div>
@@ -660,16 +664,17 @@
 
                 <div class="py-20 bg-white/60 dark:bg-slate-950/40 border-b border-slate-200/50 dark:border-slate-800/50">
                     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                        <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-4 reveal-item">
+                        <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 md:mb-12 gap-4 reveal-item">
                             <div>
                                 <h2 class="text-3xl md:text-4xl font-playfair font-black text-slate-900 dark:text-white tracking-tight mb-2">Artikel <span class="text-sky-600 dark:text-sky-400">Kesehatan</span></h2>
                                 <p class="text-slate-600 dark:text-slate-400 text-sm">Edukasi kesehatan berbasis ilmiah dan sunnah.</p>
                             </div>
-                            <button onclick="window.showSection('articles')" class="text-sky-600 dark:text-sky-400 font-bold text-sm hover:underline px-4 py-2 rounded-lg bg-sky-50 dark:bg-sky-900/30">Lihat Semua <i class="fa-solid fa-arrow-right text-xs"></i></button>
+                            <button onclick="window.showSection('articles')" class="hidden md:block text-sky-600 dark:text-sky-400 font-bold text-sm hover:underline px-4 py-2 rounded-lg bg-sky-50 dark:bg-sky-900/30">Lihat Semua <i class="fa-solid fa-arrow-right text-xs"></i></button>
                         </div>
-                        <div class="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar gap-4 pb-6 lg:grid lg:grid-cols-3">
+                        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 pb-6">
                             ${articlesPreviewHTML}
                         </div>
+                        <button onclick="window.showSection('articles')" class="md:hidden mt-2 w-full text-sky-600 bg-sky-50 dark:bg-sky-900/30 dark:text-sky-400 py-3 rounded-xl font-bold text-xs border border-sky-100 dark:border-sky-800">Lihat Semua Artikel <i class="fa-solid fa-arrow-right ml-1"></i></button>
                     </div>
                 </div>
 
@@ -689,17 +694,17 @@
 
         window.renderServices = function(container) {
             let html = window.servicesData.map((s, idx) => `
-                <div class="card-2d rounded-2xl overflow-hidden flex flex-col group reveal-item flex-none w-[85%] sm:w-[45%] md:w-[45%] lg:w-auto snap-center" style="transition-delay: ${idx * 50}ms">
-                    <div class="p-8 flex-grow flex flex-col justify-between bg-white dark:bg-slate-800">
+                <div class="card-2d rounded-2xl overflow-hidden flex flex-col group reveal-item" style="transition-delay: ${idx * 50}ms">
+                    <div class="p-4 sm:p-8 flex-grow flex flex-col justify-between bg-white dark:bg-slate-800">
                         <div>
-                            <div class="w-12 h-12 bg-sky-50 dark:bg-sky-900/30 rounded-xl flex items-center justify-center mb-6 border border-sky-100 dark:border-sky-700 text-sky-600 dark:text-sky-400">
-                                <i class="fa-solid ${s.icon || 'fa-leaf'} text-xl"></i>
+                            <div class="w-10 h-10 sm:w-12 sm:h-12 bg-sky-50 dark:bg-sky-900/30 rounded-lg sm:rounded-xl flex items-center justify-center mb-4 sm:mb-6 border border-sky-100 dark:border-sky-700 text-sky-600 dark:text-sky-400">
+                                <i class="fa-solid ${s.icon || 'fa-leaf'} text-lg sm:text-xl"></i>
                             </div>
-                            <h3 class="font-playfair font-black text-slate-900 dark:text-white text-xl mb-3">${s.title}</h3>
-                            <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-medium mb-6">${s.desc}</p>
+                            <h3 class="font-playfair font-black text-slate-900 dark:text-white text-sm sm:text-xl mb-2 sm:mb-3">${s.title}</h3>
+                            <p class="text-[10px] sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-medium mb-4 sm:mb-6 line-clamp-3 sm:line-clamp-none">${s.desc}</p>
                         </div>
-                        <button onclick="window.showSection('booking')" class="w-full text-center py-3 rounded-xl text-sky-700 bg-sky-50 hover:bg-sky-100 dark:bg-sky-900/40 dark:text-sky-400 font-bold text-xs border border-sky-200 dark:border-sky-700">
-                            Konsultasikan Layanan Ini
+                        <button onclick="window.showSection('booking')" class="w-full text-center py-2 sm:py-3 rounded-lg sm:rounded-xl text-sky-700 bg-sky-50 hover:bg-sky-100 dark:bg-sky-900/40 dark:text-sky-400 font-bold text-[10px] sm:text-xs border border-sky-200 dark:border-sky-700">
+                            Konsultasi
                         </button>
                     </div>
                 </div>
@@ -707,14 +712,14 @@
 
             container.innerHTML = `
                 <div class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="text-center mb-16 reveal-item">
-                        <div class="w-16 h-16 bg-sky-500 rounded-2xl flex items-center justify-center mx-auto mb-4 text-white border border-sky-400 shadow-sm">
-                            <i class="fa-solid fa-hand-holding-medical text-3xl"></i>
+                    <div class="text-center mb-10 sm:mb-16 reveal-item">
+                        <div class="w-12 h-12 sm:w-16 sm:h-16 bg-sky-500 rounded-2xl flex items-center justify-center mx-auto mb-4 text-white border border-sky-400 shadow-sm">
+                            <i class="fa-solid fa-hand-holding-medical text-2xl sm:text-3xl"></i>
                         </div>
                         <h2 class="text-3xl md:text-4xl font-playfair font-black text-slate-900 dark:text-white mb-3">Layanan <span class="text-sky-600 dark:text-sky-400">Klinik</span></h2>
-                        <p class="text-slate-600 text-sm max-w-2xl mx-auto">Kami menyediakan berbagai terapi kesehatan yang memadukan nilai-nilai Islami dan keilmuan medis tradisional.</p>
+                        <p class="text-slate-600 text-xs sm:text-sm max-w-2xl mx-auto">Kami menyediakan berbagai terapi kesehatan yang memadukan nilai-nilai Islami dan keilmuan medis tradisional.</p>
                     </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">
                         ${html}
                     </div>
                 </div>
@@ -870,20 +875,20 @@
             const grid = document.getElementById('articles-grid');
             if(!grid) return;
             let filtered = window.articlesData.filter(a => a.title.toLowerCase().includes(query.toLowerCase()) || a.summary.toLowerCase().includes(query.toLowerCase()));
-            if(filtered.length === 0) { grid.innerHTML = '<div class="w-full text-center text-slate-500 py-10 font-bold">Artikel tidak ditemukan.</div>'; return; }
+            if(filtered.length === 0) { grid.innerHTML = '<div class="col-span-full w-full text-center text-slate-500 py-10 font-bold">Artikel tidak ditemukan.</div>'; return; }
             
             grid.innerHTML = filtered.map((a) => `
                 <div class="card-2d rounded-2xl overflow-hidden group flex flex-col h-full cursor-pointer" onclick="window.showSection('article-detail', ${a.id})">
-                    <div class="h-48 overflow-hidden relative border-b border-slate-100 dark:border-slate-800">
+                    <div class="h-28 sm:h-48 overflow-hidden relative border-b border-slate-100 dark:border-slate-800">
                         <img src="${a.image}" alt="${a.title}" class="w-full h-full object-cover">
-                        <div class="absolute top-4 left-4 bg-sky-500 text-white text-[10px] font-black px-3 py-1.5 rounded-lg shadow border border-sky-400">${a.date}</div>
+                        <div class="absolute top-2 left-2 sm:top-4 sm:left-4 bg-sky-500 text-white text-[8px] sm:text-[10px] font-black px-1.5 sm:px-3 py-0.5 sm:py-1.5 rounded shadow sm:rounded-lg border border-sky-400">${a.date}</div>
                     </div>
-                    <div class="p-6 flex-grow flex flex-col justify-between bg-white dark:bg-slate-800">
+                    <div class="p-3 sm:p-6 flex-grow flex flex-col justify-between bg-white dark:bg-slate-800">
                         <div>
-                            <h3 class="font-playfair font-black text-slate-900 dark:text-white text-xl leading-tight mb-3 group-hover:text-sky-600 transition-colors">${a.title}</h3>
-                            <p class="text-xs text-slate-600 dark:text-slate-300 mb-4 text-justify line-clamp-3">${a.summary}</p>
+                            <h3 class="font-playfair font-black text-slate-900 dark:text-white text-sm sm:text-xl leading-tight mb-1.5 sm:mb-3 group-hover:text-sky-600 transition-colors line-clamp-2">${a.title}</h3>
+                            <p class="text-[9px] sm:text-xs text-slate-600 dark:text-slate-300 mb-3 sm:mb-4 text-justify line-clamp-3">${a.summary}</p>
                         </div>
-                        <span class="text-xs font-bold text-sky-600 dark:text-sky-400 flex items-center">Baca Selengkapnya <i class="fa-solid fa-arrow-right ml-1"></i></span>
+                        <span class="text-[9px] sm:text-xs font-bold text-sky-600 dark:text-sky-400 flex items-center">Baca <i class="fa-solid fa-arrow-right ml-1"></i></span>
                     </div>
                 </div>
             `).join('');
@@ -904,7 +909,7 @@
                         </div>
                     </div>
 
-                    <div id="articles-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 reveal-item"></div>
+                    <div id="articles-grid" class="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6 reveal-item"></div>
                 </div>
             `;
             window.filterArticles(''); 
@@ -1435,7 +1440,8 @@
             const pinEl = document.getElementById('admin-pwd-input');
             if(!pinEl) return;
             const pin = pinEl.value;
-            if(pin === '1234') { window.closeAdminLogin(); window.showSection('admin'); window.showToast("Login Admin Berhasil!"); } 
+            const currentPin = window.clinicSettings.adminPin || '1234';
+            if(pin === currentPin) { window.closeAdminLogin(); window.showSection('admin'); window.showToast("Login Admin Berhasil!"); } 
             else { window.showToast("PIN Salah!", true); }
         }
 
@@ -1675,6 +1681,7 @@
                         <div><label class="block text-xs font-bold text-slate-500 mb-2">Link Facebook (Opsional)</label><input type="text" id="set-facebook" value="${window.clinicSettings.facebookUrl || ''}" placeholder="https://facebook.com/..." class="w-full bg-white dark:bg-slate-800 border rounded-xl px-4 py-2.5 text-sm dark:text-white outline-none"></div>
                         <div><label class="block text-xs font-bold text-slate-500 mb-2">Link Instagram (Opsional)</label><input type="text" id="set-instagram" value="${window.clinicSettings.instagramUrl || ''}" placeholder="https://instagram.com/..." class="w-full bg-white dark:bg-slate-800 border rounded-xl px-4 py-2.5 text-sm dark:text-white outline-none"></div>
                         <div><label class="block text-xs font-bold text-slate-500 mb-2">Link Telegram (Opsional)</label><input type="text" id="set-telegram" value="${window.clinicSettings.telegramUrl || ''}" placeholder="https://t.me/..." class="w-full bg-white dark:bg-slate-800 border rounded-xl px-4 py-2.5 text-sm dark:text-white outline-none"></div>
+                        <div><label class="block text-xs font-bold text-red-500 mb-2"><i class="fa-solid fa-lock mr-1"></i> PIN Admin</label><input type="password" id="set-admin-pin" value="${window.clinicSettings.adminPin || '1234'}" placeholder="Ubah PIN Admin..." class="w-full bg-red-50/30 dark:bg-red-900/10 border border-red-200 dark:border-red-800 rounded-xl px-4 py-2.5 text-sm dark:text-white outline-none focus:border-red-400"></div>
 
                         <div class="md:col-span-2">
                             <label class="block text-xs font-bold text-slate-500 mb-2">Gambar Latar Beranda (Hero Background)</label>
@@ -1700,6 +1707,7 @@
             window.clinicSettings.facebookUrl = document.getElementById('set-facebook').value;
             window.clinicSettings.instagramUrl = document.getElementById('set-instagram').value;
             window.clinicSettings.telegramUrl = document.getElementById('set-telegram').value;
+            window.clinicSettings.adminPin = document.getElementById('set-admin-pin').value || '1234';
             
             if(base64Img) window.clinicSettings.heroBgUrl = base64Img;
 
