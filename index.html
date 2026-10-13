@@ -26,6 +26,11 @@
         }
         body.dark-mode .bg-pattern { opacity: 0.08; filter: grayscale(50%) sepia(20%) hue-rotate(180deg); }
 
+        /* Canvas Partikel Qi */
+        #qi-canvas {
+            position: fixed; inset: 0; z-index: -2; pointer-events: none;
+        }
+
         #splash-screen {
             position: fixed; inset: 0; z-index: 100000;
             background: linear-gradient(135deg, #0c4a6e, #0284c7);
@@ -53,11 +58,6 @@
         .flat-nav { background: #ffffff; border-bottom: 1px solid #f1f5f9; }
         body.dark-mode .flat-nav { background: #0f172a; border-bottom: 1px solid #1e293b; }
 
-        .text-gold-gradient {
-            background: linear-gradient(135deg, #fcd34d, #d97706);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-        }
-
         .reveal-item { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
         .reveal-visible { opacity: 1; transform: translateY(0); }
 
@@ -73,9 +73,13 @@
         ::-webkit-scrollbar-thumb { background: #bae6fd; border-radius: 4px; }
         body.dark-mode ::-webkit-scrollbar-thumb { background: #0c4a6e; }
 
-        #cart-btn { position: fixed; bottom: 30px; right: 30px; z-index: 9998; }
+        #cart-btn { position: fixed; bottom: 30px; right: 90px; z-index: 9998; }
         .cart-badge { position: absolute; top: -5px; right: -5px; background: #ef4444; color: white; font-size: 0.75rem; font-weight: bold; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2px solid white; }
         body.dark-mode .cart-badge { border-color: #0f172a; }
+
+        /* Naba AI Floating Chat */
+        #naba-ai-btn { position: fixed; bottom: 30px; right: 24px; z-index: 9998; }
+        #naba-ai-window { position: fixed; bottom: 100px; right: 24px; z-index: 9999; width: 360px; max-height: 500px; display: none; flex-direction: column; }
 
         .line-clamp-3 { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
         .pulse-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; background-color: #3b82f6; animation: pulse 1.5s infinite; }
@@ -83,6 +87,8 @@
     </style>
 </head>
 <body class="antialiased selection:bg-sky-400 selection:text-slate-900" onload="initApp()">
+
+    <canvas id="qi-canvas"></canvas>
 
     <div id="splash-screen">
         <div class="splash-logo w-24 h-24 bg-white/10 rounded-2xl flex items-center justify-center mb-6 border border-white/20">
@@ -114,7 +120,7 @@
                     <button onclick="showSection('home')" class="nav-link px-4 py-2 rounded-xl font-bold text-xs transition-all text-sky-600 bg-sky-50 dark:bg-sky-900/30 dark:text-sky-400 border border-transparent" data-target="home">Beranda</button>
                     <button onclick="showSection('services')" class="nav-link px-4 py-2 rounded-xl font-bold text-xs text-slate-600 dark:text-slate-300 hover:text-sky-600 hover:bg-sky-50 dark:hover:bg-sky-900/20 transition-all border border-transparent" data-target="services">Layanan</button>
                     <button onclick="showSection('therapists')" class="nav-link px-4 py-2 rounded-xl font-bold text-xs text-slate-600 dark:text-slate-300 hover:text-sky-600 hover:bg-sky-50 dark:hover:bg-sky-900/20 transition-all border border-transparent" data-target="therapists">Tim Terapis</button>
-                    <button onclick="showSection('calculator')" class="nav-link px-4 py-2 rounded-xl font-bold text-xs text-slate-600 dark:text-slate-300 hover:text-sky-600 hover:bg-sky-50 dark:hover:bg-sky-900/20 transition-all border border-transparent" data-target="calculator">Kalkulator TCM <i class="fa-solid fa-laptop-medical text-amber-500 ml-1"></i></button>
+                    <button onclick="showSection('calculator')" class="nav-link px-4 py-2 rounded-xl font-bold text-xs text-slate-600 dark:text-slate-300 hover:text-sky-600 hover:bg-sky-50 dark:hover:bg-sky-900/20 transition-all border border-transparent" data-target="calculator">Kalkulator & Anatomi <i class="fa-solid fa-laptop-medical text-amber-500 ml-1"></i></button>
                     <button onclick="showSection('articles')" class="nav-link px-4 py-2 rounded-xl font-bold text-xs text-slate-600 dark:text-slate-300 hover:text-sky-600 hover:bg-sky-50 dark:hover:bg-sky-900/20 transition-all border border-transparent" data-target="articles">Artikel</button>
                     <button onclick="showSection('store')" class="nav-link px-4 py-2 rounded-xl font-bold text-xs text-slate-600 dark:text-slate-300 hover:text-sky-600 hover:bg-sky-50 dark:hover:bg-sky-900/20 transition-all border border-transparent" data-target="store">Toko</button>
                     <button onclick="showSection('branches')" class="nav-link px-4 py-2 rounded-xl font-bold text-xs text-slate-600 dark:text-slate-300 hover:text-sky-600 hover:bg-sky-50 dark:hover:bg-sky-900/20 transition-all border border-transparent" data-target="branches">Cabang</button>
@@ -149,7 +155,7 @@
                 <button onclick="showSection('home'); toggleMobileMenu()" class="block w-full text-left px-4 py-3 rounded-xl text-sm font-bold text-sky-600 bg-sky-50 dark:bg-sky-900/30">Beranda</button>
                 <button onclick="showSection('services'); toggleMobileMenu()" class="block w-full text-left px-4 py-3 rounded-xl text-sm font-bold text-slate-700 dark:text-slate-300">Layanan</button>
                 <button onclick="showSection('therapists'); toggleMobileMenu()" class="block w-full text-left px-4 py-3 rounded-xl text-sm font-bold text-slate-700 dark:text-slate-300">Tim Terapis</button>
-                <button onclick="showSection('calculator'); toggleMobileMenu()" class="block w-full text-left px-4 py-3 rounded-xl text-sm font-bold text-slate-700 dark:text-slate-300">Kalkulator TCM</button>
+                <button onclick="showSection('calculator'); toggleMobileMenu()" class="block w-full text-left px-4 py-3 rounded-xl text-sm font-bold text-slate-700 dark:text-slate-300">Kalkulator & Anatomi</button>
                 <button onclick="showSection('articles'); toggleMobileMenu()" class="block w-full text-left px-4 py-3 rounded-xl text-sm font-bold text-slate-700 dark:text-slate-300">Artikel</button>
                 <button onclick="showSection('store'); toggleMobileMenu()" class="block w-full text-left px-4 py-3 rounded-xl text-sm font-bold text-slate-700 dark:text-slate-300">Toko Herbal</button>
                 <button onclick="showSection('branches'); toggleMobileMenu()" class="block w-full text-left px-4 py-3 rounded-xl text-sm font-bold text-slate-700 dark:text-slate-300">Cabang Klinik</button>
@@ -165,10 +171,41 @@
 
     <main id="main-content" class="min-h-screen relative z-10"></main>
 
-    <button id="cart-btn" onclick="toggleCartModal()" class="hidden w-14 h-14 bg-sky-600 rounded-full shadow-lg flex items-center justify-center text-white border-2 border-white dark:border-slate-800 group hover:bg-sky-700 transition-colors">
+    <button id="cart-btn" onclick="toggleCartModal()" class="w-14 h-14 bg-sky-600 rounded-full shadow-lg flex items-center justify-center text-white border-2 border-white dark:border-slate-800 group hover:bg-sky-700 transition-colors">
         <i class="fa-solid fa-cart-shopping text-xl"></i>
         <span id="cart-badge" class="cart-badge">0</span>
     </button>
+
+    <button id="naba-ai-btn" onclick="toggleNabaAI()" class="w-14 h-14 bg-amber-500 rounded-full shadow-lg flex items-center justify-center text-white border-2 border-white dark:border-slate-800 group hover:bg-amber-600 transition-colors" title="Naba AI Assistant">
+        <i class="fa-solid fa-robot text-xl animate-bounce"></i>
+    </button>
+
+    <div id="naba-ai-window" class="card-2d bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 overflow-hidden">
+        <div class="bg-sky-600 text-white p-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <div class="w-9 h-9 rounded-xl bg-white/20 flex items-center justify-center">
+                    <i class="fa-solid fa-robot text-amber-300"></i>
+                </div>
+                <div>
+                    <h4 class="font-playfair font-black text-sm">Naba AI Assistant</h4>
+                    <p class="text-[10px] text-sky-100 flex items-center"><span class="w-2 h-2 rounded-full bg-emerald-400 inline-block mr-1.5 animate-pulse"></span> Siap Membantu 24 Jam</p>
+                </div>
+            </div>
+            <button onclick="toggleNabaAI()" class="text-white hover:text-slate-200"><i class="fa-solid fa-xmark text-lg"></i></button>
+        </div>
+        <div id="ai-chat-body" class="p-4 h-64 overflow-y-auto space-y-3 bg-slate-50 dark:bg-slate-950/50 text-xs text-slate-700 dark:text-slate-300">
+            <div class="flex items-start space-x-2">
+                <div class="w-7 h-7 rounded-full bg-sky-600 text-white flex items-center justify-center flex-shrink-0 font-bold text-[10px]">AI</div>
+                <div class="bg-white dark:bg-slate-800 p-3 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm leading-relaxed">
+                    Assalamu'alaikum! Saya Naba AI. Ada keluhan kesehatan atau pertanyaan seputar Thibbun Nabawi & TCM yang ingin Anda tanyakan hari ini?
+                </div>
+            </div>
+        </div>
+        <div class="p-3 bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-700 flex gap-2">
+            <input type="text" id="ai-user-input" placeholder="Ketik pertanyaan (cth: obat masuk angin)..." class="flex-grow px-3 py-2 bg-slate-100 dark:bg-slate-800 border-none rounded-xl text-xs outline-none dark:text-white" onkeypress="if(event.key === 'Enter') sendAIChat()">
+            <button onclick="sendAIChat()" class="bg-sky-600 text-white px-4 py-2 rounded-xl text-xs font-bold hover:bg-sky-700"><i class="fa-solid fa-paper-plane"></i></button>
+        </div>
+    </div>
 
     <div id="cart-modal" class="fixed inset-0 bg-slate-900/70 z-[10000] hidden flex items-center justify-center p-4">
         <div class="card-2d bg-white dark:bg-slate-900 p-6 md:p-8 rounded-2xl w-full max-w-lg max-h-[90vh] flex flex-col">
@@ -208,7 +245,7 @@
                     <ul class="space-y-3 text-xs font-semibold">
                         <li><button onclick="showSection('home')" class="hover:text-amber-400 transition-colors flex items-center"><i class="fa-solid fa-chevron-right text-[10px] mr-2 text-sky-500"></i> Beranda</button></li>
                         <li><button onclick="showSection('services')" class="hover:text-amber-400 transition-colors flex items-center"><i class="fa-solid fa-chevron-right text-[10px] mr-2 text-sky-500"></i> Layanan Kami</button></li>
-                        <li><button onclick="showSection('calculator')" class="hover:text-amber-400 transition-colors flex items-center"><i class="fa-solid fa-chevron-right text-[10px] mr-2 text-sky-500"></i> Kalkulator TCM</button></li>
+                        <li><button onclick="showSection('calculator')" class="hover:text-amber-400 transition-colors flex items-center"><i class="fa-solid fa-chevron-right text-[10px] mr-2 text-sky-500"></i> Kalkulator & Anatomi</button></li>
                         <li><button onclick="showSection('articles')" class="hover:text-amber-400 transition-colors flex items-center"><i class="fa-solid fa-chevron-right text-[10px] mr-2 text-sky-500"></i> Artikel Kesehatan</button></li>
                         <li><button onclick="showSection('branches')" class="hover:text-amber-400 transition-colors flex items-center"><i class="fa-solid fa-chevron-right text-[10px] mr-2 text-sky-500"></i> Cabang Klinik</button></li>
                         <li><button onclick="showSection('partners')" class="hover:text-amber-400 transition-colors flex items-center"><i class="fa-solid fa-chevron-right text-[10px] mr-2 text-sky-500"></i> Mitra & Karir</button></li>
@@ -555,6 +592,98 @@
             document.querySelectorAll('.reveal-item').forEach(el => observer.observe(el));
         }
 
+        // Fitur 4: Qi Energy & Healing Particles (WebGL / Canvas)
+        function initQiParticles() {
+            const canvas = document.getElementById('qi-canvas');
+            if(!canvas) return;
+            const ctx = canvas.getContext('2d');
+            let width = canvas.width = window.innerWidth;
+            let height = canvas.height = window.innerHeight;
+
+            window.addEventListener('resize', () => {
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = window.innerHeight;
+            });
+
+            let particles = [];
+            for(let i=0; i<40; i++) {
+                particles.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    radius: Math.random() * 2 + 1,
+                    color: Math.random() > 0.5 ? 'rgba(56, 189, 248, 0.4)' : 'rgba(251, 191, 36, 0.4)',
+                    vx: (Math.random() - 0.5) * 0.5,
+                    vy: (Math.random() - 0.5) * 0.5
+                });
+            }
+
+            function animateQi() {
+                ctx.clearRect(0, 0, width, height);
+                particles.forEach(p => {
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    if(p.x < 0) p.x = width;
+                    if(p.x > width) p.x = 0;
+                    if(p.y < 0) p.y = height;
+                    if(p.y > height) p.y = 0;
+
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = p.color;
+                    ctx.fill();
+                });
+                requestAnimationFrame(animateQi);
+            }
+            animateQi();
+        }
+
+        // Fitur 3: Naba AI Assistant Logic
+        window.toggleNabaAI = function() {
+            const win = document.getElementById('naba-ai-window');
+            if(win.style.display === 'flex') {
+                win.style.display = 'none';
+            } else {
+                win.style.display = 'flex';
+                document.getElementById('ai-user-input').focus();
+            }
+        }
+
+        window.sendAIChat = function() {
+            const input = document.getElementById('ai-user-input');
+            const txt = input.value.trim();
+            if(!txt) return;
+
+            const body = document.getElementById('ai-chat-body');
+            body.innerHTML += `
+                <div class="flex items-end justify-end space-x-2">
+                    <div class="bg-sky-600 text-white p-3 rounded-2xl max-w-[80%] shadow-sm leading-relaxed">${txt}</div>
+                    <div class="w-7 h-7 rounded-full bg-slate-300 dark:bg-slate-700 flex items-center justify-center flex-shrink-0 font-bold text-[10px]">Anda</div>
+                </div>
+            `;
+            input.value = '';
+            body.scrollTop = body.scrollHeight;
+
+            setTimeout(() => {
+                let reply = "Terima kasih atas pertanyaannya. Berdasarkan metode Thibbun Nabawi dan TCM, keluhan tersebut dapat diatasi dengan kombinasi terapi yang tepat. Silakan buat jadwal konsultasi atau kunjungi menu Layanan kami.";
+                const lower = txt.toLowerCase();
+                if(lower.includes('bekam') || lower.includes('darah')) {
+                    reply = "Bekam Sunnah sangat efektif untuk mengeluarkan toksin dan melancarkan sirkulasi mikro. Anda dapat memesan jadwal Bekam melalui menu Booking.";
+                } else if(lower.includes('ruqyah') || lower.includes('cemas') || lower.includes('tidur')) {
+                    reply = "Ruqyah Syar'iyyah dipadukan dengan akupunktur relaksasi sangat disarankan untuk menenangkan jiwa dan mengatasi kecemasan berlebih.";
+                } else if(lower.includes('harga') || lower.includes('biaya')) {
+                    reply = "Kisaran tarif terapi kami sangat terjangkau, mulai dari Rp 100.000 hingga Rp 225.000 tergantung jenis layanannya.";
+                }
+
+                body.innerHTML += `
+                    <div class="flex items-start space-x-2">
+                        <div class="w-7 h-7 rounded-full bg-sky-600 text-white flex items-center justify-center flex-shrink-0 font-bold text-[10px]">AI</div>
+                        <div class="bg-white dark:bg-slate-800 p-3 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm leading-relaxed max-w-[80%]">${reply}</div>
+                    </div>
+                `;
+                body.scrollTop = body.scrollHeight;
+            }, 800);
+        }
+
         window.initApp = function() {
             const progress = document.getElementById('splash-progress');
             if(progress) {
@@ -568,6 +697,7 @@
             updateGlobalUI();
             updateCartUI();
             showSection('home');
+            initQiParticles();
             
             if (typeof window.initFirebaseListener === 'function') window.initFirebaseListener();
         }
@@ -872,50 +1002,42 @@
             `;
         }
 
+        // Fitur 2: Interactive Anatomy Mapper (Peta Titik Tubuh & Meridian)
         function renderCalculator(container) {
             container.innerHTML = `
-                <div class="py-16 max-w-3xl mx-auto px-4 reveal-item">
+                <div class="py-16 max-w-4xl mx-auto px-4 reveal-item">
                     <div class="text-center mb-10">
                         <div class="w-16 h-16 bg-amber-500 rounded-2xl flex items-center justify-center mx-auto mb-4 text-white shadow-sm border border-amber-400">
-                            <i class="fa-solid fa-laptop-medical text-3xl"></i>
+                            <i class="fa-solid fa-child-reaching text-3xl"></i>
                         </div>
-                        <h2 class="text-3xl md:text-4xl font-playfair font-black text-slate-900 dark:text-white mb-3">Kalkulator <span class="text-sky-600 dark:text-sky-400">Kesehatan TCM</span></h2>
-                        <p class="text-slate-600 text-sm">Analisis gejala keluhan Anda atau ukur keseimbangan massa tubuh Anda berdasarkan perspektif holistik medis klasik.</p>
+                        <h2 class="text-3xl md:text-4xl font-playfair font-black text-slate-900 dark:text-white mb-3">Peta Anatomi <span class="text-sky-600 dark:text-sky-400">& Titik Meridian</span></h2>
+                        <p class="text-slate-600 text-sm">Klik area tubuh yang mengalami keluhan untuk melihat analisis titik TCM, titik bekam sunnah, dan rekomendasi terapi.</p>
                     </div>
-                    
-                    <div class="card-2d p-6 md:p-8 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 mb-8">
-                        <h3 class="font-playfair font-black text-xl mb-4 text-slate-800 dark:text-white">1. Analisis Gejala Ringan</h3>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6" id="symptom-checks">
-                            <label class="flex items-center p-4 border border-slate-200 dark:border-slate-700 rounded-xl cursor-pointer hover:bg-sky-50 dark:hover:bg-slate-700 transition-colors">
-                                <input type="checkbox" value="angin" class="w-5 h-5 text-sky-600 rounded dark:bg-slate-800 border-slate-300">
-                                <span class="ml-3 text-sm font-bold text-slate-700 dark:text-slate-300">Sering pusing / masuk angin</span>
-                            </label>
-                            <label class="flex items-center p-4 border border-slate-200 dark:border-slate-700 rounded-xl cursor-pointer hover:bg-sky-50 dark:hover:bg-slate-700 transition-colors">
-                                <input type="checkbox" value="darah" class="w-5 h-5 text-sky-600 rounded dark:bg-slate-800 border-slate-300">
-                                <span class="ml-3 text-sm font-bold text-slate-700 dark:text-slate-300">Pegal linu / Tengkuk kaku</span>
-                            </label>
-                            <label class="flex items-center p-4 border border-slate-200 dark:border-slate-700 rounded-xl cursor-pointer hover:bg-sky-50 dark:hover:bg-slate-700 transition-colors">
-                                <input type="checkbox" value="qi" class="w-5 h-5 text-sky-600 rounded dark:bg-slate-800 border-slate-300">
-                                <span class="ml-3 text-sm font-bold text-slate-700 dark:text-slate-300">Cepat lelah / Kurang energi</span>
-                            </label>
-                            <label class="flex items-center p-4 border border-slate-200 dark:border-slate-700 rounded-xl cursor-pointer hover:bg-sky-50 dark:hover:bg-slate-700 transition-colors">
-                                <input type="checkbox" value="psikis" class="w-5 h-5 text-sky-600 rounded dark:bg-slate-800 border-slate-300">
-                                <span class="ml-3 text-sm font-bold text-slate-700 dark:text-slate-300">Susah tidur / Cemas berlebih</span>
-                            </label>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                        <div class="card-2d p-6 rounded-2xl bg-white dark:bg-slate-800 flex flex-col items-center justify-center">
+                            <h3 class="font-playfair font-black text-lg mb-4 text-slate-800 dark:text-white">Pilih Titik Keluhan</h3>
+                            <div class="flex flex-col gap-3 w-full max-w-xs">
+                                <button onclick="selectAnatomyPoint('kepala')" id="btn-kepala" class="py-3 px-4 rounded-xl border border-slate-200 dark:border-slate-700 text-xs font-bold hover:bg-sky-50 dark:hover:bg-slate-700 flex items-center justify-between"><span class="flex items-center"><i class="fa-solid fa-head-side-cough text-sky-500 mr-3"></i> Kepala & Tengkuk</span> <i class="fa-solid fa-chevron-right text-[10px]"></i></button>
+                                <button onclick="selectAnatomyPoint('punggung')" id="btn-punggung" class="py-3 px-4 rounded-xl border border-slate-200 dark:border-slate-700 text-xs font-bold hover:bg-sky-50 dark:hover:bg-slate-700 flex items-center justify-between"><span class="flex items-center"><i class="fa-solid fa-bone text-sky-500 mr-3"></i> Punggung Belakang</span> <i class="fa-solid fa-chevron-right text-[10px]"></i></button>
+                                <button onclick="selectAnatomyPoint('pencernaan')" id="btn-pencernaan" class="py-3 px-4 rounded-xl border border-slate-200 dark:border-slate-700 text-xs font-bold hover:bg-sky-50 dark:hover:bg-slate-700 flex items-center justify-between"><span class="flex items-center"><i class="fa-solid fa-stomach text-sky-500 mr-3"></i> Lambung / Pencernaan</span> <i class="fa-solid fa-chevron-right text-[10px]"></i></button>
+                                <button onclick="selectAnatomyPoint('sendi')" id="btn-sendi" class="py-3 px-4 rounded-xl border border-slate-200 dark:border-slate-700 text-xs font-bold hover:bg-sky-50 dark:hover:bg-slate-700 flex items-center justify-between"><span class="flex items-center"><i class="fa-solid fa-person-walking text-sky-500 mr-3"></i> Sendi & Kaki</span> <i class="fa-solid fa-chevron-right text-[10px]"></i></button>
+                            </div>
                         </div>
-                        <button onclick="calculateSymptoms()" class="w-full bg-sky-600 hover:bg-sky-700 text-white py-4 rounded-xl font-black text-sm mb-6 flex justify-center items-center transition-colors">
-                            Analisis Gejala <i class="fa-solid fa-wand-magic-sparkles ml-2 text-amber-300"></i>
-                        </button>
-                        
-                        <div id="calc-result" class="hidden bg-sky-50 dark:bg-sky-900/30 border border-sky-200 dark:border-sky-700 rounded-2xl p-6 text-center">
-                            <h4 class="text-sky-700 dark:text-sky-400 font-playfair font-black mb-3 text-xl">Hasil Analisis</h4>
-                            <p id="calc-desc" class="text-sm text-slate-700 dark:text-slate-300 mb-5 leading-relaxed font-medium"></p>
-                            <button onclick="showSection('booking')" class="bg-sky-600 text-white px-8 py-3 rounded-xl font-bold text-xs hover:bg-sky-700">Reservasi Konsultasi Lanjutan</button>
+
+                        <div id="anatomy-result-card" class="card-2d p-6 rounded-2xl bg-sky-50/60 dark:bg-sky-950/30 border border-sky-100 dark:border-sky-800/50 flex flex-col justify-between">
+                            <div>
+                                <h4 id="res-title" class="font-playfair font-black text-xl text-sky-700 dark:text-sky-300 mb-3"><i class="fa-solid fa-circle-info mr-2"></i> Silakan Pilih Area</h4>
+                                <p id="res-desc" class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed font-medium">Klik salah satu tombol area tubuh di sebelah kiri untuk melihat panduan titik meridian TCM dan rekomendasi terapi spesifik.</p>
+                            </div>
+                            <div class="mt-6 pt-4 border-t border-sky-200/50 dark:border-sky-800/50">
+                                <button onclick="showSection('booking')" class="w-full bg-sky-600 text-white py-3 rounded-xl font-black text-xs hover:bg-sky-700">Reservasi Terapi Terkait</button>
+                            </div>
                         </div>
                     </div>
 
                     <div class="card-2d p-6 md:p-8 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
-                        <h3 class="font-playfair font-black text-xl mb-2 text-slate-800 dark:text-white">2. Kalkulator Indeks Massa Tubuh (BMI)</h3>
+                        <h3 class="font-playfair font-black text-xl mb-2 text-slate-800 dark:text-white">Kalkulator Indeks Massa Tubuh (BMI)</h3>
                         <p class="text-xs text-slate-500 mb-6">Ukur berat badan ideal Anda dengan nasihat kesehatan menurut pandangan Traditional Chinese Medicine (TCM).</p>
                         
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
@@ -938,18 +1060,23 @@
             `;
         }
 
-        window.calculateSymptoms = function() {
-            const checks = document.querySelectorAll('#symptom-checks input:checked');
-            if(checks.length === 0) { showToast("Pilih minimal 1 keluhan", true); return; }
+        window.selectAnatomyPoint = function(point) {
+            const t = document.getElementById('res-title');
+            const d = document.getElementById('res-desc');
             
-            let vals = Array.from(checks).map(c => c.value);
-            let result = "";
-            if(vals.includes('psikis')) result = "Berdasarkan keluhan Anda (Cemas/Susah Tidur), kemungkinan terdapat gangguan pada aliran Chi atau ketidaktenangan jiwa. Kami sangat merekomendasikan **Ruqyah Syar'iyyah** dipadukan dengan **Akupunktur Relaksasi**.";
-            else if(vals.includes('darah')) result = "Gejala kaku dan pegal mengindikasikan stasis darah di area leher/punggung. Terapi **Bekam Sunnah** sangat disarankan.";
-            else result = "Untuk keluhan kelelahan atau mudah pusing, kami merekomendasikan kombinasi **Konsultasi Herbal TCM** (Sari Kurma/Madu) dan terapi akupunktur.";
-            
-            document.getElementById('calc-desc').innerHTML = result.replace(/\*\*(.*?)\*\*/g, '<strong class="text-sky-600 dark:text-sky-400">$1</strong>');
-            document.getElementById('calc-result').classList.remove('hidden');
+            if(point === 'kepala') {
+                t.innerHTML = `<i class="fa-solid fa-head-side-cough mr-2"></i> Kepala & Tengkuk (Titik Al-Akhda'in)`;
+                d.innerHTML = `<b>Analisis TCM:</b> Stagnasi energi Qi di area kepala sering memicu migrain dan hipertensi.<br><br><b>Rekomendasi Terapi:</b> Bekam Sunnah di titik Al-Akhda'in (dua urat leher) dan titik Al-Kahin (pundak) serta Akupunktur titik Baihui.`;
+            } else if(point === 'punggung') {
+                t.innerHTML = `<i class="fa-solid fa-bone mr-2"></i> Punggung Belakang (Titik Al-Kahin)`;
+                d.innerHTML = `<b>Analisis TCM:</b> Kelemahan energi Ginjal & Tulang Belakang.<br><br><b>Rekomendasi Terapi:</b> Fisioterapi Tulang Belakang, Bekam kering/basah punggung, serta konsumsi Madu Habbatussauda.`;
+            } else if(point === 'pencernaan') {
+                t.innerHTML = `<i class="fa-solid fa-stomach mr-2"></i> Lambung & Pencernaan (Meridian Limpa)`;
+                d.innerHTML = `<b>Analisis TCM:</b> Kelemahan fungsi organ Limpa dan Lambung akibat konsumsi makanan dingin.<br><br><b>Rekomendasi Terapi:</b> Konsultasi Herbal TCM, Akupunktur titik Zusanli (ST36).`;
+            } else if(point === 'sendi') {
+                t.innerHTML = `<i class="fa-solid fa-person-walking mr-2"></i> Sendi & Kaki (Meridian Hati & Ginjal)`;
+                d.innerHTML = `<b>Analisis TCM:</b> Hambatan angin-lembab (Bi Syndrome) pada persendian.<br><br><b>Rekomendasi Terapi:</b> Akupunktur meridian kaki dan manipulasi fisioterapi sendi.`;
+            }
         }
 
         window.calculateBMI = function() {
