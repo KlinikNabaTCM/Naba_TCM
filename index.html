@@ -184,31 +184,32 @@
             if(!auth || !db) return;
             try {
                 await signInAnonymously(auth);
-                // Jalur sederhana agar mudah dibaca Firebase
-                const docRef = doc(db, 'nabatcm_db', 'master_data');
-                onSnapshot(docRef, (docSnap) => {
-                    if (docSnap.exists()) {
-                        const cloudData = docSnap.data();
-                        if (cloudData.clinicSettings) window.clinicSettings = cloudData.clinicSettings;
-                        if (cloudData.servicesData) window.servicesData = cloudData.servicesData;
-                        if (cloudData.therapistsData) window.therapistsData = cloudData.therapistsData;
-                        if (cloudData.articlesData) window.articlesData = cloudData.articlesData;
-                        if (cloudData.productsData) window.productsData = cloudData.productsData;
-                        if (cloudData.branchesData) window.branchesData = cloudData.branchesData;
-                        if (cloudData.partnersData) window.partnersData = cloudData.partnersData;
-                        if (cloudData.careersData) window.careersData = cloudData.careersData;
-                        if (cloudData.queueData) window.queueData = cloudData.queueData;
-                        
-                        window.updateGlobalUI();
-                        if(window.currentSection === 'admin') {
-                            window.switchAdminTab(window.currentAdminTab);
-                        } else if(window.currentSection) {
-                            window.showSection(window.currentSection, null, true);
+                
+                // DATA DIPECAH MENJADI 9 DOKUMEN AGAR TIDAK TERKENA LIMIT 1MB FIREBASE
+                const collections = ['settings', 'services', 'therapists', 'articles', 'products', 'branches', 'partners', 'careers', 'queue'];
+                
+                collections.forEach(col => {
+                    onSnapshot(doc(db, 'nabatcm_db', col), (docSnap) => {
+                        if (docSnap.exists()) {
+                            const cloudData = docSnap.data();
+                            if (col === 'settings' && cloudData.clinicSettings) window.clinicSettings = cloudData.clinicSettings;
+                            else if (col === 'services' && cloudData.data) window.servicesData = cloudData.data;
+                            else if (col === 'therapists' && cloudData.data) window.therapistsData = cloudData.data;
+                            else if (col === 'articles' && cloudData.data) window.articlesData = cloudData.data;
+                            else if (col === 'products' && cloudData.data) window.productsData = cloudData.data;
+                            else if (col === 'branches' && cloudData.data) window.branchesData = cloudData.data;
+                            else if (col === 'partners' && cloudData.data) window.partnersData = cloudData.data;
+                            else if (col === 'careers' && cloudData.data) window.careersData = cloudData.data;
+                            else if (col === 'queue' && cloudData.data) window.queueData = cloudData.data;
+                            
+                            window.updateGlobalUI();
+                            if(window.currentSection === 'admin') {
+                                window.switchAdminTab(window.currentAdminTab);
+                            } else if(window.currentSection) {
+                                window.showSection(window.currentSection, null, true);
+                            }
                         }
-                    }
-                }, (error) => {
-                    console.error("Firebase Sync Error:", error);
-                    window.showToast("Gagal menyinkronkan data dari server. Menampilkan data lokal.", true);
+                    });
                 });
             } catch(e) { console.error("Auth Error:", e); }
         }
@@ -217,22 +218,22 @@
             if(!auth || !db) return;
             try {
                 if (!auth.currentUser) await signInAnonymously(auth);
-                const docRef = doc(db, 'nabatcm_db', 'master_data');
-                await setDoc(docRef, {
-                    clinicSettings: window.clinicSettings,
-                    servicesData: window.servicesData,
-                    therapistsData: window.therapistsData,
-                    articlesData: window.articlesData,
-                    productsData: window.productsData,
-                    branchesData: window.branchesData,
-                    partnersData: window.partnersData,
-                    careersData: window.careersData,
-                    queueData: window.queueData,
-                    updatedAt: new Date().toISOString()
-                }, { merge: true });
+                
+                // MENGIRIM DATA KE 9 DOKUMEN BERBEDA SECARA BERSAMAAN (KAPASITAS LEBIH LEGA)
+                await Promise.all([
+                    setDoc(doc(db, 'nabatcm_db', 'settings'), { clinicSettings: window.clinicSettings, updatedAt: new Date().toISOString() }),
+                    setDoc(doc(db, 'nabatcm_db', 'services'), { data: window.servicesData }),
+                    setDoc(doc(db, 'nabatcm_db', 'therapists'), { data: window.therapistsData }),
+                    setDoc(doc(db, 'nabatcm_db', 'articles'), { data: window.articlesData }),
+                    setDoc(doc(db, 'nabatcm_db', 'products'), { data: window.productsData }),
+                    setDoc(doc(db, 'nabatcm_db', 'branches'), { data: window.branchesData }),
+                    setDoc(doc(db, 'nabatcm_db', 'partners'), { data: window.partnersData }),
+                    setDoc(doc(db, 'nabatcm_db', 'careers'), { data: window.careersData }),
+                    setDoc(doc(db, 'nabatcm_db', 'queue'), { data: window.queueData })
+                ]);
             } catch(e) { 
                 console.error("Cloud save failed", e); 
-                window.showToast("Gagal simpan ke online! (Cek Aturan Firebase/Koneksi Anda)", true);
+                window.showToast("Gagal simpan ke online! (Cek Koneksi)", true);
             }
         }
 
@@ -250,9 +251,9 @@
                     img.src = event.target.result;
                     img.onload = () => {
                         const canvas = document.createElement('canvas');
-                        // Ukuran diperkecil agar aman di database cloud
-                        const MAX_WIDTH = 500;
-                        const MAX_HEIGHT = 500;
+                        // Ukuran dimaksimalkan hanya 400px (sangat ringan)
+                        const MAX_WIDTH = 400;
+                        const MAX_HEIGHT = 400;
                         let width = img.width;
                         let height = img.height;
 
@@ -265,8 +266,8 @@
                         canvas.height = height;
                         const ctx = canvas.getContext('2d');
                         ctx.drawImage(img, 0, 0, width, height);
-                        // Kualitas dikurangi jadi 60% agar file sangat kecil
-                        resolve(canvas.toDataURL('image/jpeg', 0.6)); 
+                        // Kualitas diturunkan ke 50% untuk efisiensi cloud
+                        resolve(canvas.toDataURL('image/jpeg', 0.5)); 
                     };
                 };
                 reader.onerror = error => reject(error);
